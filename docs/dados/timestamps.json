@@ -1,0 +1,273 @@
+{
+ "a-deadbug": {
+  "start": 53,
+  "end": 76,
+  "video": "0loS0bRNqfs",
+  "conf": "alta",
+  "porque": "Verificado no zoom 36-78 (passo 2s) e 66-78 (passo 1s): 53s ela ja esta deitada em 90/90 com bracos apontados para o teto (posicao inicial, legenda 'vou descer' em 54s); 56-58s perna esquerda estende e braco direito vai para tras (rep 1); 60s volta ao 90/90; 62-64s repete (rep 2); 68-71s repete (rep 3); 73s mais uma; 74-76s de volta ao 90/90. Corte em 76s cai com ela na posicao neutra, sem cortar repeticao."
+ },
+ "b-fin-3": {
+  "start": 60,
+  "end": 77,
+  "video": "0loS0bRNqfs",
+  "conf": "alta",
+  "porque": "Janela distinta da anterior, so com a parte mais estavel da execucao. Confirmado no zoom 66-78 (passo 1s): 60s em 90/90 com bracos para cima (posicao inicial, legenda 'soltando AR'); 62-64s extensao de perna esquerda + braco direito (rep 1); 66s neutro; 67-71s nova extensao completa de braco e perna (rep 2); 72s neutro; 73s mais uma extensao; 74-77s de volta ao 90/90 com abdomen ativo. 77s ainda mostra ela na posicao, sem tela final."
+ },
+ "b-pant-sent": {
+  "start": 146,
+  "end": 155,
+  "video": "1x2QAgstSn4",
+  "conf": "alta",
+  "porque": "Zoom 142-166s (1 em 1s): ate 145s e plano aberto com ele olhando para a camera. Em 146s entra o close lateral da perna com o pe na plataforma e o coxim sobre o joelho. Frames 147/148 calcanhar embaixo, 149 calcanhar elevado, 150 embaixo, 151 elevado, 152 embaixo, 153 elevado, 154 embaixo, 155 elevado = 4 repeticoes completas de panturrilha sentada. Em 156s o video corta para outro angulo onde ele passa a apontar a perna com a mao, por isso o fim em 155s."
+ },
+ "mob-tornozelo": {
+  "start": 16,
+  "end": 38,
+  "video": "3pprN9t_P1o",
+  "conf": "alta",
+  "porque": "Confere nos mosaicos 14-38s e 16-40s (1 em 1s): em 16s ele ja esta em passada com o pe da frente encostado na parede/anteparo escuro e a perna praticamente estendida - inicio da repeticao. 17-18s o joelho avanca em direcao a parede (dorsiflexao), 19s volta; 22-23s avanca de novo, 24s volta; 26-27s avanca; 30-31s avanca ate encostar; 34-35s avanca; 37s avanca, 38s volta a posicao atras. Sao 6+ repeticoes em 22s, com o corte final em 38s na posicao de volta (nao corta meio de rep). Nenhum quadro de rosto falando, vinheta ou cartela dentro da janela."
+ },
+ "b-terra-uni": {
+  "start": 103,
+  "end": 126,
+  "video": "5t3TzJ3oW7I",
+  "conf": "alta",
+  "porque": "Comeca com ela ja em posicao no topo (103-105: pe de tras no caixote, halter na mao, tronco ereto). Repeticao 1 completa: desce 106, fundo 107-108 (halter abaixo do joelho), sobe 109-112. Repeticao curta 113-115. Repeticao 2 completa: desce 121, fundo 122-124, sobe 125-126. Termina em 126 com ela de pe no topo, ultimo quadro antes de comecar a demonstracao do erro de coluna retificada (legenda de alerta + X vermelho a partir de 127/128)."
+ },
+ "b-fin-1": {
+  "start": 170,
+  "end": 192,
+  "video": "9LBlAgBjDKM",
+  "conf": "alta",
+  "porque": "Confere no mosaico 168-192s (1 em 1s): em 172s ela ja esta com o pe apoiado no banco e as maos na barra da escada (posicao inicial da subida); 173-175s sobe e fica em cima do banco; 177-179s repete; 181-183s repete; 186-188s repete; 189-191s repete. Em 192s ela esta de pe, no fim de uma repeticao, entao o corte nao pega meio de rep. Nenhum quadro de vinheta, banner ou pessoa falando sozinha para a camera dentro da janela - o treinador aparece ao lado narrando, mas quem esta em quadro executando o exercicio o tempo todo e a aluna. 5 repeticoes completas em 20s.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "Corta no meio da repeticao. No mosaico de 0,5s cobrindo 168-180 fica claro que ela esta no FUNDO (em pe no chao, pe apoiado no banco, maos na barra) de 168,0 a 170,5, sobe em 171,0-171,5 e esta no TOPO em 172,0-173,5. Portanto o start=172 pega ela ja em cima, e a primeira coisa que se ve e a descida - metade de repeticao. O porque afirma que em 172s ela esta 'na posicao inicial da subida', o que a imagem desmente. Sugiro 170-192: 170 fundo (posicao inicial confirmada), sobe 171-173, desce 174-176, e seguem as repeticoes ate 182 fundo, 183/184 topo, 185 fundo, 187 topo, 188 fundo, 189/190 topo, 191/192 fundo. 22s, comeca e termina embaixo."
+ },
+ "c-afundo": {
+  "start": 9,
+  "end": 30,
+  "video": "9bxRdpUFW4c",
+  "conf": "alta",
+  "porque": "Zoom 0-26s e 22-46s (1 em 1s): banner amarelo de Instagram/Facebook aparece em 0s e 1s, sai em 2s. Em 3s ele ja esta em pe com os halteres nas maos, sem falar. Passadas caminhando visiveis nos frames 6, 8, 11, 13, 16, 19-20, 23, 25, 27-28 (joelho de tras perto do chao, avancando pelo salao). Em 30s ele esta em pe, ereto, entre repeticoes, entao o corte nao pega meio de repeticao. Janela de 27s com muito mais de 2 repeticoes completas.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "Timestamps do agente anterior estao errados em ~5s. Extraí os quadros exatos (seek de entrada E de saida, resultados identicos): em 0,1,2,3,4,5 e 6s ele esta em PLANO FECHADO FALANDO PARA A CAMERA e o banner amarelo de Instagram/Facebook esta na tela o tempo todo; o banner so sai em 7s, quando entra o plano aberto com halteres. Portanto start=3 cai em cima do banner + cabeca falante. A primeira passada so acontece em 10s (9s = em pe, posicao inicial). O fim em 30s esta correto: 28s afundo profundo, 29s e 30s em pe entre repeticoes, e de 31 a 39s ele fica parado falando."
+ },
+ "b-flexora": {
+  "start": 475,
+  "end": 491,
+  "video": "AFG0wxXmTH4",
+  "conf": "alta",
+  "porque": "Verificado quadro a quadro no zoom 472-500: 474s e fade branco; 475s ela ja esta sentada na cadeira flexora com pernas estendidas (posicao inicial); 476-478s flexao completa; 479-481s volta estendida; 482s flexao; 484s estendida; 485-487s flexao; 489-491s estendida. Sao ~3 repeticoes completas em 16s. Corte em 491s termina com a perna estendida (fim de repeticao) e antes de 492s, onde ela volta a falar para a camera."
+ },
+ "mob-gato": {
+  "start": 50,
+  "end": 72,
+  "video": "BMdYxIDt5Ys",
+  "conf": "media",
+  "porque": "Mosaico 48-72 (passo 1s): em 50 ela ja esta em quatro apoios com a coluna no ponto maximo de arredondamento (gato) - inicio limpo, nao e quadro de fala. Ciclos visiveis: gato 50-52, vaca (tronco baixa, dorso retifica/afunda) 53-54, gato 55-58, vaca 59, gato 60-63, vaca 64-70, gato 71-72. Sao 3 ciclos gato-vaca completos em 22s e o corte em 72 cai de novo no topo do gato, sem cortar repeticao. Conf media porque a diferenca entre as fases e sutil na miniatura, mas e consistente em tres mosaicos."
+ },
+ "a-fin-3": {
+  "start": 117,
+  "end": 136,
+  "video": "CaTbpJH49i4",
+  "conf": "alta",
+  "porque": "Em 114-116s ele afasta o banco; em 117s ja esta em pe de perfil na posicao inicial (maos juntas no peito) e desce em 118s. Quadros 118/119/121/124/127/131/134 mostram fundo de agachamento e 120/122/128/132/136 mostram extensao completa: pelo menos 5 repeticoes completas de agachamento com peso do corpo. Corte em 136s com ele ja em pe (repeticao terminada)."
+ },
+ "b-desenvolv": {
+  "start": 13,
+  "end": 42,
+  "video": "IDOZyXHq7aI",
+  "conf": "alta",
+  "porque": "Em 11s ele senta com os halteres nas coxas, em 12s sobe ate os ombros e em 13s ja esta na posicao inicial (halteres na altura dos ombros). De 14s a 42s sao repeticoes continuas de desenvolvimento sentado: extensao completa em 17/19/22/27/29/33/36/40s e retorno aos ombros em 16/21/24/26/28/31/38/41s - bem mais de 2 repeticoes completas. Corte em 42s com os halteres na altura dos ombros (repeticao concluida), antes do corte de plano preto e branco em 44s."
+ },
+ "b-biceps": {
+  "start": 45,
+  "end": 55,
+  "video": "LlJ6wf3NjeA",
+  "conf": "media",
+  "porque": "Verificado com quadros de 0,5 em 0,5s entre 44,0 e 56,5: ate 44,5 o instrutor esta segurando o antebraco dele; a partir de 45,0 o aluno aparece sozinho de perfil e executa rosca alternada continua - 45,0 braco flexionado, 46,0 bracos estendidos, 47,0 flexionado, 48,0 estendido, 50,0 flexionado, 52,0 flexionado, 54,0/54,5/55,5 flexionado (5+ reps alternadas). Em 56,0 o instrutor volta a entrar na frente da camera, por isso o corte em 55."
+ },
+ "b-pallof": {
+  "start": 112,
+  "end": 127,
+  "video": "LuePuoHEt6s",
+  "conf": "media",
+  "porque": "Em 112 ele esta de perfil, em posicao, com as duas maos na alca junto ao peito e o elastico tensionado; 113-115 empurra os bracos a frente (rep 1), 116 volta ao peito, 117-126 empurra de novo e sustenta a posicao estendida por ~10s (isometria de anti-rotacao, bem acima dos 5s exigidos), 127 recolhe ao peito. Duas repeticoes completas + sustentacao. A cartela '2-Postura' aparece so ate 111, fora da janela."
+ },
+ "c-kb": {
+  "start": 128,
+  "end": 152,
+  "video": "MB87gQFA_y0",
+  "conf": "alta",
+  "porque": "Em 128-132 ele ja esta em posicao de hip hinge com o kettlebell entre as pernas (plano lateral); de 133 a 150 faz swings russos continuos (topos na altura do peito em 134, 137, 139, 140, 142, 145, 148 e fundos em 138, 141, 143, 146, 149-150), bem mais de 2 repeticoes; em 151-152 ele para e larga o kettlebell. Nenhum quadro de vinheta, logo ou banner dentro da janela."
+ },
+ "mob-rotext": {
+  "start": 183,
+  "end": 196,
+  "video": "PZPbasPoJQ8",
+  "conf": "alta",
+  "porque": "Zoom 1 em 1s (172-197 e 180-204): de 176s em diante ele esta de perfil, cotovelo colado no tronco, com a alca do elastico ancorado na barra sueca a esquerda. A mao alterna claramente entre linha media (180, 184, 188, 190, 193, 195) e rotacao externa aberta (181, 182, 183, 186, 191, 192) - pelo menos 4 repeticoes completas em 20s. Em 174-175s ele ainda fala olhando para a camera, por isso o start em 178. Em 199s entra o banner laranja '1) Cuidados com o punho', por isso o end em 198.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "Zoom fino de 0,5s (177,0-189,5) mostra que em 179,0-180,0 ele SOLTA a alca do elastico e gesticula com a mao aberta falando (nao ha exercicio nesse trecho) - o comeco do corte cai em cima de uma explicacao, nao de execucao. Alem disso 178,0-183,5 e 194,5-198,0 sao tempo morto parado com a mao na cintura: das 3 repeticoes reais (184,0-186,0 / 189,5-191,0 / 192,5-194,0) nenhuma acontece nos primeiros 6s nem nos ultimos 4s da janela proposta. Sugiro 183-196: comeca em posicao neutra com a alca na mao (confirmado em 183,0), entrega as mesmas 3 rotacoes externas completas sem a interrupcao gestual, termina em repouso e o banner laranja '1) Cuidados com o punho' so entra em 200,5 (confirmado no zoom fino 189-201,5), entao continua seguro."
+ },
+ "a-prancha-lat": {
+  "start": 65,
+  "end": 91,
+  "video": "RTxAFDK1OMw",
+  "conf": "alta",
+  "porque": "Em 62-64 ele ainda esta sentado se posicionando; em 65 ja esta apoiado no antebraco com o quadril elevado e mantem a prancha lateral sem interrupcao ate 97. 26s de sustentacao isometrica continua (muito acima dos 5s minimos). Termina em 91 para nao pegar o banner do Instagram que entra por volta de 93."
+ },
+ "c-prancha": {
+  "start": 39,
+  "end": 47,
+  "video": "RTxAFDK1OMw",
+  "conf": "alta",
+  "porque": "Em 38 ele ainda esta se abaixando; em 39 ja esta na prancha frontal (antebracos no colchonete, pernas estendidas, apoio nas pontas dos pes) e sustenta ate 47 - plano aberto 39-42 e close 43-47. Em 48 ele desfaz a posicao e volta a falar. 8s de sustentacao isometrica - e todo o tempo em que o video mostra a prancha frontal."
+ },
+ "al-pelvica": {
+  "start": 238,
+  "end": 250,
+  "video": "Sk-mBla2h8A",
+  "conf": "media",
+  "porque": "Zoom 224-248s 1-em-1s: em 238s ele ja esta deitado com as costas no banco (nao e quadro de fala para a camera) e a partir de 239s sobe o quadril e SUSTENTA com a perna esquerda estendida ate ~250s. Isometria de ~11s, bem acima dos 5s exigidos, que e exatamente a versao 'mantem'."
+ },
+ "a-pelvica-uni": {
+  "start": 252,
+  "end": 265,
+  "video": "Sk-mBla2h8A",
+  "conf": "media",
+  "porque": "Zoom 246-270s 1-em-1s: quadril em cima 252-255s, desce em 256s, sobe 257-258s, desce 259-261s, sobe 262s, desce 263-265s. Sao 2-3 repeticoes completas de elevacao pelvica unilateral (perna esquerda estendida, sola verde visivel). Corte natural em 265s, antes do close falando em 266s."
+ },
+ "a-fin-2": {
+  "start": 115,
+  "end": 130,
+  "video": "UkDVBs9GEWo",
+  "conf": "alta",
+  "porque": "Bloco continuo verificado quadro a quadro (88..104): em 87s ainda e busto falante, em 88s ele ja esta em prancha alta e em 105s corta para busto falante. Plano lateral aberto, flexao padrao com cotovelo fechado. 94-104 tem ~4 repeticoes completas (94/95/96 embaixo, 97 em cima, 99/100 embaixo, 101/102 em cima, 103 embaixo, 104 em cima). Comeca e termina no topo, sem cortar repeticao.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "O trecho 88-104 comeca na DEMONSTRACAO DO ERRO. A legenda automatica de 80,5s a 90,7s diz: 'frequentemente essas pessoas formam as costas arqueadas, fazendo essa anteversao de quadril LEVANTANDO O QUADRIL, e apresentam essa falta de tensao corporal; entao para evitar isso voce deve fazer a contracao dos gluteos...'. E exatamente o que a imagem mostra: 88,89,90,91,92,93 e 98 com o quadril bem alto (V invertido). So 99-104 e forma correta, com apenas 2 reps (99 topo-100 fundo-101 topo; 102 topo-103 fundo-104 topo). Sugiro 115-130, bloco continuo de flexao frontal limpa (o cartao '2 Posicao do Braco' sai em 114): 115/116 topo, 117 fundo, 118/119 topo, 120/121 fundo, 122/123 topo, 124 fundo, 125/126/127 topo, 128 fundo, 129/130 topo = 4 repeticoes completas em 15s, comecando e terminando no topo, sem busto falante e sem cartao."
+ },
+ "c-flexao": {
+  "start": 401,
+  "end": 422,
+  "video": "UkDVBs9GEWo",
+  "conf": "media",
+  "porque": "Verificado 398..422: em 398-400 ele se apoia e monta a posicao, em 401 ja esta em prancha alta e a execucao segue continua ate 422 (aos 435s volta o busto falante). Plano lateral bem aberto, flexao padrao no chao, pes juntos. Repeticoes visiveis: 405-407 embaixo, 408-410 em cima, 411-413 embaixo, 414-418 em cima, 419-420 embaixo, 421-422 em cima (4+ reps). Conf media so porque esta dentro do capitulo 'Adaptacoes e dicas' e o ritmo e mais lento/pausado, mas o movimento executado e a flexao padrao."
+ },
+ "mob-pullapart": {
+  "start": 33,
+  "end": 49,
+  "video": "XN0J-hI17SU",
+  "conf": "alta",
+  "porque": "Zoom 29-53s (1 em 1s): cartela de transicao em 31s, e a partir de 32s ela esta sentada de pernas cruzadas com o elastico a frente na altura dos ombros abrindo os bracos lateralmente. Frames 33/36/37/38 = bracos bem abertos com elastico esticado; 34/35, 39/40, 44/45, 49 = retorno com elastico arqueado. Ciclo claro de abre/fecha, ~4 repeticoes completas dentro de 33-49s. Nova cartela de transicao em 50s, entao o corte fecha em 49s ainda dentro do exercicio."
+ },
+ "at-pant": {
+  "start": 33,
+  "end": 52,
+  "video": "Xb-nuSxLVSY",
+  "conf": "media",
+  "porque": "Em 33-45s ela ja esta com o antepe no caixote executando elevacao de panturrilha (plano aberto, calcanhar sobe e desce); 46-52s entra o close da perna por tras mostrando amplitude completa (46 em cima, 47 embaixo, 48/49 em cima, 50 embaixo, 51 em cima, 52 embaixo) - mais de 4 repeticoes completas. Em 54s ela desce do caixote, por isso o corte em 52s (fim da fase excentrica). Confianca media porque o video so mostra a versao unilateral, nao a bilateral classica de panturrilha em pe."
+ },
+ "a-pant-uni": {
+  "start": 114,
+  "end": 132,
+  "video": "Xb-nuSxLVSY",
+  "conf": "alta",
+  "porque": "Trecho sem narracao (95-118s) que e a demonstracao limpa da panturrilha livre unilateral: 98-106s plano aberto com ela subindo e descendo o calcanhar com uma perna so no caixote, 107-110s e 114-117s closes do pe mostrando alongamento embaixo e contracao no alto. Comeca em 98s (a transicao com crossfade e em 97s, evitada) e termina em 117s, antes de a narracao dos erros voltar em 118s.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "O porque esta errado. Fiz um recorte ampliado da regiao do caixote em 98-110: de 98 a 106 ela esta parada em cima do caixote com os DOIS pes chapados, calcanhar apoiado, sem nenhuma elevacao - quem se mexe e o instrutor, que gesticula explicando. Nao e unilateral e nao ha repeticao nenhuma nesses 9s (mais de metade do trecho). Ela so tira um pe e comeca o trabalho unilateral a partir de 107 (close) e 113. Sugiro 114-132, todo confirmado: 114-119 close do pe unico subindo/descendo (114 calcanhar baixo, 115/116 na ponta, 117 desce, 118/119 sobe), 120-123 plano aberto com um pe so na quina do caixote e o outro suspenso, 125-128 novo close, 129-132 aberto com o calcanhar subindo e descendo. 18s, unilateral do primeiro ao ultimo quadro."
+ },
+ "al-cruci": {
+  "start": 33,
+  "end": 46,
+  "video": "ZjIKUMtW37c",
+  "conf": "alta",
+  "porque": "Zoom 25-52s 1-em-1s: em 32s ainda e o personal falando e em 33s ja corta para a moça deitada no banco reto com os halteres em cima (topo do movimento). Descida/subida em 34-36, 39-41, 44-46: 3 repeticoes completas, terminando no topo (nao corta no meio da rep). Unico incomodo e uma miniatura ilustrativa no canto superior esquerdo entre 36-44s; sem banner de rede social e sem propaganda (a propaganda so entra em 47s)."
+ },
+ "b-fin-2": {
+  "start": 81,
+  "end": 100,
+  "video": "a3-bQbTdA_0",
+  "conf": "alta",
+  "porque": "Verificado 80..102 de 1 em 1s: em 81 ela esta em pe com o pe de tras no banco (inicio da rep) e em 100 volta ao topo; 103 ja e outra cena. Entre 82 e 99 ela desce e sobe varias vezes com o instrutor apenas em pe atras, sem obstruir. Janela de 19s, comeca e termina no topo."
+ },
+ "a-extensora": {
+  "start": 34,
+  "end": 52,
+  "video": "exLCpU7mT3g",
+  "conf": "media",
+  "porque": "Mosaico 28-52 (passo 1s): em 32 ainda e animacao pura, em 33 entra a tela dividida; comeco em 34 para nao pegar a emenda, e ali ele ja esta sentado na cadeira extensora com o rolo no tornozelo e os joelhos flexionados (posicao inicial). Repeticoes completas visiveis: 34 flexionado -> 35 estendido, 36-41 flexiona/volta, 42 estendido, 43 flexionado, 44-45 estendido, 46 flexionado, 47 estendido, 48-51 flexionado, 52 estendido - mais de 4 repeticoes em 18s. Corto em 52 no topo da extensao porque em 53 a imagem real acaba e volta a animacao. Conf media so por causa do formato de tela dividida."
+ },
+ "mob-9090": {
+  "start": 370,
+  "end": 385,
+  "video": "i8Y_v2AWqKc",
+  "conf": "alta",
+  "porque": "Mosaico 362-386 (passo 1s): em 370 ela ja esta sentada em 90/90 (perna da frente e de tras dobradas a 90 graus), tronco ereto, maos na perna da frente = topo da repeticao, sem gesto de fala. Seguem inclinacoes completas de tronco sobre a perna da frente em 371-373, sobe em 374-375, desce 376, sobe 377, desce 378-379 (4 repeticoes). Em 380-381 ela troca de lado e repete a inclinacao em 382-384, voltando ereta em 385, onde corto. Mosaico 380-404 confirma que 385 e fim de repeticao e que so em 394 ela vira para a camera."
+ },
+ "a-elev-lat": {
+  "start": 19,
+  "end": 35,
+  "video": "jannLx4RxKo",
+  "conf": "alta",
+  "porque": "Verificado no zoom 10-40 e 30-55 (passo de 1s): 19s em pe com halteres ao lado do corpo (posicao inicial); 20s subindo; 21-23s bracos na horizontal; 24-25s descendo ate embaixo (rep 1); 28s corte para plano frontal ainda com bracos embaixo; 29s subindo; 30-31s horizontal; 32-33s descendo (rep 2); 34-35s bracos ja embaixo, repeticao fechada. A partir de 36s ele volta a falar e em 38-40s troca para demonstracao inclinada, entao o corte em 35s nao pega conversa nem outro exercicio."
+ },
+ "a-agacha": {
+  "start": 810,
+  "end": 832,
+  "video": "kOgcM3NCYA0",
+  "conf": "alta",
+  "porque": "Verificado quadro a quadro (zoom 806-832, passo 1s). Em 806-810 ele ja esta em posicao, de perfil, com a barra apoiada nas costas fora do rack - nao ha vinheta, banner nem quadro falando para a camera. Desce em 811-812, fundo em 813, sobe em 814-816 (rep 1); desce em 821-822, fundo 822-823, sobe 824-825 (rep 2); desce 827, fundo 828-829, sobe 830 (rep 3). Em 830/832/834 esta de pe, entao o corte em 832 nao parte nenhuma repeticao. 22s, 3 reps completas, corpo inteiro visivel e sem legenda sobreposta na janela."
+ },
+ "c-remo": {
+  "start": 124,
+  "end": 148,
+  "video": "nfT-wE0SjLk",
+  "conf": "alta",
+  "porque": "Zoom 124-150s 1-em-1s: ciclos completos de remada (catch 124-127, drive 128, finish 129, recovery 130-131, catch 137-138, drive 139-141, finish 142-144...). Comeca com ele ja na posicao de ataque puxando o cabo, sem vinheta nem fala para a camera. ~8 remadas completas em 24s."
+ },
+ "b-pelvica": {
+  "start": 416,
+  "end": 453,
+  "video": "np35bxrQqRI",
+  "conf": "alta",
+  "porque": "Zoom 1s em 412-436 e 436-460: em 414 o instrutor posiciona a barra; de 415 ate 454 ela executa elevacao pelvica bilateral com barra apoiada no quadril e costas no banco, com quadril subindo e descendo repetidamente (varias repeticoes completas visiveis nos quadros 417-421, 426-430, 431-435, 437-441...). Comeca em 416 com ela ja deitada em posicao com a carga; termina em 453 no fim de uma repeticao, antes do corte para o encerramento em 455s."
+ },
+ "at-ponte": {
+  "start": 33,
+  "end": 68,
+  "video": "q5U-p6vA3uo",
+  "conf": "alta",
+  "porque": "Em 33 ele ja esta deitado em decubito dorsal, joelhos flexionados e miniband nas coxas, quadril no chao, iniciando a subida; sobe em 34-35, desce em 36-37, sobe em 38, desce 39-40, sobe 41, e segue subindo e descendo continuamente ate 66; em 67-68 o quadril esta apoiado no chao, fim de repeticao completa. Cerca de 10 repeticoes, sem cortar no meio de nenhuma."
+ },
+ "a-supino": {
+  "start": 33,
+  "end": 59,
+  "video": "vIGvt-vgrvY",
+  "conf": "alta",
+  "porque": "Zoom 1s em 14-38 e 38-62. Em 33s ele ja esta deitado com a barra em extensao completa (topo da repeticao) no plano de tras da cabeca; a partir dai ha varias descidas ate o peito e subidas (34-37, 40-43, 45-46, 49-50, 55-57), com corte de camera para o plano lateral em 40 e 58 sem interromper a serie. Termina em 59s com os bracos estendidos no topo, sem cortar no meio de repeticao e antes de ele sentar."
+ },
+ "al-leg": {
+  "start": 21,
+  "end": 38,
+  "video": "waAxlYvtCcI",
+  "conf": "media",
+  "porque": "Zoom 1 em 1s (8-20, 18-32, 25-50): as pernas da modelo alternam de forma inequivoca entre flexao profunda (22, 25, 26, 28, 30, 31, 33, 36, 38) e extensao (21, 23, 24, 27, 29, 32, 34, 37) - cadencia de ~2s, cerca de 6 repeticoes completas em 17s. A legenda automatica confirma em 24.9-28.6s 'voce vai empurrar o peso e destravar o aparelho e executar como Ingrid vai fazer agora'. Conf media porque o professor esta falando em quadro o tempo todo (nao ha alternativa no video) e o enquadramento e aberto."
+ },
+ "b-lombar": {
+  "start": 24,
+  "end": 42,
+  "video": "W_kuBiLk5s0",
+  "conf": "alta",
+  "porque": "Video de execucao pura no banco romano 45 graus, sem narracao. Tem dois angulos: 0-22s camera frontal/alta (e nos 2 primeiros segundos aparece um lower-third com o nome 'Matheu Nascimento'); a partir de 23s entra a vista lateral limpa, que mostra o movimento de quadril com coluna neutra do inicio ao fim do video. Recorte 24-42s: em 24s ele esta no fundo (tronco flexionado, iniciando a subida) e em 42s esta no topo (tronco alinhado), ou seja nao corta repeticao pela metade. Sao cerca de 6 repeticoes completas em 18s, dentro da faixa de 12-40s, longe do corte de camera e sem tela final. Conferido quadro a quadro no mosaico geral e em recorte com seek exato (o rotulo do comando 'zoom' fica ~5s deslocado nesse video; os tempos aqui sao os reais).",
+  "substituto": true
+ },
+ "al-extensora": {
+  "start": 34,
+  "end": 52,
+  "video": "exLCpU7mT3g",
+  "conf": "media",
+  "porque": "Mosaico 28-52 (passo 1s): em 32 ainda e animacao pura, em 33 entra a tela dividida; comeco em 34 para nao pegar a emenda, e ali ele ja esta sentado na cadeira extensora com o rolo no tornozelo e os joelhos flexionados (posicao inicial). Repeticoes completas visiveis: 34 flexionado -> 35 estendido, 36-41 flexiona/volta, 42 estendido, 43 flexionado, 44-45 estendido, 46 flexionado, 47 estendido, 48-51 flexionado, 52 estendido - mais de 4 repeticoes em 18s. Corto em 52 no topo da extensao porque em 53 a imagem real acaba e volta a animacao. Conf media so por causa do formato de tela dividida.",
+  "herdado_de": "a-extensora"
+ }
+}

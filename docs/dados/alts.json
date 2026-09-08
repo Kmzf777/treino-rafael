@@ -1,0 +1,57 @@
+{
+ "alt|Versão stiff unilateral com halteres": {
+  "start": 118,
+  "end": 137,
+  "video": "Pj9dbkj9Wsc",
+  "conf": "alta",
+  "porque": "Confere no mosaico 116-140s (1 em 1s): em 118s ela ja esta de pe em posicao, halter na mao, pronta para descer (nao esta falando para a camera, nao ha banner). Rep 1: desce em 119s, fundo com perna estendida atras em 120-121s, sobe em 122s, topo em 123s. Rep 2: 124s desce, 125-126s fundo, 127s sobe, 128s topo. Rep 3: 129s desce, 130-131s fundo, 132s sobe, 133s topo. Rep 4: 134s desce, 135-136s fundo, 137s topo. Corte em 137s cai no topo da 4a repeticao, sem cortar rep. 4 repeticoes completas em 19s. Em 138s ela ja para e o treinador volta a falar."
+ },
+ "alt|Prancha frontal": {
+  "start": 39,
+  "end": 47,
+  "video": "RTxAFDK1OMw",
+  "conf": "alta",
+  "porque": "Mesmo trecho: e o unico momento do video com prancha frontal executada. Comeca em 39 com ele ja em posicao de prancha (antebracos apoiados, corpo alinhado) e termina em 47, ultimo quadro antes de ele sair da posicao em 48. 8s de sustentacao."
+ },
+ "alt|Flexão de braço (push-up)": {
+  "start": 115,
+  "end": 130,
+  "video": "UkDVBs9GEWo",
+  "conf": "media",
+  "porque": "Verificado 106..132: 112-114 e o card de capitulo '2 Posicao do Braco', a execucao comeca em 115 ja em prancha alta e segue continua ate 132. Cortei em 130 (topo) para nao entrar no trecho seguinte. Plano frontal/de cima, otimo para ver o posicionamento de mao e cotovelo. Reps: 117 embaixo, 118-119 em cima, 120-122 embaixo, 123 em cima, 124 embaixo, 125-127 em cima, 128 embaixo, 129-130 em cima."
+ },
+ "alt|Ou agachamento búlgaro": {
+  "start": 67,
+  "end": 81,
+  "video": "a3-bQbTdA_0",
+  "conf": "media",
+  "porque": "Verificado 58..90 de 1 em 1s: 66 ela esta em pe com o pe de tras no banco, desce em 68-75, sobe em 76, desce de novo em 77-80 e sobe em 81. 15s, 2-3 reps completas, comeca e termina no topo. Conf media porque em 67s o instrutor passa pela direita do quadro e atrapalha ~1s a visao.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "Corta no meio da repeticao. No mosaico fino de 62-73 (quadros a cada 1s, 520px) da pra ver que 63 e 64 sao o TOPO (de pe, perna da frente estendida), 65 e 66 sao o FUNDO (joelho da frente flexionado, joelho de tras baixo) e so em 67 ela volta ao topo. Ou seja, o start=66 cai no fundo do agachamento, no meio da descida/subida - nao 'em pe' como diz o porque. Sugiro 67-81, tudo confirmado nos mosaicos finos 62-73 e 74-85: 67 topo, 68-69 fundo, 70/71 topo, 72-73 fundo, 74 topo, 75-76 fundo, 77/78 topo, 79-80 fundo, 81 topo = 4 repeticoes completas em 14s, comecando e terminando em pe."
+ },
+ "alt|Supino inclinado com barra": {
+  "start": 10,
+  "end": 39,
+  "video": "oZjIQN0YMX0",
+  "conf": "alta",
+  "porque": "Zoom 1s em 0-24 e 26-50. Em 4s ele ja esta deitado no banco inclinado com a barra em extensao acima do peito (barra ja retirada do suporte em 3s). De 5s a 45s sao repeticoes completas continuas: barra desce ate o peito e sobe (5-8, 10-13, 16-19, 22-25, 27-30, 31-34, 36-39). Fecho em 39s com a barra em extensao no topo, sem cortar repeticao; ele so devolve a barra ao suporte em 46s.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "O porque esta errado: em 4s ele NAO esta deitado com a barra em extensao. No mosaico 1-26 (1 em 1s) o 4s mostra ele ainda montando no banco (de pe/sentando) e com o resto do banner vermelho 'SUPINO INCLINADO C/ BARRA' ainda desaparecendo no rodape; 5s sentado, 6s reclinando, 7s deitado esticando a mao pro suporte, 8s pegando a barra, 9s retirando do suporte. Ou seja, o primeiro quadro tem banner + setup, nao exercicio. So em 10s ele esta deitado com a barra em extensao no topo. Sugiro 10-39: 10/11 topo, 12-13 barra no peito, 14-17 topo, 18 desce, 19-20 topo, 21-23 peito, 24-27 topo, 28-29 peito, 30-32 topo, 33-36 peito, 38-39 topo (39 confirmado no topo, 40 ja descendo). 29s, comeca e termina no topo."
+ },
+ "alt|Barra fixa assistida no graviton": {
+  "start": 54,
+  "end": 85,
+  "video": "w0UVe0JAEDQ",
+  "conf": "alta",
+  "porque": "Zoom 1 em 1s (48-80 e 66-90): plano fixo de costas no graviton. Em 52s ele ja esta pendurado com bracos totalmente estendidos (posicao inicial), sobe ate o queixo na barra em 56-61, desce em 62, sobe 63, desce 64-65, sobe 66-67, desce 68-69, sobe 70-73, desce 74-75. Sao 4+ repeticoes completas em 23s, com corte no fim de uma fase excentrica. Em 86s corta para ele falando com a camera.",
+  "corrigido_pela_auditoria": true,
+  "problema_original": "Corta no meio da repeticao. No mosaico 72-90 (1 em 1s), 74s e 75s mostram ele NO TOPO da barra (queixo na altura das pegadas, pernas visiveis) e so em 76-77s ele desce. Terminar em 75 corta a fase excentrica. Alem disso, 52-55s sao 4s parado pendurado com bracos estendidos (nos frames 46,47,48,49,50,51,52,53,54,55 a posicao e identica), a primeira puxada so acontece em 56s. Sugestao confirmada na imagem: comecar em 54s (bracos totalmente estendidos, posicao inicial, imediatamente antes da 1a puxada) e terminar em 85s, onde ele esta de novo embaixo com bracos estendidos (repeticao completa) e o video corta para ele falando com a camera em 86s. Janela 54-85 = 31s, toda dentro do bloco marcado 'EXECUCAO CORRETA' (o selo vermelho 'EXECUCAO ERRADA' so aparece por volta de 96-110s, conforme o sheet geral)."
+ },
+ "alt|Versão hack machine": {
+  "start": 258,
+  "end": 279,
+  "video": "weyTbC-AjRg",
+  "conf": "alta",
+  "porque": "Comeca no fundo de uma repeticao em close lateral (258 joelhos flexionados) e segue com repeticoes completas: 259/260 extensao, 261/262 fundo, 264 extensao, 269-271 fundo no plano aberto, 273 extensao, 276-278 fundo, 279 extensao final. Mais de 4 repeticoes completas do agachamento hack. Termina em 279, ultimo quadro antes do corte em 280 onde o instrutor volta a falar para a camera."
+ }
+}
