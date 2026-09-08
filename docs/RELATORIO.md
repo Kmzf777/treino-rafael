@@ -73,9 +73,13 @@ de qualquer busca por regex porque o nome usa aspas duplas.
 - Campo opcional `t:{start,end}` por exercício, e `t:{start}` nos alternativos.
 - Player pela IFrame Player API com loop no trecho (`onStateChange` + cão-de-guarda
   por `getCurrentTime`).
-- Fallback para iframe simples com `start`/`end` e `loop=1&playlist=ID`, que repete
-  o trecho mesmo sem a API. **Nos testes a API não subiu e o fallback assumiu**, então
-  esse caminho não é teórico: é o que roda.
+- Fallback para iframe simples com `start`/`end` e `loop=1&playlist=ID`, para o caso
+  de a API não carregar sobre HTTP.
+- Aberto por `file://` o app **não embute vídeo nenhum**: o botão vira "Ver no YouTube"
+  e abre o vídeo no segundo certo. Motivo: sem origem HTTP o navegador não manda
+  `Referer` e o YouTube recusa todo embed com erro 153. Testado com e sem
+  `enablejsapi`, com e sem `loop`/`playlist`, e com os parâmetros originais do app —
+  os quatro casos falham igual. Não é contornável pelo lado do app.
 - Links "Abrir no YouTube" levam ao timestamp.
 
 Sem build, sem framework, arquivo único. `window.storage` intocado, sem `localStorage`.

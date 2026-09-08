@@ -593,7 +593,7 @@ function exHTML(x){
     <div class="ex-body">
       <div class="video" data-video="${x.video}"${x.t?` data-start="${x.t.start}" data-end="${x.t.end}"`:''}>
         <img loading="lazy" src="${thumb}" alt="">
-        <span class="play"><span>Ver execução</span></span>
+        <span class="play"><span>${location.protocol==='file:'?'Ver no YouTube':'Ver execução'}</span></span>
       </div>
       <ul class="cues">${x.cues.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
       <div class="links">
@@ -751,10 +751,17 @@ function sync(){
 /* ============================================================
    PLAYER COM RECORTE — IFrame API, loop no trecho, com fallback
    ============================================================ */
-let ytPronto = false, ytFalhou = false;
+// Aberto por file:// o navegador não manda cabeçalho Referer, e o YouTube
+// recusa TODO embed com erro 153 — testado com e sem enablejsapi, com e sem
+// playlist, e com os parâmetros originais do app. Não existe parâmetro que
+// resolva. Nesse caso abrimos o YouTube direto no segundo certo, que sempre
+// funciona. Servido por http(s) o embed roda normal, com loop.
+const LOCAL = location.protocol === 'file:';
+
+let ytPronto = false, ytFalhou = LOCAL;
 const players = [];
 
-(function carregarAPI(){
+if(!LOCAL) (function carregarAPI(){
   const s = document.createElement('script');
   s.src = 'https://www.youtube.com/iframe_api';
   s.onerror = ()=>{ ytFalhou = true; };
@@ -772,12 +779,12 @@ function pausarOutros(atual){
 }
 
 function iframeSimples(el, id, ini, fim){
-  const q = ['rel=0','modestbranding=1','playsinline=1','autoplay=1','enablejsapi=1'];
+  // nada de enablejsapi aqui: exige origem válida e quebra em file:// (erro 153)
+  const q = ['rel=0','modestbranding=1','playsinline=1','autoplay=1'];
   if(ini != null) q.push('start=' + ini);
   if(fim != null) q.push('end=' + fim);
-  // sem a API não há onStateChange; loop+playlist faz o próprio YouTube repetir
-  // o trecho, que é o que o aluno precisa para rever o movimento
-  if(ini != null && fim != null) q.push('loop=1', 'playlist=' + id);
+  // loop sem a API depende de playlist=, que também precisa de origem válida
+  if(!LOCAL && ini != null && fim != null) q.push('loop=1', 'playlist=' + id);
   el.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?${q.join('&')}" allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture" allowfullscreen title="Execução do exercício"></iframe>`;
 }
 
@@ -815,6 +822,11 @@ function abrirVideo(el){
   const id  = el.dataset.video;
   const ini = el.dataset.start ? +el.dataset.start : null;
   const fim = el.dataset.end   ? +el.dataset.end   : null;
+  if(LOCAL){
+    el.dataset.on = '';                  // deixa clicar de novo
+    window.open(YT(id, ini), '_blank', 'noopener');
+    return;
+  }
   if(ytPronto && window.YT && window.YT.Player) return criarPlayer(el, id, ini, fim);
   if(ytFalhou) return iframeSimples(el, id, ini, fim);
   const t0 = Date.now();

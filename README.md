@@ -21,15 +21,26 @@ O projeto é estático. Importe o repositório na Vercel e aceite os padrões:
 
 O `vercel.json` já cuida de `cleanUrls` e dos cabeçalhos. `index.html` é servido na raiz.
 
-Para rodar local, qualquer servidor estático serve:
+## Precisa ser servido por HTTP
+
+Abrir o `index.html` com dois cliques, por `file://`, **não toca os vídeos embutidos**.
+Sem origem HTTP o navegador não manda cabeçalho `Referer`, e o YouTube recusa todo
+embed com **erro 153**. Isso vale para qualquer combinação de parâmetros — foi testado
+com e sem `enablejsapi`, com e sem `loop`/`playlist`, e com os parâmetros originais
+do app. Não é contornável pelo lado do app.
+
+Por isso, aberto por `file://` o app muda de comportamento: o botão vira
+**"Ver no YouTube"** e clicar abre o vídeo no YouTube já no segundo certo, em vez de
+mostrar um player quebrado. Funciona sempre, mas sem o loop no trecho.
+
+Servido por HTTP (Vercel, ou local) o player embutido roda normal, com loop.
+
+Para rodar local:
 
 ```bash
 python -m http.server 8000
 # abre http://127.0.0.1:8000
 ```
-
-Abrir o arquivo por `file://` funciona parcialmente: os embeds do YouTube preferem
-uma origem HTTP.
 
 ## Testes
 
