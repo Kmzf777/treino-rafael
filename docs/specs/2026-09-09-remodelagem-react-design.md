@@ -1,6 +1,6 @@
 # Remodelagem em Node + React — design
 
-Data: 2026-09-09 · Substitui: `treino-rafael.html` (mantido como legado) · Destino: `app/`
+Data: 2026-09-09 · Substitui: `index.html` (mantido como legado) · Destino: `app/`
 
 ## 1. O que estamos construindo
 
@@ -39,7 +39,7 @@ Esse é o número que o app deve exibir, não esconder. O design inteiro se orga
 
 ### Correção de dados registrada
 
-`docs/superpowers/RELATORIO.md` afirma "47 vídeos únicos" e "181 minutos → 14 minutos". Ambos estão
+`docs/RELATORIO.md` afirma "47 vídeos únicos" e "181 minutos → 14 minutos". Ambos estão
 errados: são 39 vídeos únicos nos exercícios principais e a razão real é 139:45 → 11:51. A spec usa
 os números verificados. O relatório antigo fica como está (é registro histórico), mas o app não deve
 repetir os números dele.

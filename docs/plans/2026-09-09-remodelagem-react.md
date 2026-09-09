@@ -2,13 +2,13 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Substituir `treino-rafael.html` por um app React de consulta — 7 divisões, 47 exercícios, 37 recortes de vídeo em loop e explicações em modal — com a direção de arte "Protocolo" e UX nível Apple.
+**Goal:** Substituir `index.html` por um app React de consulta — 7 divisões, 47 exercícios, 37 recortes de vídeo em loop e explicações em modal — com a direção de arte "Protocolo" e UX nível Apple.
 
 **Architecture:** SPA estático em Vite + React 19. Todo o plano de treino é embutido no bundle como módulos TypeScript tipados (sem fetch, sem estado de carregamento). Roteamento por hash em ~40 linhas próprias. O player de recorte usa a IFrame API crua com um watchdog em `requestAnimationFrame`, porque `seekTo()` desarma o `endSeconds` e nenhuma biblioteca resolve isso. Servido por um `node:http` de zero dependências, porque embeds do YouTube falham em `file://`.
 
 **Tech Stack:** Vite 8 · React 19 · TypeScript 6 · Tailwind CSS v4 (CSS-first) · shadcn/ui v4 com Base UI · motion 13 · Vitest 5 + Testing Library + jsdom 29 · oxlint · `@fontsource` (Newsreader, IBM Plex Sans, IBM Plex Mono)
 
-**Spec:** `docs/superpowers/specs/2026-09-09-remodelagem-react-design.md`
+**Spec:** `docs/specs/2026-09-09-remodelagem-react-design.md`
 
 ---
 
@@ -302,7 +302,7 @@ git commit -m "feat: tokens da direcao de arte Protocolo (paleta, fontes, escala
 
 **Files:**
 - Create: `app/src/data/tipos.ts`, `app/src/data/plano.ts`, `app/src/data/metadados.ts`, `app/src/data/duracoes.ts`, `app/src/data/semana.ts`, `app/src/data/editorial.ts`
-- Fonte de verdade: `treino-rafael.html` linhas 254–552 e `test/duracoes.json`
+- Fonte de verdade: `index.html` linhas 254–552 e `test/duracoes.json`
 
 - [ ] **Step 1: Escrever `app/src/data/tipos.ts`**
 
@@ -354,7 +354,7 @@ Não transcreva à mão. Rode este script uma vez, da raiz do projeto, e depois 
 ```bash
 node --input-type=module -e "
 import { readFileSync, writeFileSync } from 'node:fs'
-const linhas = readFileSync('treino-rafael.html','utf8').split(/\r?\n/)
+const linhas = readFileSync('index.html','utf8').split(/\r?\n/)
 const bloco = linhas.slice(253, 552).join('\n')
 const { DATA, ORDEM } = new Function(bloco + '\nreturn { DATA, ORDEM };')()
 const ex = x => ({
@@ -404,7 +404,7 @@ Expected: `videos: 47`
 
 - [ ] **Step 5: Escrever `metadados.ts`**
 
-Copie o conteúdo de `docs/superpowers/dados/metadados-exercicios.json` (gravado pela pesquisa; se não existir, veja a nota no fim desta task) para:
+Copie o conteúdo de `docs/dados/metadados-exercicios.json` (gravado pela pesquisa; se não existir, veja a nota no fim desta task) para:
 
 ```ts
 import type { Metadados } from './tipos'
@@ -454,7 +454,7 @@ export const REGRA_DE_OURO =
 
 - [ ] **Step 7: Escrever `editorial.ts`**
 
-Fonte: `treino-rafael.html`, funções `corridaHTML()` (linha 630) e `guiaHTML()` (linha 684). Copie o texto **palavra por palavra**, com uma exceção registrada na spec: no parágrafo "Como progredir a carga", **remova** a frase *"Anote tudo no campo de carga de cada exercício — sem anotar, não existe progressão."* — o campo de carga não existe mais.
+Fonte: `index.html`, funções `corridaHTML()` (linha 630) e `guiaHTML()` (linha 684). Copie o texto **palavra por palavra**, com uma exceção registrada na spec: no parágrafo "Como progredir a carga", **remova** a frase *"Anote tudo no campo de carga de cada exercício — sem anotar, não existe progressão."* — o campo de carga não existe mais.
 
 ```ts
 export type Card = { titulo: string; texto: string }
@@ -2497,7 +2497,7 @@ git commit -m "feat: servidor estatico node:http e verificacao de saude dos vide
 
 **Files:**
 - Create: `app/README.md`
-- Modify: `treino-rafael.html` (só um aviso no topo)
+- Modify: `index.html` (só um aviso no topo)
 
 - [ ] **Step 1: Escrever `app/README.md`**
 
@@ -2545,7 +2545,7 @@ mas você perde o loop no trecho.
 
 - [ ] **Step 2: Marcar o legado como aposentado**
 
-Adicione logo depois de `<head>` em `treino-rafael.html`:
+Adicione logo depois de `<head>` em `index.html`:
 
 ```html
 <!-- APOSENTADO em 2026-09-09. Substituído por app/ (React).
@@ -2566,7 +2566,7 @@ Expected: os três limpos.
 - [ ] **Step 4: Commit**
 
 ```bash
-git add app/README.md treino-rafael.html
+git add app/README.md index.html
 git commit -m "docs: readme do app e aviso de aposentadoria no legado"
 ```
 

@@ -4,7 +4,7 @@ App de consulta ao plano de treino: 7 divisões, 47 exercícios e 37 recortes de
 apontando para o segundo exato da execução correta — 11:51 de vídeo útil no lugar de
 139:45 de vídeo bruto.
 
-Substitui o `treino-rafael.html` da raiz do repositório, que ficou como referência
+Substitui o `index.html` da raiz do repositório, que ficou como referência
 histórica dos dados.
 
 ## Rodar

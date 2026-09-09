@@ -2,8 +2,8 @@
 // uso: node test/validate.js [app.html] [original.bak]
 const fs = require('fs');
 
-const APP = process.argv[2] || 'treino-rafael.html';
-const BAK = process.argv[3] || 'treino-rafael.ORIGINAL.bak';
+const APP = process.argv[2] || 'index.html';
+const BAK = process.argv[3] || 'docs/original-antes-do-recorte.html';
 const src = fs.readFileSync(APP, 'utf8');
 const bak = fs.existsSync(BAK) ? fs.readFileSync(BAK, 'utf8') : null;
 

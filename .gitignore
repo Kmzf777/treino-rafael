@@ -1,7 +1,10 @@
 node_modules/
 dist/
+.vercel
 .superpowers/
 *.local
+*.log
 .DS_Store
+Thumbs.db
 .vite/
 coverage/
