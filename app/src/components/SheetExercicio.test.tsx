@@ -62,10 +62,44 @@ describe('SheetExercicio', () => {
     )
   })
 
-  it('marca o cue de risco para leitor de tela, sem depender só da cor', () => {
-    render(<SheetExercicio exercicio={exercicio} aberto onFechar={() => {}} />)
-    const avisos = screen.getAllByText('Atenção:')
-    expect(avisos).toHaveLength(1)
-    expect(avisos[0].parentElement).toHaveTextContent('sem dor')
+  /**
+   * A cor de risco (--tijolo) é o único vermelho do app e tem que continuar
+   * cara: um cue só é aviso quando ABRE dizendo o que não fazer, ou o que fazer
+   * se doer. Instrução principal que por acaso menciona dor não é aviso.
+   */
+  describe('cue de risco', () => {
+    it('não pinta de vermelho a instrução principal do agachamento', () => {
+      render(<SheetExercicio exercicio={exercicio} aberto onFechar={() => {}} />)
+      const principal = screen.getByText(
+        'Desça abaixo da linha do quadril, dentro do que o joelho aceita sem dor.',
+      )
+      expect(principal).toBeInTheDocument()
+      expect(principal.className).not.toContain('text-tijolo')
+      expect(screen.queryByText('Atenção:')).not.toBeInTheDocument()
+    })
+
+    it('marca o cue que abre proibindo, para leitor de tela e não só pela cor', () => {
+      const lateral = buscarExercicio('at-lateral')!
+      render(<SheetExercicio exercicio={lateral} aberto onFechar={() => {}} />)
+
+      const aviso = screen.getByText('Não deixe o joelho cair para dentro em nenhum passo.')
+      expect(aviso.className).toContain('text-tijolo')
+      expect(screen.getAllByText('Atenção:')).toHaveLength(1)
+
+      // "sem juntar os pés" no meio da frase é instrução, não alerta.
+      const neutro = screen.getByText(
+        'Joelhos semiflexionados, passos curtos e controlados, sem juntar os pés.',
+      )
+      expect(neutro.className).not.toContain('text-tijolo')
+    })
+
+    it('marca o cue condicional de dor', () => {
+      const finalizador = buscarExercicio('b-fin-2')!
+      render(<SheetExercicio exercicio={finalizador} aberto onFechar={() => {}} />)
+      expect(
+        screen.getByText('Se incomodar o joelho operado, reduza a altura do apoio de trás.')
+          .className,
+      ).toContain('text-tijolo')
+    })
   })
 })

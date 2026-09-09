@@ -17,13 +17,18 @@ import { Dialog, DialogClose, DialogContent, DialogTitle } from './ui/dialog'
 /**
  * Cue de risco articular: o único lugar onde --tijolo aparece.
  *
- * O legado tinha a classe `.warn` no CSS mas nunca a aplicava, então a regra é
- * nova. `\bdor\b` em vez do `dor` solto do plano porque "dor" solto acende
- * "amorteceDOR" — a frase "A panturrilha é o primeiro amortecedor da corrida"
- * virava alerta vermelho. Conferido nos 92 cues: 10 marcados, todos de
- * proibição ou de dor de verdade.
+ * A regra é POSICIONAL, não de vocabulário: só é aviso o cue que ABRE dizendo o
+ * que não fazer, ou o que fazer se doer. Procurar a palavra "dor" em qualquer
+ * posição pintava de vermelho a instrução principal do agachamento — "Desça
+ * abaixo da linha do quadril, dentro do que o joelho aceita sem dor." — onde
+ * "sem dor" é o objetivo, não o alerta. Vermelho na frase mais importante da
+ * tela desvaloriza os avisos de verdade.
+ *
+ * Conferido nos 92 cues do plano: 10 marcados (11%), todos de proibição
+ * ("Não deixe o joelho cair para dentro…") ou de condição de dor ("Se incomodar
+ * o joelho operado…"). Ver a spec: --tijolo deve viver em ~12 linhas do app.
  */
-const RISCO = /^(não|nunca|sem |se sentir|pare\b)|\bdor\b/i
+const RISCO = /^(não|nunca|nada de|sem |evite|pare\b|se sentir|se incomodar|se doer)/i
 
 type Props = { exercicio: ExercicioResolvido; aberto: boolean; onFechar: () => void }
 

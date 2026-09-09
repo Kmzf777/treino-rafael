@@ -110,6 +110,21 @@ describe('PranchaFigura', () => {
     expect(dublagem.tocar).toHaveBeenCalled()
   })
 
+  /**
+   * O overlay de destrave cobre o iframe inteiro (inset-0). Se ele sobrevivesse
+   * ao PLAYING, comeria todo clique nos controles do próprio YouTube — barra de
+   * progresso, volume, tela cheia. Ele só pode existir enquanto 'bloqueado'.
+   */
+  it('some com o "Toque para tocar" assim que o vídeo começa, liberando os controles', () => {
+    dublagem.estado = 'bloqueado'
+    const { rerender } = render(<PranchaFigura {...base} />)
+    expect(screen.getByRole('button', { name: /toque para tocar/i })).toBeInTheDocument()
+
+    dublagem.estado = 'tocando'
+    rerender(<PranchaFigura {...base} />)
+    expect(screen.queryByRole('button', { name: /toque para tocar/i })).not.toBeInTheDocument()
+  })
+
   it('explica que o dono não permite incorporar (erro 150)', () => {
     dublagem.estado = 'erro'
     dublagem.codigoErro = 150

@@ -16,6 +16,16 @@ import { carregarApiYouTube, ehFileProtocol } from '@/lib/youtube'
 const EPSILON = 0.08
 const GUARD_MS = 400
 
+/**
+ * Rede de segurança do autoplay. `onAutoplayBlocked` é o aviso oficial, mas nem
+ * todo navegador o emite: iOS em modo de baixo consumo, economia de dados no
+ * Android e Chrome automatizado simplesmente engolem o `playVideo()` calados —
+ * nunca chega PLAYING e nunca chega o aviso. Sem este prazo o usuário fica
+ * olhando "carregando…" para sempre. Ao vencer, caímos em 'bloqueado', que já
+ * tem o overlay "Toque para tocar" — e um toque de verdade destrava o autoplay.
+ */
+const ESPERA_AUTOPLAY_MS = 5000
+
 export type EstadoClipe =
   | 'ocioso'
   | 'carregando'
@@ -59,6 +69,12 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
     let raf = 0
     let guardAte = 0
     let tempoDoUltimoSeek: number | null = null
+    let prazoAutoplay: ReturnType<typeof setTimeout> | null = null
+
+    const cancelarPrazoAutoplay = () => {
+      if (prazoAutoplay != null) clearTimeout(prazoAutoplay)
+      prazoAutoplay = null
+    }
 
     setEstado('carregando')
 
@@ -145,14 +161,26 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
                 /* ignorado */
               }
               if (fim != null) vigiar(evento.target)
+              cancelarPrazoAutoplay()
+              prazoAutoplay = setTimeout(() => {
+                prazoAutoplay = null
+                if (descartado) return
+                // Só o silêncio vira 'bloqueado'. Se o vídeo já tocou, ou se o
+                // player já reportou erro, o prazo não tem nada a dizer.
+                setEstado((atual) => (atual === 'carregando' ? 'bloqueado' : atual))
+              }, ESPERA_AUTOPLAY_MS)
             },
             onStateChange: (evento) => {
               if (descartado) return
-              if (evento.data === 1) setEstado('tocando')
+              if (evento.data === 1) {
+                cancelarPrazoAutoplay()
+                setEstado('tocando')
+              }
               if (evento.data === 0) voltarAoInicio(evento.target)
             },
             onError: (evento) => {
               if (descartado) return
+              cancelarPrazoAutoplay()
               setCodigoErro(evento.data)
               setEstado('erro')
             },
@@ -160,6 +188,7 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
             // baixo consumo bloqueia até vídeo mudo.
             onAutoplayBlocked: () => {
               if (descartado) return
+              cancelarPrazoAutoplay()
               setEstado('bloqueado')
             },
           },
@@ -173,6 +202,7 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
     return () => {
       descartado = true
       cancelAnimationFrame(raf)
+      cancelarPrazoAutoplay()
       try {
         playerRef.current?.destroy()
       } catch {
