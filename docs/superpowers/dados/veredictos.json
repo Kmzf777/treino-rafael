@@ -1,0 +1,276 @@
+[
+ {
+  "ex": "b-flexora",
+  "video": "AFG0wxXmTH4",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "b-pelvica",
+  "video": "np35bxrQqRI",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "alt|Barra fixa assistida no graviton",
+  "video": "w0UVe0JAEDQ",
+  "aprovado": false,
+  "problema": "Corta no meio da repeticao. No mosaico 72-90 (1 em 1s), 74s e 75s mostram ele NO TOPO da barra (queixo na altura das pegadas, pernas visiveis) e so em 76-77s ele desce. Terminar em 75 corta a fase excentrica. Alem disso, 52-55s sao 4s parado pendurado com bracos estendidos (nos frames 46,47,48,49,50,51,52,53,54,55 a posicao e identica), a primeira puxada so acontece em 56s. Sugestao confirmada na imagem: comecar em 54s (bracos totalmente estendidos, posicao inicial, imediatamente antes da 1a puxada) e terminar em 85s, onde ele esta de novo embaixo com bracos estendidos (repeticao completa) e o video corta para ele falando com a camera em 86s. Janela 54-85 = 31s, toda dentro do bloco marcado 'EXECUCAO CORRETA' (o selo vermelho 'EXECUCAO ERRADA' so aparece por volta de 96-110s, conforme o sheet geral).",
+  "start_sugerido": 54,
+  "end_sugerido": 85
+ },
+ {
+  "ex": "alt|Flexão de braço (push-up)",
+  "video": "UkDVBs9GEWo",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "a-fin-3",
+  "video": "CaTbpJH49i4",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "mob-9090",
+  "video": "i8Y_v2AWqKc",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "b-pant-sent",
+  "video": "1x2QAgstSn4",
+  "aprovado": true,
+  "problema": "Aprovado apesar de ter so 9s: e realmente tudo o que o video mostra em um plano limpo. Verifiquei os mosaicos 128-152, 143-158 e 164-189: o close de execucao vai de 146 a 155; em 156-163 muda o angulo e ele passa a apontar a panturrilha com a mao (nao e execucao); em 169-177 ha outro close com repeticoes mas com o banner 'Deixe o Like! / Inscreva-se' sobreposto no quadro; e 182-192 e outro fragmento de ~10s ate o fim do video (dur 193). Nao existe trecho continuo maior e limpo."
+ },
+ {
+  "ex": "mob-tornozelo",
+  "video": "3pprN9t_P1o",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "c-prancha",
+  "video": "RTxAFDK1OMw",
+  "aprovado": true,
+  "problema": "Aprovado com 8s por ser isometrico e por ser tudo o que o video mostra: no mosaico 36-50 ele esta falando sentado ate 37s, desce em 38s, sustenta a prancha frontal de 39s a 47s (plano aberto 39-42 e close 43-47) e desfaz a posicao em 48s, voltando a falar para a camera de 49s em diante. 8s de sustentacao, acima dos 5s exigidos."
+ },
+ {
+  "ex": "c-remo",
+  "video": "nfT-wE0SjLk",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "b-pallof",
+  "video": "LuePuoHEt6s",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "a-agacha",
+  "video": "kOgcM3NCYA0",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "b-fin-3",
+  "video": "0loS0bRNqfs",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "mob-rotext",
+  "video": "PZPbasPoJQ8",
+  "aprovado": false,
+  "problema": "Zoom fino de 0,5s (177,0-189,5) mostra que em 179,0-180,0 ele SOLTA a alca do elastico e gesticula com a mao aberta falando (nao ha exercicio nesse trecho) - o comeco do corte cai em cima de uma explicacao, nao de execucao. Alem disso 178,0-183,5 e 194,5-198,0 sao tempo morto parado com a mao na cintura: das 3 repeticoes reais (184,0-186,0 / 189,5-191,0 / 192,5-194,0) nenhuma acontece nos primeiros 6s nem nos ultimos 4s da janela proposta. Sugiro 183-196: comeca em posicao neutra com a alca na mao (confirmado em 183,0), entrega as mesmas 3 rotacoes externas completas sem a interrupcao gestual, termina em repouso e o banner laranja '1) Cuidados com o punho' so entra em 200,5 (confirmado no zoom fino 189-201,5), entao continua seguro.",
+  "start_sugerido": 183,
+  "end_sugerido": 196
+ },
+ {
+  "ex": "c-flexao",
+  "video": "UkDVBs9GEWo",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "b-biceps",
+  "video": "LlJ6wf3NjeA",
+  "aprovado": true,
+  "problema": "Duracao de apenas 10s (abaixo dos 12s ideais), mas aprovado porque o video nao oferece nada maior: varri 13-38s e 38-62s e o instrutor entra na frente da camera, segura o antebraco do aluno ou bloqueia o enquadramento praticamente o tempo todo (13-17, 21-37 e 42-44). A unica janela limpa e 45-55; em 44,5 ele ainda segura o braco e em 56 volta a tapar a lente. Dentro dos 10s da para ver 4 roscas alternadas completas (45 flexionado, 46 estendido, 47 flexionado, 48 estendido, 49/52/55 flexionado). Obs: ha legenda fixa 'Aprendam a Execucao correta Biceps Alternado' no rodape durante todo o video - e legenda permanente, nao vinheta."
+ },
+ {
+  "ex": "b-desenvolv",
+  "video": "IDOZyXHq7aI",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "mob-pullapart",
+  "video": "XN0J-hI17SU",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "alt|Versão stiff unilateral com halteres",
+  "video": "Pj9dbkj9Wsc",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "a-prancha-lat",
+  "video": "RTxAFDK1OMw",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "a-pelvica",
+  "video": "Sk-mBla2h8A",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "c-kb",
+  "video": "MB87gQFA_y0",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "a-deadbug",
+  "video": "0loS0bRNqfs",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "alt|Supino inclinado com barra",
+  "video": "oZjIQN0YMX0",
+  "aprovado": false,
+  "problema": "O porque esta errado: em 4s ele NAO esta deitado com a barra em extensao. No mosaico 1-26 (1 em 1s) o 4s mostra ele ainda montando no banco (de pe/sentando) e com o resto do banner vermelho 'SUPINO INCLINADO C/ BARRA' ainda desaparecendo no rodape; 5s sentado, 6s reclinando, 7s deitado esticando a mao pro suporte, 8s pegando a barra, 9s retirando do suporte. Ou seja, o primeiro quadro tem banner + setup, nao exercicio. So em 10s ele esta deitado com a barra em extensao no topo. Sugiro 10-39: 10/11 topo, 12-13 barra no peito, 14-17 topo, 18 desce, 19-20 topo, 21-23 peito, 24-27 topo, 28-29 peito, 30-32 topo, 33-36 peito, 38-39 topo (39 confirmado no topo, 40 ja descendo). 29s, comeca e termina no topo.",
+  "start_sugerido": 10,
+  "end_sugerido": 39
+ },
+ {
+  "ex": "a-fin-2",
+  "video": "UkDVBs9GEWo",
+  "aprovado": false,
+  "problema": "O trecho 88-104 comeca na DEMONSTRACAO DO ERRO. A legenda automatica de 80,5s a 90,7s diz: 'frequentemente essas pessoas formam as costas arqueadas, fazendo essa anteversao de quadril LEVANTANDO O QUADRIL, e apresentam essa falta de tensao corporal; entao para evitar isso voce deve fazer a contracao dos gluteos...'. E exatamente o que a imagem mostra: 88,89,90,91,92,93 e 98 com o quadril bem alto (V invertido). So 99-104 e forma correta, com apenas 2 reps (99 topo-100 fundo-101 topo; 102 topo-103 fundo-104 topo). Sugiro 115-130, bloco continuo de flexao frontal limpa (o cartao '2 Posicao do Braco' sai em 114): 115/116 topo, 117 fundo, 118/119 topo, 120/121 fundo, 122/123 topo, 124 fundo, 125/126/127 topo, 128 fundo, 129/130 topo = 4 repeticoes completas em 15s, comecando e terminando no topo, sem busto falante e sem cartao.",
+  "start_sugerido": 115,
+  "end_sugerido": 130
+ },
+ {
+  "ex": "alt|Ou agachamento búlgaro",
+  "video": "a3-bQbTdA_0",
+  "aprovado": false,
+  "problema": "Corta no meio da repeticao. No mosaico fino de 62-73 (quadros a cada 1s, 520px) da pra ver que 63 e 64 sao o TOPO (de pe, perna da frente estendida), 65 e 66 sao o FUNDO (joelho da frente flexionado, joelho de tras baixo) e so em 67 ela volta ao topo. Ou seja, o start=66 cai no fundo do agachamento, no meio da descida/subida - nao 'em pe' como diz o porque. Sugiro 67-81, tudo confirmado nos mosaicos finos 62-73 e 74-85: 67 topo, 68-69 fundo, 70/71 topo, 72-73 fundo, 74 topo, 75-76 fundo, 77/78 topo, 79-80 fundo, 81 topo = 4 repeticoes completas em 14s, comecando e terminando em pe.",
+  "start_sugerido": 67,
+  "end_sugerido": 81
+ },
+ {
+  "ex": "a-pant-uni",
+  "video": "Xb-nuSxLVSY",
+  "aprovado": false,
+  "problema": "O porque esta errado. Fiz um recorte ampliado da regiao do caixote em 98-110: de 98 a 106 ela esta parada em cima do caixote com os DOIS pes chapados, calcanhar apoiado, sem nenhuma elevacao - quem se mexe e o instrutor, que gesticula explicando. Nao e unilateral e nao ha repeticao nenhuma nesses 9s (mais de metade do trecho). Ela so tira um pe e comeca o trabalho unilateral a partir de 107 (close) e 113. Sugiro 114-132, todo confirmado: 114-119 close do pe unico subindo/descendo (114 calcanhar baixo, 115/116 na ponta, 117 desce, 118/119 sobe), 120-123 plano aberto com um pe so na quina do caixote e o outro suspenso, 125-128 novo close, 129-132 aberto com o calcanhar subindo e descendo. 18s, unilateral do primeiro ao ultimo quadro.",
+  "start_sugerido": 114,
+  "end_sugerido": 132
+ },
+ {
+  "ex": "a-extensora",
+  "video": "exLCpU7mT3g",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "b-fin-1",
+  "video": "9LBlAgBjDKM",
+  "aprovado": false,
+  "problema": "Corta no meio da repeticao. No mosaico de 0,5s cobrindo 168-180 fica claro que ela esta no FUNDO (em pe no chao, pe apoiado no banco, maos na barra) de 168,0 a 170,5, sobe em 171,0-171,5 e esta no TOPO em 172,0-173,5. Portanto o start=172 pega ela ja em cima, e a primeira coisa que se ve e a descida - metade de repeticao. O porque afirma que em 172s ela esta 'na posicao inicial da subida', o que a imagem desmente. Sugiro 170-192: 170 fundo (posicao inicial confirmada), sobe 171-173, desce 174-176, e seguem as repeticoes ate 182 fundo, 183/184 topo, 185 fundo, 187 topo, 188 fundo, 189/190 topo, 191/192 fundo. 22s, comeca e termina embaixo.",
+  "start_sugerido": 170,
+  "end_sugerido": 192
+ },
+ {
+  "ex": "b-terra-uni",
+  "video": "5t3TzJ3oW7I",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "al-pelvica",
+  "video": "Sk-mBla2h8A",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "al-cruci",
+  "video": "ZjIKUMtW37c",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "a-elev-lat",
+  "video": "jannLx4RxKo",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "a-supino",
+  "video": "vIGvt-vgrvY",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "al-leg",
+  "video": "waAxlYvtCcI",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "b-fin-2",
+  "video": "a3-bQbTdA_0",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "at-pant",
+  "video": "Xb-nuSxLVSY",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "mob-gato",
+  "video": "BMdYxIDt5Ys",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "c-afundo",
+  "video": "9bxRdpUFW4c",
+  "aprovado": false,
+  "problema": "Timestamps do agente anterior estao errados em ~5s. Extraí os quadros exatos (seek de entrada E de saida, resultados identicos): em 0,1,2,3,4,5 e 6s ele esta em PLANO FECHADO FALANDO PARA A CAMERA e o banner amarelo de Instagram/Facebook esta na tela o tempo todo; o banner so sai em 7s, quando entra o plano aberto com halteres. Portanto start=3 cai em cima do banner + cabeca falante. A primeira passada so acontece em 10s (9s = em pe, posicao inicial). O fim em 30s esta correto: 28s afundo profundo, 29s e 30s em pe entre repeticoes, e de 31 a 39s ele fica parado falando.",
+  "start_sugerido": 9,
+  "end_sugerido": 30
+ },
+ {
+  "ex": "alt|Versão hack machine",
+  "video": "weyTbC-AjRg",
+  "aprovado": true,
+  "problema": ""
+ },
+ {
+  "ex": "alt|Prancha frontal",
+  "video": "RTxAFDK1OMw",
+  "aprovado": true,
+  "problema": "Aprovado com 8s (abaixo do ideal 12-40s) porque e isometrico e e o unico trecho de prancha frontal do video: no sheet geral 0-113s so ha prancha frontal entre 39 e 47 (12-38s ele fala sentado, 48-56s volta a falar, 60-96s e prancha LATERAL, 100s+ e encerramento com overlay de WhatsApp). Confirmado em alta resolucao: 39s ja em prancha completa (plano aberto), 40-47s prancha (close a partir de 43s), 48s ele sai da posicao apoiando os joelhos."
+ },
+ {
+  "ex": "at-bike",
+  "video": "nfT-wE0SjLk",
+  "aprovado": false,
+  "problema": "Exercicio mostrado nao e o exercicio nomeado. O ex at-bike e 'Bike ou esteira em ritmo leve' e o video (titulo: 'Aprenda a Tecnica do Remo Indoor Concept2') mostra remo ergometro Concept2 em TODOS os quadros de 167 a 191s - nao ha bike nem esteira em nenhum momento. O recorte em si esta tecnicamente limpo (remada continua, sem cabeca falante, sem vinheta, 22s), mas nenhuma janela deste video resolve o problema: e preciso trocar o VIDEO, nao os timestamps."
+ },
+ {
+  "ex": "at-ponte",
+  "video": "q5U-p6vA3uo",
+  "aprovado": true,
+  "problema": ""
+ }
+]
