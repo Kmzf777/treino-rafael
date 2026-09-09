@@ -1,21 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeAll, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { buscarExercicio } from '@/data'
 import { Busca } from './Busca'
 
-// Dois buracos do jsdom que o cmdk usa de verdade:
-// 1. scrollIntoView() é chamado no item selecionado a cada tecla digitada;
-// 2. o CommandList observa a própria altura com ResizeObserver.
-// Sem os dois stubs a montagem estoura antes de qualquer asserção.
-beforeAll(() => {
-  Element.prototype.scrollIntoView = vi.fn()
-  globalThis.ResizeObserver = class {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  }
-})
+// Os stubs de `scrollIntoView` e `ResizeObserver` que o cmdk exige vivem em
+// src/test/setup.ts — são os mesmos de que o teste do App precisa.
 
 const campo = () => screen.getByRole('combobox')
 
