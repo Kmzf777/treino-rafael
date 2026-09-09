@@ -59,6 +59,11 @@ export function useTema() {
         tema === 'escuro' || (tema === 'auto' && (consultaEscuro()?.matches ?? false))
       const raiz = document.documentElement
       raiz.classList.toggle('escuro', escuro)
+      // A classe `claro` é explícita porque o CSS precisa distinguir "o usuário
+      // escolheu claro" de "ninguém escolheu nada ainda": é ela que desarma o
+      // bloco @media (prefers-color-scheme: dark) do index.css, a rede de
+      // segurança que pinta o escuro antes do JS existir.
+      raiz.classList.toggle('claro', !escuro)
       // Alinha barras de rolagem e controles nativos ao tema escolhido: sem isso,
       // "claro" num sistema escuro devolve scrollbar preta numa página de papel.
       raiz.style.colorScheme = tema === 'auto' ? 'light dark' : tema === 'escuro' ? 'dark' : 'light'

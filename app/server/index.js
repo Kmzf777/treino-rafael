@@ -2,6 +2,7 @@ import { createReadStream, existsSync, statSync } from 'node:fs'
 import { createServer } from 'node:http'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { resolverDentro } from './caminho.js'
 
 const RAIZ = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist')
 const PORTA = Number(process.env.PORT) || 5173
@@ -33,9 +34,8 @@ createServer((req, res) => {
     return
   }
 
-  let arquivo = path.join(RAIZ, pedido)
-
-  if (!arquivo.startsWith(RAIZ)) {
+  let arquivo = resolverDentro(RAIZ, pedido)
+  if (arquivo === null) {
     res.writeHead(403).end('Proibido')
     return
   }

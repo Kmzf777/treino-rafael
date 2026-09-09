@@ -13,6 +13,27 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FCFAF5" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#211E1A" />
     <title>Protocolo de treino — Rafael</title>
+    <!-- O escuro é primeira classe, não afterthought: papel puro a 100% de
+         brilho num canto escuro da academia às 22h machuca. A classe do tema
+         precisa estar no <html> ANTES do primeiro paint — o useTema do React só
+         roda depois de baixar e avaliar o bundle, e até lá a tela seria branca.
+         Bloqueante e minúsculo de propósito; falha em silêncio se o storage
+         estiver bloqueado (modo privado), caindo no que o sistema pedir. -->
+    <script>
+      ;(function () {
+        try {
+          var tema = localStorage.getItem('treino.tema') || 'auto'
+          var escuro =
+            tema === 'escuro' ||
+            (tema !== 'claro' &&
+              window.matchMedia &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+          var raiz = document.documentElement
+          raiz.classList.add(escuro ? 'escuro' : 'claro')
+          raiz.style.colorScheme = tema === 'auto' ? 'light dark' : escuro ? 'dark' : 'light'
+        } catch (e) {}
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -41,11 +41,20 @@ export type OpcoesClipe = {
   ativo: boolean
 }
 
+/**
+ * Publicação do playhead. A régua tem 3 pixels de altura: a 60 fps ninguém vê a
+ * diferença, e re-renderizar o sheet inteiro sessenta vezes por segundo por
+ * causa dela seria caro à toa. 10 Hz é o suficiente para o traço parecer contínuo.
+ */
+const PASSO_PROGRESSO_MS = 100
+
 export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
   const ref = useRef<HTMLDivElement | null>(null)
   const playerRef = useRef<YT.Player | null>(null)
   const [estado, setEstado] = useState<EstadoClipe>('ocioso')
   const [codigoErro, setCodigoErro] = useState<number | null>(null)
+  /** 0..1 dentro da janela curada. Null enquanto não há player tocando. */
+  const [progresso, setProgresso] = useState<number | null>(null)
 
   const tocar = useCallback(() => {
     try {
@@ -70,10 +79,36 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
     let guardAte = 0
     let tempoDoUltimoSeek: number | null = null
     let prazoAutoplay: ReturnType<typeof setTimeout> | null = null
+    let prontoChegou = false
+    let progressoPublicadoEm = 0
 
     const cancelarPrazoAutoplay = () => {
       if (prazoAutoplay != null) clearTimeout(prazoAutoplay)
       prazoAutoplay = null
+    }
+
+    /**
+     * O prazo nasce junto com o Player, não só no onReady.
+     *
+     * Se o iframe do youtube-nocookie.com nunca abrir — o domínio está em
+     * praticamente toda blocklist de DNS enquanto o iframe_api costuma passar —
+     * não chega onReady, nem onError, nem onAutoplayBlocked, e sem este prazo o
+     * estado ficaria em 'carregando' para sempre. Por isso o vencimento
+     * distingue os dois silêncios: com onReady o player existe e um toque
+     * destrava ('bloqueado'); sem onReady o iframe nunca abriu e "Toque para
+     * tocar" ali seria um botão morto ('indisponivel').
+     */
+    const armarPrazo = () => {
+      cancelarPrazoAutoplay()
+      prazoAutoplay = setTimeout(() => {
+        prazoAutoplay = null
+        if (descartado) return
+        // Só o silêncio vira alguma coisa: se já tocou, ou já deu erro, o prazo
+        // não tem nada a dizer.
+        setEstado((atual) =>
+          atual !== 'carregando' ? atual : prontoChegou ? 'bloqueado' : 'indisponivel',
+        )
+      }, ESPERA_AUTOPLAY_MS)
     }
 
     setEstado('carregando')
@@ -119,11 +154,26 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
       }
     }
 
+    /**
+     * A outra metade da assinatura: a barra já mostra a economia (a proporção
+     * da janela curada dentro do vídeo inteiro); o playhead mostra o loop.
+     */
+    const publicarProgresso = (tempo: number) => {
+      if (inicio == null || fim == null || fim <= inicio) return
+      if (!Number.isFinite(tempo)) return
+      const agora = performance.now()
+      if (agora - progressoPublicadoEm < PASSO_PROGRESSO_MS) return
+      progressoPublicadoEm = agora
+      const bruto = (tempo - inicio) / (fim - inicio)
+      setProgresso(Math.min(1, Math.max(0, bruto)))
+    }
+
     const vigiar = (player: YT.Player) => {
       raf = requestAnimationFrame(() => {
         if (descartado) return
         if (fim != null) {
           const tempo = lerTempo(player)
+          publicarProgresso(tempo)
           if (tempo < fim - EPSILON) {
             // Voltamos para dentro do trecho: o seek chegou, rearma a trava 2.
             tempoDoUltimoSeek = null
@@ -161,14 +211,10 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
                 /* ignorado */
               }
               if (fim != null) vigiar(evento.target)
-              cancelarPrazoAutoplay()
-              prazoAutoplay = setTimeout(() => {
-                prazoAutoplay = null
-                if (descartado) return
-                // Só o silêncio vira 'bloqueado'. Se o vídeo já tocou, ou se o
-                // player já reportou erro, o prazo não tem nada a dizer.
-                setEstado((atual) => (atual === 'carregando' ? 'bloqueado' : atual))
-              }, ESPERA_AUTOPLAY_MS)
+              // O player existe: daqui em diante o vencimento do prazo é
+              // autoplay bloqueado, não iframe morto.
+              prontoChegou = true
+              armarPrazo()
             },
             onStateChange: (evento) => {
               if (descartado) return
@@ -194,6 +240,7 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
           },
         } as YT.PlayerOptions)
         playerRef.current = player
+        armarPrazo()
       })
       .catch(() => {
         if (!descartado) setEstado('indisponivel')
@@ -210,8 +257,23 @@ export function useYouTubeClip({ video, inicio, fim, ativo }: OpcoesClipe) {
       }
       playerRef.current = null
       container.replaceChildren()
+      // Sem player não há estado de player. Sem esta varredura o hook continua
+      // dizendo 'tocando'/'bloqueado'/'erro' com o iframe já destruído — e o
+      // overlay de destrave sobrevive como um botão morto por cima da prancha
+      // durante a animação de saída do sheet. É também aqui que o código de
+      // erro do vídeo ANTERIOR morre: o cleanup roda antes do efeito novo, e
+      // sem isso a tarja do vídeo novo exibiria o diagnóstico do vídeo velho.
+      setEstado('ocioso')
+      setCodigoErro(null)
+      setProgresso(null)
+      // Sem player não há estado de player. Sem esta varredura o hook continua
+      // dizendo 'tocando'/'bloqueado'/'erro' com o iframe já destruído — e o
+      // overlay de destrave sobrevive como um botão morto por cima da prancha
+      // durante a animação de saída do sheet. É também aqui que o código de
+      // erro do vídeo ANTERIOR morre: o cleanup roda antes do efeito novo, e
+      // sem isso a tarja do vídeo novo exibiria o diagnóstico do vídeo velho.
     }
   }, [video, inicio, fim, ativo])
 
-  return { ref, estado, codigoErro, tocar }
+  return { ref, estado, codigoErro, progresso, tocar }
 }

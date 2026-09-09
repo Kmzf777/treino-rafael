@@ -33,13 +33,24 @@ function assinar(callback: () => void) {
   return () => window.removeEventListener('hashchange', callback)
 }
 
-export function irPara(divisao: string, exercicio?: string) {
+/**
+ * `substituir` troca o push por um replaceState. Fechar o sheet não é navegar
+ * para lugar nenhum, é desfazer a abertura: empilhando, o botão Voltar do
+ * Android — o gesto natural de sair — reabre o exercício que o usuário acabou
+ * de fechar.
+ */
+export function irPara(divisao: string, exercicio?: string, substituir = false) {
   const alvo = exercicio ? `#/${divisao}/${exercicio}` : `#/${divisao}`
-  if (window.location.hash !== alvo) window.location.hash = alvo
+  if (window.location.hash !== alvo) {
+    if (substituir) window.history.replaceState(null, '', alvo)
+    else window.location.hash = alvo
+  }
   // `location.hash` muda na hora, mas o `hashchange` é uma tarefa enfileirada —
   // tanto no navegador quanto no jsdom. Sem este aviso síncrono a interface só
   // reagiria no tick seguinte ao clique. Quando o evento real chegar, o
   // snapshot já será idêntico e o useSyncExternalStore não re-renderiza.
+  // Com `substituir` ele deixa de ser otimização e passa a ser obrigatório:
+  // replaceState não dispara `hashchange` nenhum.
   window.dispatchEvent(new HashChangeEvent('hashchange'))
 }
 

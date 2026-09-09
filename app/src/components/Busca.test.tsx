@@ -59,6 +59,59 @@ describe('Busca', () => {
     expect(screen.getByText(/nenhum exercício/i)).toBeInTheDocument()
   })
 
+  /**
+   * O rodapé promete "↑↓ NAVEGAR". Sem aria-activedescendant o leitor de tela
+   * não anuncia qual dos 47 resultados está destacado enquanto se navega.
+   */
+  describe('opção ativa anunciada', () => {
+    const ativa = () => document.querySelector('[role=option][aria-selected="true"]')
+
+    it('aponta para a opção destacada assim que a paleta abre', () => {
+      render(<Busca aberta onFechar={() => {}} onEscolher={() => {}} />)
+      expect(ativa()).not.toBeNull()
+      expect(campo()).toHaveAttribute('aria-activedescendant', ativa()!.id)
+    })
+
+    it('continua apontando depois de filtrar', async () => {
+      const usuario = userEvent.setup()
+      render(<Busca aberta onFechar={() => {}} onEscolher={() => {}} />)
+      await usuario.type(campo(), 'agach')
+      expect(ativa()).not.toBeNull()
+      expect(campo()).toHaveAttribute('aria-activedescendant', ativa()!.id)
+    })
+
+    it('acompanha a navegação por seta', async () => {
+      const usuario = userEvent.setup()
+      render(<Busca aberta onFechar={() => {}} onEscolher={() => {}} />)
+      const primeira = ativa()!.id
+      await usuario.keyboard('{ArrowDown}')
+      expect(ativa()!.id).not.toBe(primeira)
+      expect(campo()).toHaveAttribute('aria-activedescendant', ativa()!.id)
+    })
+
+    it('esquece a opção ativa quando nada casa', async () => {
+      const usuario = userEvent.setup()
+      render(<Busca aberta onFechar={() => {}} onEscolher={() => {}} />)
+      await usuario.type(campo(), 'zzzzzz')
+      expect(ativa()).toBeNull()
+      expect(campo()).not.toHaveAttribute('aria-activedescendant')
+    })
+  })
+
+  /**
+   * Filtrar acontece em silêncio: o contador é o único retorno de quantos
+   * resultados sobraram e de quando a lista zerou.
+   */
+  it('publica a contagem de resultados numa região viva', async () => {
+    const usuario = userEvent.setup()
+    render(<Busca aberta onFechar={() => {}} onEscolher={() => {}} />)
+    const viva = screen.getByRole('status')
+    expect(viva).toHaveTextContent('47 de 47 exercícios')
+
+    await usuario.type(campo(), 'zzzzzz')
+    expect(viva).toHaveTextContent('0 de 47 exercícios')
+  })
+
   it('devolve o exercício escolhido', async () => {
     const onEscolher = vi.fn()
     const usuario = userEvent.setup()

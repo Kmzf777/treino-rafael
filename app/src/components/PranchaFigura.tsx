@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
-import { useYouTubeClip } from '@/hooks/useYouTubeClip'
+import { type EstadoClipe, useYouTubeClip } from '@/hooks/useYouTubeClip'
 import { cn } from '@/lib/utils'
 import { mmss, urlYouTube } from '@/lib/formato'
 import { BarraTrecho } from './BarraTrecho'
@@ -36,6 +36,19 @@ const MENSAGENS: Record<number, string> = {
   153: 'Este vídeo não pode ser incorporado a partir de um arquivo local.',
 }
 
+/**
+ * Quem aciona "Ver execução" com leitor de tela perde o botão do DOM e depois
+ * disso a caixa muda de estado em silêncio absoluto. Estes são os avisos que a
+ * região viva abaixo publica — curtos, porque são interrupções.
+ */
+const AVISOS: Partial<Record<EstadoClipe, string>> = {
+  carregando: 'Carregando o clipe.',
+  bloqueado: 'Clipe pronto. Toque para tocar.',
+  tocando: 'Clipe tocando em loop.',
+  erro: 'Não foi possível carregar o vídeo aqui.',
+  indisponivel: 'Não foi possível carregar o vídeo aqui.',
+}
+
 export function PranchaFigura({
   numero,
   nome,
@@ -47,7 +60,12 @@ export function PranchaFigura({
 }: Props) {
   const [pedido, setPedido] = useState(false)
   const ativo = pedido && habilitado
-  const { ref, estado, codigoErro, tocar } = useYouTubeClip({ video, inicio, fim, ativo })
+  const { ref, estado, codigoErro, progresso, tocar } = useYouTubeClip({
+    video,
+    inicio,
+    fim,
+    ativo,
+  })
 
   const temRecorte = inicio != null && fim != null
   const falhou = estado === 'erro' || estado === 'indisponivel'
@@ -58,6 +76,12 @@ export function PranchaFigura({
 
   return (
     <figure className="m-0">
+      {/* A região viva existe desde o primeiro render, antes de qualquer troca
+          de estado: live region criada junto com o texto novo não anuncia. */}
+      <span role="status" aria-live="polite" className="sr-only">
+        {ativo ? (AVISOS[estado] ?? '') : ''}
+      </span>
+
       <div className="relative aspect-video w-full overflow-hidden border border-fio bg-plate">
         {/* Container exclusivo do player: o hook faz replaceChildren aqui, então
             este nó não pode ter nenhum filho do React. */}
@@ -132,9 +156,18 @@ export function PranchaFigura({
         )}
       </div>
 
-      {temRecorte && <BarraTrecho duracao={duracao} inicio={inicio} fim={fim} />}
+      {temRecorte && (
+        <BarraTrecho
+          duracao={duracao}
+          inicio={inicio}
+          fim={fim}
+          // Só existe playhead enquanto há vídeo andando: parado na régua ele
+          // viraria uma marca a mais, e a barra deixaria de dizer "em loop".
+          progresso={estado === 'tocando' ? (progresso ?? undefined) : undefined}
+        />
+      )}
 
-      <figcaption className="mt-2 font-mono text-[13px] leading-[1.35] tracking-[-0.003em] text-tinta-2">
+      <figcaption className="mt-2 font-mono text-[13px] leading-[1.35] tracking-[-0.003em] tabular-nums text-tinta-2">
         Fig. {numero} — {nome}
         {temRecorte && (
           <>
@@ -144,13 +177,16 @@ export function PranchaFigura({
           </>
         )}
         {' · '}
+        {/* inline-block + py: dentro da frase o link media 17px de altura de
+            alvo, metade do mínimo de 24px da WCAG 2.5.8. */}
         <a
-          className="text-carimbo underline underline-offset-2"
+          className="inline-block py-1 text-carimbo underline underline-offset-2"
           href={urlYouTube(video, inicio)}
           target="_blank"
           rel="noopener"
         >
           Abrir no YouTube
+          <span className="sr-only"> (abre em nova aba)</span>
         </a>
       </figcaption>
     </figure>

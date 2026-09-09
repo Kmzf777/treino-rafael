@@ -151,7 +151,7 @@
   --color-papel: #FCFAF5;
   --color-papel-2: #F2EEE5;
   --color-tinta: #2B2622;
-  --color-tinta-2: #77706A;
+  --color-tinta-2: #6B645E;
   --color-fio: #DCD6CC;
   --color-carimbo: #2F5AA8;
   --color-tijolo: #B4462E;
@@ -178,6 +178,25 @@
   --color-plate: #16130F;
 }
 
+/* Rede de segurança do escuro: sem isto o tema só existe depois que o React
+   roda o efeito do useTema, e um aparelho no escuro pinta papel a 100% de brilho
+   durante todo o download do bundle. O script inline do index.html carimba
+   `escuro`/`claro` antes do primeiro paint; este bloco cobre o caso de o JS
+   estar desligado ou ter quebrado. `:not(.claro)` é o que deixa a escolha
+   explícita do usuário por tema claro vencer o sistema. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.claro) {
+    --color-papel: #211E1A;
+    --color-papel-2: #2A2622;
+    --color-tinta: #EDE7DD;
+    --color-tinta-2: #A79E93;
+    --color-fio: #423C36;
+    --color-carimbo: #6E9BE0;
+    --color-tijolo: #E0785C;
+    --color-plate: #16130F;
+  }
+}
+
 body {
   background: var(--color-papel);
   color: var(--color-tinta);
@@ -189,6 +208,12 @@ body {
 }
 
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* "tabular-nums ligado em tudo que é mono" fecha aqui, e não classe a classe:
+   dígito de largura variável em legenda, timecode, prescrição e numeração de
+   protocolo faz o número dançar quando o dado troca. Fora de @layer de
+   propósito, para vencer as utilities do Tailwind sem depender de ordem. */
+[class*="font-mono"] { font-variant-numeric: tabular-nums; }
 
 :focus-visible {
   outline: 2px solid var(--color-carimbo);

@@ -8,7 +8,7 @@ export const PLANO: Divisao[] = [
     "lede": "Três partes: soltar as articulações, acordar glúteo e core, subir a frequência cardíaca. Não pule a parte 2: é ela que protege o joelho operado.",
     "blocos": [
       {
-        "nome": "1. Mobilidade",
+        "nome": "Mobilidade",
         "sub": "1x15 cada movimento (2x15 se estiver travado)",
         "exercicios": [
           {
@@ -114,7 +114,7 @@ export const PLANO: Divisao[] = [
         ]
       },
       {
-        "nome": "2. Ativação com miniband e bola",
+        "nome": "Ativação com miniband e bola",
         "sub": "o bloco que você já fazia",
         "exercicios": [
           {
@@ -181,7 +181,7 @@ export const PLANO: Divisao[] = [
         ]
       },
       {
-        "nome": "3. Cardio leve",
+        "nome": "Cardio leve",
         "sub": "5 minutos",
         "exercicios": [
           {

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Command as CommandPrimitive } from "cmdk"
+import { Command as CommandPrimitive, useCommandState } from "cmdk"
 import { cn } from "cn"
 
 import {
@@ -38,28 +38,36 @@ function CommandDialog({
   description = "Search for a command to run...",
   children,
   className,
+  overlayClassName,
   showCloseButton = false,
   ...props
 }: Omit<React.ComponentProps<typeof Dialog>, "children"> & {
   title?: string
   description?: string
   className?: string
+  /** Backdrop do Base UI, que fica fora do popup e por isso não alcançável por className. */
+  overlayClassName?: string
   showCloseButton?: boolean
   children: React.ReactNode
 }) {
   return (
     <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
-      </DialogHeader>
       <DialogContent
+        aria-modal="true"
+        overlayClassName={overlayClassName}
         className={cn(
           "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0",
           className
         )}
         showCloseButton={showCloseButton}
       >
+        {/* O cabeçalho sr-only vive DENTRO do popup: fora dele ficava renderizado
+            no <main> mesmo com a paleta fechada, e todas as sete rotas
+            terminavam com um h2 órfão descrevendo um diálogo inexistente. */}
+        <DialogHeader className="sr-only">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
         {children}
       </DialogContent>
     </Dialog>
@@ -70,10 +78,29 @@ function CommandInput({
   className,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
+  const ref = React.useRef<HTMLInputElement>(null)
+  // O cmdk 1.1.1 guarda o id da opção ativa num agendador próprio, e quando a
+  // seleção é definida DURANTE o flush desse agendador — que é o que acontece no
+  // registro inicial dos itens e a cada refiltragem — o id é escrito no mapa
+  // velho e descartado. Resultado: aria-activedescendant só aparece depois da
+  // primeira seta, e até lá o leitor de tela não anuncia o resultado destacado.
+  // Ressincronizamos lendo a própria opção que o cmdk marcou com aria-selected.
+  const valorAtivo = useCommandState((estado) => estado.value)
+  React.useEffect(() => {
+    const campo = ref.current
+    if (!campo) return
+    const ativa = campo
+      .closest("[cmdk-root]")
+      ?.querySelector('[cmdk-item=""][aria-selected="true"]')
+    if (ativa?.id) campo.setAttribute("aria-activedescendant", ativa.id)
+    else campo.removeAttribute("aria-activedescendant")
+  }, [valorAtivo])
+
   return (
     <div data-slot="command-input-wrapper" className="p-1 pb-0">
       <InputGroup className="h-8! rounded-lg! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
         <CommandPrimitive.Input
+          ref={ref}
           data-slot="command-input"
           className={cn(
             "w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",

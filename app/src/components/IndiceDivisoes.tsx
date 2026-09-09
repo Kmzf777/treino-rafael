@@ -36,7 +36,7 @@ export function IndiceDivisoes({ atual, onIr }: Props) {
     <nav
       ref={navRef}
       aria-label="Divisões do plano"
-      className="sticky top-0 z-30 -mx-4 flex gap-5 overflow-x-auto border-b border-fio bg-papel/95 px-4 backdrop-blur [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-col sm:items-start sm:gap-1 sm:overflow-visible sm:border-r sm:border-b-0 sm:px-0 sm:py-2 sm:pr-5"
+      className="sticky top-0 z-30 -mx-4 flex gap-5 overflow-x-auto border-b border-fio bg-papel px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-col sm:items-start sm:gap-2 sm:overflow-visible sm:border-r sm:border-b-0 sm:px-0 sm:py-2 sm:pr-5"
     >
       {DIVISOES.map((divisao) => {
         const ativa = divisao.chave === atual
@@ -47,7 +47,7 @@ export function IndiceDivisoes({ atual, onIr }: Props) {
             type="button"
             onClick={() => onIr(divisao.chave)}
             aria-current={ativa ? 'page' : undefined}
-            className="relative flex min-h-[44px] flex-none items-center gap-1.5 whitespace-nowrap text-left sm:min-h-[36px]"
+            className="relative flex min-h-[44px] flex-none items-center gap-1.5 whitespace-nowrap text-left"
           >
             <span
               className={`font-mono text-[12px] font-medium tabular-nums transition-colors duration-150 ${

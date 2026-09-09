@@ -96,6 +96,10 @@ export function Busca({ aberta, onFechar, onEscolher }: Props) {
       }}
       title="Buscar exercício"
       description="Busque por nome, músculo ou equipamento e abra o exercício."
+      // Mesmo backdrop do sheet: sólido, sem blur. O padrão do shadcn é
+      // bg-black/10 com vidro fosco — o efeito genérico que a direção rejeita, e
+      // a 10% de preto a folha atrás continua competindo com a paleta.
+      overlayClassName="bg-black/40 backdrop-blur-none supports-backdrop-filter:backdrop-blur-none dark:bg-black/60"
       className="top-[10vh] rounded-[20px]! border border-fio bg-papel p-0 text-tinta ring-0 sm:max-w-[560px]"
     >
       <Command
@@ -151,7 +155,10 @@ export function Busca({ aberta, onFechar, onEscolher }: Props) {
         </CommandList>
 
         <div className="flex items-baseline justify-between gap-4 border-t border-fio px-5 py-3 font-mono text-[11px] tracking-[0.06em] text-tinta-2 uppercase">
-          <span className="tabular-nums">
+          {/* Digitar filtra a lista em silêncio para quem usa leitor de tela: o
+              contador é o único retorno de quantos resultados sobraram, e de
+              quando a lista zerou. Por isso ele é a região viva. */}
+          <span role="status" aria-live="polite" className="tabular-nums">
             {resultados.length} de {TODOS_EXERCICIOS.length} exercícios
           </span>
           <span className="hidden shrink-0 sm:inline">↑↓ navegar · ↵ abrir · esc fechar</span>

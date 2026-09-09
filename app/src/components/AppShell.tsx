@@ -38,7 +38,7 @@ export function AppShell({ children, onAbrirBusca }: Props) {
   const [tema, setTema] = useTema()
 
   return (
-    <div className="mx-auto min-h-dvh max-w-[672px] px-4 pt-[env(safe-area-inset-top)] sm:px-5">
+    <div className="mx-auto min-h-dvh max-w-[672px] px-4 pt-[env(safe-area-inset-top)] min-[430px]:px-5 sm:max-w-[972px]">
       <header className="pt-2 pb-5">
         <div className="flex items-center justify-end gap-5">
           <button
@@ -77,7 +77,7 @@ export function AppShell({ children, onAbrirBusca }: Props) {
       <main>{children}</main>
 
       <footer className="mt-14 border-t border-fio pt-5 pb-[calc(env(safe-area-inset-bottom)+2rem)]">
-        <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[13px] tabular-nums text-tinta-2">
+        <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[13px] leading-[1.385] tabular-nums text-tinta-2">
           <span>{ESTATISTICAS.totalExercicios} exercícios</span>
           <Fio />
           <span>{ESTATISTICAS.totalClipes} clipes</span>

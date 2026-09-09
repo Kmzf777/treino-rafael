@@ -5,6 +5,7 @@ import { useYouTubeClip } from './useYouTubeClip'
 let tempoAtual = 0
 let aoPronto: (() => void) | null = null
 let aoMudarEstado: ((codigo: number) => void) | null = null
+let aoErrar: ((codigo: number) => void) | null = null
 const seekTo = vi.fn()
 const playVideo = vi.fn()
 const destroy = vi.fn()
@@ -12,12 +13,14 @@ const destroy = vi.fn()
 type EventosFalsos = {
   onReady: (e: unknown) => void
   onStateChange: (e: unknown) => void
+  onError: (e: unknown) => void
 }
 
 class PlayerFalso {
   constructor(_host: HTMLElement, opcoes: { events: EventosFalsos }) {
     aoPronto = () => opcoes.events.onReady({ target: this })
     aoMudarEstado = (codigo) => opcoes.events.onStateChange({ target: this, data: codigo })
+    aoErrar = (codigo) => opcoes.events.onError({ target: this, data: codigo })
   }
   getCurrentTime() {
     return tempoAtual
@@ -41,6 +44,7 @@ beforeEach(() => {
   tempoAtual = 0
   aoPronto = null
   aoMudarEstado = null
+  aoErrar = null
   seekTo.mockClear()
   playVideo.mockClear()
   destroy.mockClear()
@@ -56,13 +60,20 @@ function Sonda({ ativo = true }: { ativo?: boolean }) {
   return <div ref={ref} data-testid="host" />
 }
 
-/** Igual à Sonda, mas publica o estado do hook no DOM para as asserções. */
-function SondaComEstado({ ativo = true }: { ativo?: boolean }) {
-  const { ref, estado } = useYouTubeClip({ video: 'abc', inicio: 30, fim: 40, ativo })
+/** Igual à Sonda, mas publica todo o retorno do hook no DOM para as asserções. */
+function SondaComEstado({ ativo = true, video = 'abc' }: { ativo?: boolean; video?: string }) {
+  const { ref, estado, codigoErro, progresso } = useYouTubeClip({
+    video,
+    inicio: 30,
+    fim: 40,
+    ativo,
+  })
   return (
     <div>
       <div ref={ref} data-testid="host" />
       <span data-testid="estado">{estado}</span>
+      <span data-testid="codigo">{String(codigoErro)}</span>
+      <span data-testid="progresso">{String(progresso)}</span>
     </div>
   )
 }
@@ -212,6 +223,92 @@ describe('useYouTubeClip', () => {
         })
       }).not.toThrow()
       expect(vi.getTimerCount()).toBe(0)
+    })
+
+    /**
+     * O beco sem saída uma camada acima: o YT.Player é construído, mas o iframe
+     * do youtube-nocookie.com nunca abre (o domínio está em praticamente toda
+     * blocklist de DNS enquanto o iframe_api costuma passar). Não chega onReady,
+     * nem onError, nem onAutoplayBlocked. Sem prazo armado na CRIAÇÃO do player
+     * o estado fica em 'carregando' para sempre — por isso o relógio falso vale
+     * desde antes do render.
+     */
+    it('não fica em "carregando" para sempre quando o iframe nunca abre', async () => {
+      vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+      const { getByTestId } = render(<SondaComEstado />)
+      await act(async () => {}) // deixa o .then do loader rodar
+      expect(getByTestId('estado')).toHaveTextContent('carregando')
+
+      act(() => {
+        vi.advanceTimersByTime(60_000)
+      })
+      // 'indisponivel' e não 'bloqueado': sem onReady não há player para
+      // destravar, e "Toque para tocar" ali seria um botão morto.
+      expect(getByTestId('estado')).toHaveTextContent('indisponivel')
+    })
+  })
+
+  describe('recomeço limpo', () => {
+    it('esquece o código de erro quando o vídeo troca', async () => {
+      const { getByTestId, rerender } = render(<SondaComEstado video="abc" />)
+      await waitFor(() => expect(aoErrar).not.toBeNull())
+      act(() => {
+        aoErrar?.(101)
+      })
+      expect(getByTestId('estado')).toHaveTextContent('erro')
+      expect(getByTestId('codigo')).toHaveTextContent('101')
+
+      // Sem a varredura, a tarja do vídeo novo exibiria "O dono deste vídeo não
+      // permite que ele seja incorporado" para um vídeo que nem foi pedido.
+      rerender(<SondaComEstado video="xyz" />)
+      expect(getByTestId('estado')).toHaveTextContent('carregando')
+      expect(getByTestId('codigo')).toHaveTextContent('null')
+    })
+
+    it('volta a ocioso quando o clipe é desativado', async () => {
+      const { getByTestId, rerender } = render(<SondaComEstado />)
+      await waitFor(() => expect(aoErrar).not.toBeNull())
+      act(() => {
+        aoErrar?.(150)
+      })
+      expect(getByTestId('estado')).toHaveTextContent('erro')
+
+      // Com o player destruído o hook não pode continuar afirmando um estado de
+      // player: é isso que deixava um overlay com botão morto por cima da
+      // prancha durante os 280ms da animação de saída do sheet.
+      rerender(<SondaComEstado ativo={false} />)
+      expect(getByTestId('estado')).toHaveTextContent('ocioso')
+      expect(getByTestId('codigo')).toHaveTextContent('null')
+      expect(getByTestId('progresso')).toHaveTextContent('null')
+    })
+  })
+
+  describe('playhead', () => {
+    it('publica o progresso dentro da janela curada enquanto o clipe roda', async () => {
+      const { getByTestId } = render(<SondaComEstado />)
+      await waitFor(() => expect(aoPronto).not.toBeNull())
+      act(() => {
+        aoPronto?.()
+      })
+
+      // Metade exata do recorte 30–40.
+      tempoAtual = 35
+      await avancarFrames(150)
+      expect(getByTestId('progresso')).toHaveTextContent('0.5')
+    })
+
+    it('não deixa o progresso escapar da janela', async () => {
+      const { getByTestId } = render(<SondaComEstado />)
+      await waitFor(() => expect(aoPronto).not.toBeNull())
+      act(() => {
+        aoPronto?.()
+      })
+
+      // O player pode reportar um instante antes do início (start é arredondado
+      // para baixo nos playerVars): o playhead nunca sai da janela.
+      tempoAtual = 29
+      await avancarFrames(150)
+      expect(getByTestId('progresso')).toHaveTextContent('0')
     })
   })
 })

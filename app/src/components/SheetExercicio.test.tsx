@@ -63,6 +63,35 @@ describe('SheetExercicio', () => {
   })
 
   /**
+   * O Base UI já marca o #root com aria-hidden enquanto o sheet está aberto, mas
+   * o atributo que o padrão de diálogo modal pede continuava ausente.
+   */
+  it('se declara modal', () => {
+    render(<SheetExercicio exercicio={exercicio} aberto onFechar={() => {}} />)
+    expect(screen.getByRole('dialog')).toHaveAttribute('aria-modal', 'true')
+  })
+
+  /**
+   * A área dos cues é o único contêiner rolável do sheet e só tem três focáveis
+   * dentro. Sem uma parada de tabulação nele, quem usa teclado não alcança as
+   * setas/PageDown para ler o resto. É o que a WCAG 2.1.1 cobre.
+   */
+  it('deixa a área rolável dos cues alcançável pelo teclado', () => {
+    render(<SheetExercicio exercicio={exercicio} aberto onFechar={() => {}} />)
+    const area = screen.getByRole('group', { name: 'Conteúdo do exercício' })
+    expect(area).toHaveAttribute('tabindex', '0')
+    expect(area.className).toContain('overflow-y-auto')
+  })
+
+  it('avisa que "Outros vídeos" abre em nova aba', () => {
+    const comBusca = buscarExercicio('mob-tornozelo')!
+    render(<SheetExercicio exercicio={comBusca} aberto onFechar={() => {}} />)
+    expect(screen.getByRole('link', { name: /outros vídeos/i })).toHaveAccessibleName(
+      /abre em nova aba/,
+    )
+  })
+
+  /**
    * A cor de risco (--tijolo) é o único vermelho do app e tem que continuar
    * cara: um cue só é aviso quando ABRE dizendo o que não fazer, ou o que fazer
    * se doer. Instrução principal que por acaso menciona dor não é aviso.

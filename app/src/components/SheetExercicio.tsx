@@ -49,6 +49,9 @@ export function SheetExercicio({ exercicio, aberto, onFechar }: Props) {
     >
       <DialogContent
         showCloseButton={false}
+        // O Base UI já marca o #root com aria-hidden enquanto o sheet está
+        // aberto; o aria-modal é o atributo que o padrão de diálogo modal pede.
+        aria-modal="true"
         // Backdrop sólido, sem blur: o material grosso vira cinza sujo atrás de
         // uma superfície que cobre 90% da tela.
         overlayClassName="bg-black/40 backdrop-blur-none supports-backdrop-filter:backdrop-blur-none dark:bg-black/60"
@@ -75,7 +78,7 @@ export function SheetExercicio({ exercicio, aberto, onFechar }: Props) {
               <p className="font-mono text-[13px] font-medium tabular-nums text-carimbo">
                 {exercicio.numero}
               </p>
-              <DialogTitle className="mt-1 font-display text-[22px] leading-[1.2] font-medium tracking-[-0.017em] text-tinta">
+              <DialogTitle className="mt-1 font-display text-[20px] leading-[1.25] font-medium tracking-[-0.017em] text-tinta">
                 {exercicio.nome}
               </DialogTitle>
             </div>
@@ -90,7 +93,7 @@ export function SheetExercicio({ exercicio, aberto, onFechar }: Props) {
             </DialogClose>
           </div>
 
-          <p className="mt-2 font-mono text-[13px] leading-[1.4] text-tinta-2">
+          <p className="mt-2 font-mono text-[13px] leading-[1.4] tabular-nums text-tinta-2">
             <span className="text-tinta">{exercicio.prescricao}</span>
             {' · '}
             {exercicio.meta.equipamento}
@@ -101,8 +104,18 @@ export function SheetExercicio({ exercicio, aberto, onFechar }: Props) {
         </header>
 
         {/* min-h-0: sem ele o `min-height:auto` do item flex impede o encolhimento
-            e a lista de cues estoura o max-h em vez de rolar. */}
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-[max(24px,env(safe-area-inset-bottom))]">
+            e a lista de cues estoura o max-h em vez de rolar.
+
+            tabIndex=0 é o que a WCAG 2.1.1 cobre para conteúdo rolável: só há
+            três focáveis aqui dentro, e sem uma parada de tabulação no próprio
+            contêiner quem usa teclado não alcança as setas/PageDown para ler os
+            cues e o "Por que está no plano". */}
+        <div
+          role="group"
+          tabIndex={0}
+          aria-label="Conteúdo do exercício"
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-[max(24px,env(safe-area-inset-bottom))]"
+        >
           <PranchaFigura
             numero={exercicio.numero}
             nome={exercicio.nome}
@@ -113,14 +126,14 @@ export function SheetExercicio({ exercicio, aberto, onFechar }: Props) {
             habilitado={aberto}
           />
 
-          <ol className="mt-7 list-none space-y-3.5 p-0">
+          <ol className="mt-7 list-none space-y-4 p-0">
             {exercicio.cues.map((cue, i) => {
               const risco = RISCO.test(cue)
               return (
                 <li key={cue} className="grid grid-cols-[44px_1fr] gap-2">
                   <span
                     className={cn(
-                      'font-mono text-[13px] tabular-nums',
+                      'font-mono text-[13px] leading-none font-medium tracking-normal tabular-nums',
                       risco ? 'text-tijolo' : 'text-tinta-2',
                     )}
                   >
@@ -165,6 +178,7 @@ export function SheetExercicio({ exercicio, aberto, onFechar }: Props) {
                 {exercicio.busca && (
                   <a href={urlBusca(exercicio.busca)} target="_blank" rel="noopener" className={CHIP}>
                     Outros vídeos
+                    <span className="sr-only"> (abre em nova aba)</span>
                   </a>
                 )}
               </div>

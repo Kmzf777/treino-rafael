@@ -18,12 +18,12 @@ export function SecaoEditorial({
   children?: ReactNode
 }) {
   return (
-    <section className="mt-10 border-t border-fio pt-5">
+    <section className="mt-8 border-t border-fio pt-5">
       <h3 className="font-display text-[20px] font-medium leading-[1.25] tracking-[-0.017em] text-tinta">
         {titulo}
       </h3>
       {lede && (
-        <p className="mt-1.5 max-w-[60ch] text-[17px] leading-[1.47] text-tinta-2">{lede}</p>
+        <p className="mt-2 max-w-[60ch] text-[17px] leading-[1.47] text-tinta-2">{lede}</p>
       )}
       {children}
     </section>

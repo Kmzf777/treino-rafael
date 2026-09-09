@@ -50,6 +50,22 @@ describe('integridade do plano', () => {
     expect(TODOS_EXERCICIOS.filter((e) => e.recorte)).toHaveLength(37)
     expect(TODOS_EXERCICIOS.filter((e) => !e.recorte)).toHaveLength(10)
   })
+
+  /**
+   * O endereço de protocolo (2.3) existe para o Rafael ter como falar de um
+   * movimento com o fisioterapeuta. Os blocos do Aquecer vinham do legado com
+   * numeração própria — "1. Mobilidade", "2. Ativação…", "3. Cardio leve" —
+   * impressa em mono a 8px das linhas 1.1 a 1.11, e o bloco "2" continha os
+   * exercícios 1.7 a 1.10. Duas numerações concorrentes na mesma coluna: dizer
+   * "o 2" no Aquecer virava ambíguo.
+   */
+  it('nenhum cabeçalho de bloco carrega numeração própria', () => {
+    for (const divisao of DIVISOES) {
+      for (const bloco of divisao.blocos) {
+        expect(bloco.nome).not.toMatch(/^\d+[.)]\s/)
+      }
+    }
+  })
 })
 
 describe('numeração de protocolo', () => {

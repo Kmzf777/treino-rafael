@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import App from './App'
@@ -96,6 +96,54 @@ describe('App', () => {
     expect(
       screen.getByRole('heading', { level: 2, name: /^Força B —/, hidden: true }),
     ).toBeInTheDocument()
+  })
+
+  /**
+   * O sheet é bottom sheet no Android, e ali o gesto de voltar é o jeito natural
+   * de sair. Se fechar EMPILHASSE uma entrada nova, o Voltar reabriria o
+   * exercício que o usuário acabou de fechar.
+   */
+  it('o Voltar do navegador não reabre o sheet que o usuário acabou de fechar', async () => {
+    const usuario = userEvent.setup()
+    render(<App />)
+    await usuario.click(screen.getByRole('button', { name: /Mobilidade de tornozelo/ }))
+    await screen.findByRole('dialog')
+
+    await usuario.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Fechar' }))
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+
+    await act(async () => {
+      window.history.back()
+      await new Promise((r) => setTimeout(r, 60))
+    })
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  /**
+   * Trocar de divisão substitui o <main> inteiro sem recarregar a página: o foco
+   * fica no chip e o aria-current sozinho não diz que o documento mudou.
+   */
+  it('publica a divisão nova numa região viva ao trocar de divisão', async () => {
+    const usuario = userEvent.setup()
+    render(<App />)
+    const viva = screen.getByRole('status')
+    expect(viva).toHaveTextContent(/^Aquecimento/)
+
+    await usuario.click(screen.getByRole('button', { name: /^03\s*Força B$/ }))
+    expect(viva).toHaveTextContent(/^Força B —/)
+  })
+
+  /**
+   * O cabeçalho sr-only do diálogo da busca ficava renderizado no <main> mesmo
+   * com a paleta fechada: em todas as sete rotas a lista de cabeçalhos terminava
+   * com um h2 órfão descrevendo um diálogo que não existe na tela.
+   */
+  it('não deixa o cabeçalho da busca no documento enquanto ela está fechada', () => {
+    render(<App />)
+    expect(screen.queryByRole('heading', { name: 'Buscar exercício' })).not.toBeInTheDocument()
+    expect(
+      screen.queryByText('Busque por nome, músculo ou equipamento e abra o exercício.'),
+    ).not.toBeInTheDocument()
   })
 
   it('cicla o tema e marca a classe escuro no documento', async () => {

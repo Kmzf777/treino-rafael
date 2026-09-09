@@ -55,10 +55,18 @@ export default function App() {
 
   return (
     <AppShell onAbrirBusca={() => setBuscaAberta(true)}>
+      {/* Trocar de divisão substitui o <main> inteiro sem recarregar a página:
+          sem este aviso o leitor de tela não percebe que o documento mudou, já
+          que o foco continua no chip e o aria-current sozinho não diz isso.
+          Fica FORA do bloco com `key`, senão remontaria junto e não anunciaria. */}
+      <p role="status" aria-live="polite" className="sr-only">
+        {divisao.titulo}
+      </p>
+
       {/* `items-start` não é enfeite: sem ele o grid estica a coluna do índice
           até a altura do conteúdo, e um item esticado não gruda — o `sticky
           top-0` do IndiceDivisoes só volta a valer com o alinhamento no topo. */}
-      <div className="sm:grid sm:grid-cols-[180px_1fr] sm:items-start sm:gap-8">
+      <div className="sm:grid sm:grid-cols-[220px_minmax(0,680px)] sm:items-start sm:gap-8">
         <IndiceDivisoes atual={divisao.chave} onIr={(destino) => irPara(destino)} />
 
         {/* A `key` remonta o conteúdo a cada divisão, e o fade de 150ms cobre a
@@ -74,7 +82,7 @@ export default function App() {
           <p className="font-mono text-[13px] font-medium tracking-[0.08em] tabular-nums text-carimbo">
             {divisao.numero}
           </p>
-          <h2 className="mt-1.5 font-display text-[28px] leading-[1.2] font-medium tracking-[-0.021em] text-tinta sm:text-[30px]">
+          <h2 className="mt-1.5 font-display text-[28px] leading-[1.214] font-medium tracking-[-0.021em] text-tinta">
             {divisao.titulo}
           </h2>
 
@@ -129,7 +137,7 @@ export default function App() {
         <SheetExercicio
           exercicio={ultimo}
           aberto={exercicio != null}
-          onFechar={() => irPara(chave)}
+          onFechar={() => irPara(chave, undefined, true)}
         />
       )}
 
