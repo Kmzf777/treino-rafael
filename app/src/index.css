@@ -2,8 +2,15 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
 
-@custom-variant dark (&:is(.dark *));
+/* A classe de tema do app é `escuro` (ver useTema). O shadcn gera `.dark`;
+   apontamos a variante e os tokens dele para a mesma classe, senão os
+   componentes (Dialog, Drawer, Command) ficariam claros no modo escuro. */
+@custom-variant dark (&:is(.escuro *));
 
 @theme inline {
     --font-heading: var(--font-sans);
@@ -83,7 +90,7 @@
     --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+.escuro {
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
@@ -127,4 +134,73 @@
   html {
     @apply font-sans;
     }
+}
+/* ---------------------------------------------------------------------------
+   Direção de arte "Protocolo"
+   Sem cards, sem sombras: o único dispositivo estrutural é o filete de 1px.
+   --------------------------------------------------------------------------- */
+
+/* `static` é obrigatório: o Tailwind v4 remove do CSS final toda variável de
+   @theme que nenhuma utility usa. As regras abaixo (body, .mono, :focus-visible)
+   leem estes tokens por var() em CSS puro, que o Tailwind não rastreia — sem
+   `static`, --color-papel só existiria dentro de .escuro e o modo claro ficaria
+   sem fundo. */
+@theme static {
+  --font-display: "Newsreader Variable", Newsreader, Georgia, serif;
+  --font-sans: "IBM Plex Sans Variable", "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-papel: #FCFAF5;
+  --color-papel-2: #F2EEE5;
+  --color-tinta: #2B2622;
+  --color-tinta-2: #77706A;
+  --color-fio: #DCD6CC;
+  --color-carimbo: #2F5AA8;
+  --color-tijolo: #B4462E;
+  --color-plate: #FFFFFF;
+
+  --radius-chip: 8px;
+  --radius-ios: 10px;
+  --radius-modal: 20px;
+  --radius-sheet: 24px;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+.escuro {
+  --color-papel: #211E1A;
+  --color-papel-2: #2A2622;
+  --color-tinta: #EDE7DD;
+  --color-tinta-2: #A79E93;
+  --color-fio: #423C36;
+  --color-carimbo: #6E9BE0;
+  --color-tijolo: #E0785C;
+  --color-plate: #16130F;
+}
+
+body {
+  background: var(--color-papel);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.294;
+  letter-spacing: -0.013em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+:focus-visible {
+  outline: 2px solid var(--color-carimbo);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
