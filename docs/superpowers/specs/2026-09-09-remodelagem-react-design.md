@@ -112,12 +112,18 @@ Bone quente no claro, carbono quente no escuro — nunca cinza neutro, que é o 
 gerado por IA. O escuro é primeira classe, não afterthought: papel puro a 100% de brilho num canto
 escuro da academia às 22h machuca.
 
+> **Correção de 2026-09-09.** A primeira versão desta tabela trazia `--tinta-2` claro em `#77706A`,
+> que mede **4,21:1** sobre `--papel-2` — abaixo do mínimo de 4.5:1 que a própria linha exige e que a
+> seção 10 repete. O par aparece 15 vezes no app. Escurecer o token para `#6B645E` resolve na origem;
+> a alternativa (trocar as chamadas para `--tinta`) deixaria a legenda da figura com 0,17 de margem.
+> Quando a spec se contradiz, vale a restrição, não o hex.
+
 | Token | Claro | Escuro | Papel |
 |---|---|---|---|
 | `--papel` | `#FCFAF5` | `#211E1A` | Fundo |
 | `--papel-2` | `#F2EEE5` | `#2A2622` | Lavagem recessada: faixa de bloco, fundo do sheet |
 | `--tinta` | `#2B2622` | `#EDE7DD` | Texto primário. Contraste ≥13:1 nos dois modos |
-| `--tinta-2` | `#77706A` | `#A79E93` | Metadados. Nunca abaixo de 4.5:1 |
+| `--tinta-2` | `#6B645E` | `#A79E93` | Metadados. Nunca abaixo de 4.5:1 |
 | `--fio` | `#DCD6CC` | `#423C36` | Filete de 1px — o único dispositivo estrutural |
 | `--carimbo` | `#2F5AA8` | `#6E9BE0` | Acento institucional: numeração, aba ativa, foco, janela do trecho |
 | `--tijolo` | `#B4462E` | `#E0785C` | Só cues de risco articular. ~12 linhas no app inteiro |

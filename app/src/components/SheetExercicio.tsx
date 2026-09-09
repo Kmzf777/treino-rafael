@@ -116,7 +116,12 @@ export function SheetExercicio({ exercicio, aberto, onFechar }: Props) {
           aria-label="Conteúdo do exercício"
           className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-[max(24px,env(safe-area-inset-bottom))]"
         >
+          {/* A key remonta a prancha ao trocar de exercício com o sheet aberto
+              (deep link direto de um id para outro). Sem ela, o estado interno
+              de "já pedi o vídeo" vaza do exercício anterior e o novo abre com
+              o player pedido sem ninguém ter tocado em "Ver execução". */}
           <PranchaFigura
+            key={exercicio.id}
             numero={exercicio.numero}
             nome={exercicio.nome}
             video={exercicio.video}

@@ -131,4 +131,22 @@ describe('SheetExercicio', () => {
       ).toContain('text-tijolo')
     })
   })
+  it('remonta a prancha ao trocar de exercício com o sheet aberto', async () => {
+    const usuario = userEvent.setup()
+    const outro = buscarExercicio('at-ponte')!
+    const { rerender } = render(
+      <SheetExercicio exercicio={exercicio} aberto onFechar={() => {}} />,
+    )
+
+    // Pede o vídeo do primeiro exercício: o botão do pôster some.
+    await usuario.click(screen.getByRole('button', { name: /ver execução/i }))
+    expect(screen.queryByRole('button', { name: /ver execução/i })).not.toBeInTheDocument()
+
+    // Deep link direto de um id para outro, sem fechar o sheet.
+    rerender(<SheetExercicio exercicio={outro} aberto onFechar={() => {}} />)
+
+    // O novo exercício tem que começar do zero, não herdar o "já pedi".
+    expect(screen.getByRole('button', { name: /ver execução/i })).toBeInTheDocument()
+    expect(screen.getByText(outro.nome)).toBeInTheDocument()
+  })
 })
