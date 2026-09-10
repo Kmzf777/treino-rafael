@@ -1,106 +1,110 @@
 # Treino Rafael
 
-App de página única para treino híbrido de academia e corrida de 5 km, com um joelho
-operado (reconstrução de LCA + LCM) como restrição central do plano.
+App de consulta a um plano de treino híbrido — academia e corrida de 5 km — com um joelho
+operado (reconstrução de LCA + LCM) como restrição central.
 
-Cada exercício abre num trecho curto do vídeo mostrando **só a execução**, em loop.
-Serve para ser consultado no celular, na academia, entre séries.
+Você abre, acha a divisão do dia, toca num exercício e vê a execução **no segundo exato**,
+em loop, com as três linhas que importam. Fecha e volta para a série.
 
-**Sem build, sem framework, sem dependências.** É um arquivo HTML.
+Não é app de registro de treino: **sem cronômetro, sem marcar feito, sem log de carga,
+sem contador de progresso.** É um documento que se consulta.
 
-## Publicar na Vercel
+## O ativo
 
-O projeto é estático. Importe o repositório na Vercel e aceite os padrões:
+O plano qualquer um escreve. O que não se refaz numa tarde são os **37 recortes de vídeo
+auditados à mão**, cada um apontando para o segundo em que a execução correta aparece.
 
-| Campo | Valor |
+| | |
 |---|---|
-| Framework Preset | Other |
-| Build Command | *(vazio)* |
-| Output Directory | *(vazio, usa a raiz)* |
-| Install Command | *(vazio)* |
+| Exercícios | 47 |
+| Com recorte (`início`+`fim`) | 37 |
+| Sem recorte (só link) | 10 |
+| Vídeos únicos | 39 |
+| Vídeo bruto | 139:45 |
+| Vídeo útil depois do recorte | **11:51** |
+| Redução | **91,5%** |
 
-O `vercel.json` já cuida de `cleanUrls` e dos cabeçalhos. `index.html` é servido na raiz.
+## Rodar
+
+```bash
+cd app
+npm install
+npm run dev                  # desenvolvimento
+npm run build && npm start   # http://localhost:5173
+```
+
+| | |
+|---|---|
+| `npm test` | 147 testes (Vitest) |
+| `npm run lint` | oxlint |
+| `npm run check:clips` | verifica se algum vídeo saiu do ar |
 
 ## Precisa ser servido por HTTP
 
-Abrir o `index.html` com dois cliques, por `file://`, **não toca os vídeos embutidos**.
-Sem origem HTTP o navegador não manda cabeçalho `Referer`, e o YouTube recusa todo
-embed com **erro 153**. Isso vale para qualquer combinação de parâmetros — foi testado
-com e sem `enablejsapi`, com e sem `loop`/`playlist`, e com os parâmetros originais
-do app. Não é contornável pelo lado do app.
+Abrir o `dist/index.html` com dois cliques cai em `file://`, onde o navegador não manda
+cabeçalho `Referer` e o YouTube **recusa todo embed com erro 153**. Não é contornável por
+parâmetro — foi testado com e sem `enablejsapi`, com e sem `loop`/`playlist`.
 
-Por isso, aberto por `file://` o app muda de comportamento: o botão vira
-**"Ver no YouTube"** e clicar abre o vídeo no YouTube já no segundo certo, em vez de
-mostrar um player quebrado. Funciona sempre, mas sem o loop no trecho.
+O app detecta esse caso e cai no link direto para o YouTube no segundo certo. Funciona,
+mas sem o loop no trecho. Por isso existe o `npm start`: um servidor `node:http` de zero
+dependências que serve o `dist/`.
 
-Servido por HTTP (Vercel, ou local) o player embutido roda normal, com loop.
+## Deploy
 
-Para rodar local:
-
-```bash
-python -m http.server 8000
-# abre http://127.0.0.1:8000
-```
-
-## Testes
-
-```bash
-node test/validate.js
-```
-
-São 211 checagens sobre `index.html`: estrutura preservada (47 exercícios, 11
-alternativos, nenhum `cue` perdido em relação ao original), coerência de todos os
-trechos de vídeo, e presença do player com recorte, loop e fallback.
-
-O teste compara contra `docs/original-antes-do-recorte.html`, que é o app como estava
-antes do trabalho de recorte.
-
-## Como os trechos foram definidos
-
-Capítulos e transcrição propõem a janela; um mosaico de quadros com o segundo
-carimbado confirma na imagem. Nenhum timestamp entrou sem alguém ter olhado os
-quadros. Depois, uma auditoria adversarial independente tentou reprovar cada trecho,
-também olhando os quadros — e reprovou 9 dos 43 primeiros.
-
-Detalhes em [`docs/RELATORIO.md`](docs/RELATORIO.md). Os dados brutos (timestamps,
-veredictos da auditoria, metadados dos vídeos) estão em `docs/dados/`.
+A Vercel constrói o `app/` e publica o `app/dist/`. O `vercel.json` na raiz cuida disso —
+não há configuração a fazer no painel além de importar o repositório.
 
 ## Estrutura
 
 ```
-index.html                      o app inteiro
-vercel.json                     configuração de deploy
-docs/RELATORIO.md               o que foi feito, com tabela de todos os trechos
-docs/specs/                     design aprovado
-docs/plans/                     plano de implementação
-docs/dados/                     timestamps, auditoria, metadados dos vídeos
-docs/original-antes-do-recorte.html   referência para o teste de regressão
-test/validate.js                211 checagens
+app/                      o app (Vite + React 19 + TypeScript)
+  src/data/               o plano inteiro, tipado, embutido no bundle
+  src/hooks/              useYouTubeClip — o loop [início, fim]
+  src/components/         a interface
+  server/index.js         servidor estático, zero dependências
+docs/specs/               design aprovado
+docs/plans/               planos de implementação
+docs/dados/               timestamps, auditoria, metadados dos exercícios
+docs/RELATORIO.md         como cada recorte foi decidido
+docs/original-antes-do-recorte.html   o app original, antes do trabalho de recorte
+test/duracoes.json        duração real dos 47 vídeos
+vercel.json               configuração de deploy
 ```
 
-## Modelo de dados
+## O ponto técnico que define o app
 
-No `<script>`, a constante `DATA` tem uma chave por aba. Exercícios são criados por:
+A documentação da YouTube IFrame API diz:
 
-```js
-const e = (id, nome, sets, video, cues, opts={}) => ({id, nome, sets, video, cues, ...opts});
-```
+> *"If you specify an `endSeconds` value and then call `seekTo()`, the `endSeconds` value
+> will no longer be in effect."*
 
-`opts` aceita `{uni:true, busca:'termo', alt:[{n,v,t}], t:{start,end}}`.
+Ou seja: o `end` vale para a **primeira passada**. No instante em que você faz
+`seekTo(início)` para reiniciar o trecho, o YouTube desarma o ponto final e a segunda
+volta toca o vídeo inteiro. Não existe parâmetro de URL que faça loop de trecho, e
+nenhuma biblioteca de player resolve isso — você escreveria o mesmo watchdog de qualquer
+jeito.
 
-O campo `t` é **do exercício, não do vídeo**: o mesmo vídeo aparece em exercícios
-diferentes com trechos diferentes. `RTxAFDK1OMw` é o exemplo — 39–47s para a prancha
-frontal, 65–91s para a lateral.
+Por isso `useYouTubeClip` usa a IFrame API crua com um watchdog em `requestAnimationFrame`
+(que para sozinho quando o app vai para segundo plano) e um guard de 400 ms contra
+tempestade de `seekTo`.
 
-## Restrições que não mudam
+## Direção de arte
 
-- Persistência em `window.storage` com fallback em memória. **Nada de `localStorage`.**
-- Arquivo único, sem build. Precisa abrir direto no celular.
-- Os `cues` foram escritos com o joelho operado em mente. Trocar um vídeo não invalida
-  os cues.
-- O aviso de que o plano não substitui fisioterapeuta ou médico fica onde está.
+"Protocolo": o app é o protocolo de reabilitação impresso que um bom fisioterapeuta
+entrega na mão — numerado, hierárquico, sem ambiguidade — e as figuras dele por acaso se
+movem. Sem cards, sem sombras: o único dispositivo estrutural é o filete de 1 px. Cada
+exercício tem um endereço estável (`2.3`) que serve para falar com o fisioterapeuta.
+
+Detalhes em [`docs/specs/2026-09-09-remodelagem-react-design.md`](docs/specs/2026-09-09-remodelagem-react-design.md).
+
+## Histórico
+
+O app nasceu como uma página HTML única, sem build. Essa versão foi aposentada em
+2026-09-09 e vive no histórico do git (`254b621` e anteriores). O trabalho de recorte dos
+vídeos, feito sobre ela, está descrito em [`docs/RELATORIO.md`](docs/RELATORIO.md) — e os
+dados que ele produziu são os mesmos que o app React usa hoje.
 
 ## Aviso
 
-Este plano não substitui avaliação de fisioterapeuta ou médico. Saltos e pliometria
-só com liberação do fisio.
+Este plano é orientação geral de treino e não substitui avaliação de fisioterapeuta ou
+médico. Saltos e pliometria só com liberação do fisio.
