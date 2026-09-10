@@ -51,8 +51,19 @@ dependências que serve o `dist/`.
 
 ## Deploy
 
-A Vercel constrói o `app/` e publica o `app/dist/`. O `vercel.json` na raiz cuida disso —
-não há configuração a fazer no painel além de importar o repositório.
+A Vercel constrói o `app/` e publica o `app/dist/`. O `vercel.json` na raiz cuida de
+install, build e output — deixe os três campos **vazios** no painel, senão ele sobrescreve
+o arquivo.
+
+**O Root Directory precisa ficar em `./`** (a raiz do repositório). É a única configuração
+do painel que importa: o `outputDirectory` do `vercel.json` é `app/dist`, relativo à raiz.
+Se o Root Directory for mudado para `app`, o build ainda roda — os comandos detectam onde
+estão — mas a Vercel procura o output em `app/app/dist` e falha com "No Output Directory
+found". Nesse caso, troque `outputDirectory` para `dist`.
+
+JSON não aceita comentário e a Vercel valida o schema: qualquer propriedade desconhecida
+no `vercel.json`, inclusive um campo `"//"` usado como nota, faz o deploy ser recusado
+antes de começar com *"Invalid request: should NOT have additional property"*.
 
 ## Estrutura
 

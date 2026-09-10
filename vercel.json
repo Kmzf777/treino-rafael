@@ -1,16 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-
-  "//": "Este projeto tem Root Directory = app no painel da Vercel. Os comandos abaixo e o outputDirectory sao relativos a app/, nao a raiz do repositorio. Se algum dia o Root Directory voltar para a raiz, troque para 'cd app && npm ci', 'cd app && npm run build' e 'app/dist'.",
-
-  "installCommand": "npm ci",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "installCommand": "if [ -f package.json ]; then npm ci; else cd app && npm ci; fi",
+  "buildCommand": "if [ -f package.json ]; then npm run build; else cd app && npm run build; fi",
+  "outputDirectory": "app/dist",
   "framework": null,
-
   "cleanUrls": true,
   "trailingSlash": false,
-
   "headers": [
     {
       "source": "/index.html",
