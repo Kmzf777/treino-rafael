@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { DURACOES } from './duracoes'
 import { METADADOS } from './metadados'
-import { DIVISOES, ESTATISTICAS, TODOS_EXERCICIOS, buscarExercicio } from './index'
+import { DIVISOES, ESTATISTICAS, TODOS_EXERCICIOS, buscarDivisao, buscarExercicio } from './index'
 
 describe('integridade do plano', () => {
-  it('tem 47 exercícios', () => {
-    expect(TODOS_EXERCICIOS).toHaveLength(47)
+  it('tem 53 exercícios', () => {
+    expect(TODOS_EXERCICIOS).toHaveLength(53)
   })
 
   it('não tem ids duplicados', () => {
@@ -42,13 +42,13 @@ describe('integridade do plano', () => {
     for (const e of TODOS_EXERCICIOS) expect(e.cues.length).toBeGreaterThan(0)
   })
 
-  it('tem exatamente 13 exercícios unilaterais', () => {
-    expect(TODOS_EXERCICIOS.filter((e) => e.unilateral)).toHaveLength(13)
+  it('tem exatamente 11 exercícios unilaterais', () => {
+    expect(TODOS_EXERCICIOS.filter((e) => e.unilateral)).toHaveLength(11)
   })
 
-  it('tem 37 recortes e 10 exercícios sem recorte', () => {
-    expect(TODOS_EXERCICIOS.filter((e) => e.recorte)).toHaveLength(37)
-    expect(TODOS_EXERCICIOS.filter((e) => !e.recorte)).toHaveLength(10)
+  it('tem 40 recortes e 13 exercícios sem recorte', () => {
+    expect(TODOS_EXERCICIOS.filter((e) => e.recorte)).toHaveLength(40)
+    expect(TODOS_EXERCICIOS.filter((e) => !e.recorte)).toHaveLength(13)
   })
 
   /**
@@ -69,8 +69,8 @@ describe('integridade do plano', () => {
 })
 
 describe('numeração de protocolo', () => {
-  it('numera as divisões de 01 a 07', () => {
-    expect(DIVISOES.map((d) => d.numero)).toEqual(['01', '02', '03', '04', '05', '06', '07'])
+  it('numera as divisões de 01 a 08', () => {
+    expect(DIVISOES.map((d) => d.numero)).toEqual(['01', '02', '03', '04', '05', '06', '07', '08'])
   })
 
   it('dá endereço divisão.posição a cada exercício', () => {
@@ -86,18 +86,109 @@ describe('numeração de protocolo', () => {
 })
 
 describe('estatísticas', () => {
-  it('calcula 711s úteis e 8385s brutos', () => {
-    expect(ESTATISTICAS.totalUtil).toBe(711)
-    expect(ESTATISTICAS.totalBruto).toBe(8385)
+  it('calcula 770s úteis e os segundos brutos dos 44 vídeos', () => {
+    expect(ESTATISTICAS.totalUtil).toBe(770)
+    expect(ESTATISTICAS.totalBruto).toBe(8259)
   })
 })
 
 describe('buscarExercicio', () => {
   it('acha por id', () => {
-    expect(buscarExercicio('a-agacha')?.nome).toContain('Agachamento')
+    expect(buscarExercicio('ea-agacha')?.nome).toContain('Agachamento')
   })
 
   it('devolve undefined para id inexistente', () => {
     expect(buscarExercicio('nao-existe')).toBeUndefined()
+  })
+})
+
+const TORSO_PUXAR = [
+  'Dorsal (latíssimo)',
+  'Bíceps',
+  'Trapézio médio',
+  'Deltoide posterior',
+  'Antebraço',
+]
+
+const TORSO_EMPURRAR = ['Peitoral maior', 'Deltoide anterior', 'Deltoide lateral', 'Tríceps']
+
+const DIAS_EMPURRAR = ['empurrarA', 'empurrarB']
+const DIAS_PUXAR = ['puxarA', 'puxarB']
+const DIAS_FORCA = [...DIAS_EMPURRAR, ...DIAS_PUXAR]
+
+function exerciciosDe(chave: string) {
+  return buscarDivisao(chave)!.blocos.flatMap((b) => b.exercicios)
+}
+
+describe('modelo empurrar/puxar', () => {
+  it('existe um dia para cada ponto da fila', () => {
+    for (const chave of DIAS_FORCA) expect(buscarDivisao(chave)).toBeDefined()
+  })
+
+  it('nenhum dia de empurrar contém músculo de puxar como primário', () => {
+    for (const chave of DIAS_EMPURRAR) {
+      for (const e of exerciciosDe(chave)) {
+        expect(TORSO_PUXAR).not.toContain(e.meta.musculoPrimario)
+      }
+    }
+  })
+
+  it('nenhum dia de puxar contém músculo de empurrar como primário', () => {
+    for (const chave of DIAS_PUXAR) {
+      for (const e of exerciciosDe(chave)) {
+        expect(TORSO_EMPURRAR).not.toContain(e.meta.musculoPrimario)
+      }
+    }
+  })
+
+  it('toda sessão de força tem exercício de perna — inferior em toda sessão', () => {
+    const PERNA = ['Agachar', 'Dobradiça de quadril', 'Unilateral de perna', 'Isolado']
+    for (const chave of DIAS_FORCA) {
+      const perna = exerciciosDe(chave).filter((e) => PERNA.includes(e.meta.padraoMovimento))
+      expect(perna.length).toBeGreaterThan(0)
+    }
+  })
+
+  it('toda sessão de força tem ao menos um unilateral — P6 da spec', () => {
+    for (const chave of DIAS_FORCA) {
+      expect(exerciciosDe(chave).some((e) => e.unilateral)).toBe(true)
+    }
+  })
+
+  it('toda sessão de força tem joelho-dominante e quadril-dominante — P5 da spec', () => {
+    const JOELHO = ['Agachar', 'Unilateral de perna']
+    const QUADRIL = ['Dobradiça de quadril']
+    for (const chave of DIAS_FORCA) {
+      const padroes = exerciciosDe(chave).map((e) => e.meta.padraoMovimento)
+      expect(padroes.some((p) => JOELHO.includes(p))).toBe(true)
+      expect(padroes.some((p) => QUADRIL.includes(p))).toBe(true)
+    }
+  })
+
+  it('panturrilha carregada só nos dias de empurrar — P8 da spec', () => {
+    const ehPanturrilha = (m: string) => m.startsWith('Panturrilha')
+    for (const chave of DIAS_PUXAR) {
+      expect(exerciciosDe(chave).some((e) => ehPanturrilha(e.meta.musculoPrimario))).toBe(false)
+    }
+    for (const chave of DIAS_EMPURRAR) {
+      expect(exerciciosDe(chave).some((e) => ehPanturrilha(e.meta.musculoPrimario))).toBe(true)
+    }
+  })
+
+  it('todo dia de força tem exatamente 3 blocos de 3 exercícios', () => {
+    for (const chave of DIAS_FORCA) {
+      const divisao = buscarDivisao(chave)!
+      expect(divisao.blocos).toHaveLength(3)
+      for (const bloco of divisao.blocos) expect(bloco.exercicios).toHaveLength(3)
+    }
+  })
+
+  it('nenhum bloco junta dois exercícios do mesmo músculo primário', () => {
+    for (const chave of DIAS_FORCA) {
+      for (const bloco of buscarDivisao(chave)!.blocos) {
+        const primarios = bloco.exercicios.map((e) => e.meta.musculoPrimario)
+        expect(new Set(primarios).size).toBe(primarios.length)
+      }
+    }
   })
 })

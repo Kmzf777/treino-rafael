@@ -1,16 +1,17 @@
 import { useSyncExternalStore } from 'react'
 
 /**
- * As sete chaves de divisão do plano. Ficam aqui, e não importadas de
+ * As oito chaves de divisão do plano. Ficam aqui, e não importadas de
  * `@/data/plano`, para que a camada de roteamento não dependa da camada de
  * dados: `rota.ts` precisa apenas saber quais endereços são válidos.
  * A integridade entre as duas listas é garantida por `rota.test.ts`.
  */
 export const CHAVES_DIVISAO = [
   'aquecer',
-  'forcaA',
-  'forcaB',
-  'forcaAl',
+  'empurrarA',
+  'puxarA',
+  'empurrarB',
+  'puxarB',
   'corrida',
   'circuito',
   'guia',

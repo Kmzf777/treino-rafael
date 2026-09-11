@@ -28,18 +28,18 @@ describe('App', () => {
 
   it('mostra o colofão com o total de clipes e a economia de tempo', () => {
     render(<App />)
-    expect(screen.getByText('37 clipes')).toBeInTheDocument()
-    expect(screen.getByText('11:51 úteis de 139:45 brutos')).toBeInTheDocument()
+    expect(screen.getByText('40 clipes')).toBeInTheDocument()
+    expect(screen.getByText('12:50 úteis de 137:39 brutos')).toBeInTheDocument()
   })
 
   it('troca de divisão pelo índice e escreve a rota', async () => {
     const usuario = userEvent.setup()
     render(<App />)
     // O número e o rótulo são elementos irmãos sem espaço entre eles: o nome
-    // acessível sai colado ("02Força A").
-    await usuario.click(screen.getByRole('button', { name: /^02\s*Força A$/ }))
-    expect(window.location.hash).toBe('#/forcaA')
-    expect(tituloDaDivisao(/^Força A —/)).toBeInTheDocument()
+    // acessível sai colado ("02Empurrar A").
+    await usuario.click(screen.getByRole('button', { name: /^02\s*Empurrar A$/ }))
+    expect(window.location.hash).toBe('#/empurrarA')
+    expect(tituloDaDivisao(/^Empurrar A —/)).toBeInTheDocument()
   })
 
   it('renderiza o painel editorial nas divisões custom, sem lista de exercícios', () => {
@@ -70,7 +70,7 @@ describe('App', () => {
   })
 
   it('abre o exercício direto pelo deep link', async () => {
-    window.location.hash = '#/forcaA/a-agacha'
+    window.location.hash = '#/empurrarA/ea-agacha'
     render(<App />)
     const sheet = await screen.findByRole('dialog')
     expect(within(sheet).getByText('Agachamento (barra, goblet ou hack)')).toBeInTheDocument()
@@ -82,19 +82,21 @@ describe('App', () => {
 
     await usuario.keyboard('{Meta>}k{/Meta}')
     const campo = await screen.findByRole('combobox')
-    await usuario.type(campo, 'cadeira flexora')
+    // A cadeira flexora aparece nos dois dias de puxar, e a rosca de bíceps
+    // também: o termo precisa ser de um exercício que só existe uma vez.
+    await usuario.type(campo, 'stiff')
 
     const resultados = screen.getAllByRole('option')
     expect(resultados).toHaveLength(1)
     await usuario.click(resultados[0])
 
-    expect(window.location.hash).toBe('#/forcaB/b-flexora')
+    expect(window.location.hash).toBe('#/puxarA/pa-stiff')
     const sheet = await screen.findByRole('dialog')
-    expect(within(sheet).getByText('Cadeira flexora')).toBeInTheDocument()
+    expect(within(sheet).getByText('Levantamento terra / stiff unilateral')).toBeInTheDocument()
     // O sheet é modal: o Base UI esconde o resto da página da árvore de
     // acessibilidade, então o título da divisão só aparece com `hidden: true`.
     expect(
-      screen.getByRole('heading', { level: 2, name: /^Força B —/, hidden: true }),
+      screen.getByRole('heading', { level: 2, name: /^Puxar A —/, hidden: true }),
     ).toBeInTheDocument()
   })
 
@@ -129,13 +131,13 @@ describe('App', () => {
     const viva = screen.getByRole('status')
     expect(viva).toHaveTextContent(/^Aquecimento/)
 
-    await usuario.click(screen.getByRole('button', { name: /^03\s*Força B$/ }))
-    expect(viva).toHaveTextContent(/^Força B —/)
+    await usuario.click(screen.getByRole('button', { name: /^03\s*Puxar A$/ }))
+    expect(viva).toHaveTextContent(/^Puxar A —/)
   })
 
   /**
    * O cabeçalho sr-only do diálogo da busca ficava renderizado no <main> mesmo
-   * com a paleta fechada: em todas as sete rotas a lista de cabeçalhos terminava
+   * com a paleta fechada: em todas as oito rotas a lista de cabeçalhos terminava
    * com um h2 órfão descrevendo um diálogo que não existe na tela.
    */
   it('não deixa o cabeçalho da busca no documento enquanto ela está fechada', () => {

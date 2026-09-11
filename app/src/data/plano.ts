@@ -177,6 +177,24 @@ export const PLANO: Divisao[] = [
             "unilateral": false,
             "busca": "panturrilha em pé execução correta",
             "alternativos": []
+          },
+          {
+            "id": "at-equilibrio",
+            "nome": "Equilíbrio em uma perna",
+            "prescricao": "30s cada",
+            "video": "5OKF9DJcP6M",
+            "cues": [
+              "Olhos abertos primeiro. Quando ficar fácil: olhos fechados, depois em almofada.",
+              "Fique perto de uma parede nas primeiras vezes."
+            ],
+            "unilateral": true,
+            "busca": "equilíbrio unipodal propriocepção exercício",
+            "alternativos": [
+              {
+                "nome": "Apoio em superfície instável",
+                "video": "5OKF9DJcP6M"
+              }
+            ]
           }
         ]
       },
@@ -202,19 +220,19 @@ export const PLANO: Divisao[] = [
     ]
   },
   {
-    "chave": "forcaA",
-    "rotulo": "Força A",
-    "titulo": "Força A — quadríceps e empurrar",
-    "lede": "Tri-set: faça A1, A2 e A3 em sequência, descanse 90 segundos, repita. 3 a 4 voltas por bloco.",
+    "chave": "empurrarA",
+    "rotulo": "Empurrar A",
+    "titulo": "Empurrar A — peito, ombro, tríceps e perna que empurra",
+    "lede": "Nenhum exercício de costas, bíceps ou antebraço entra aqui. Cada bloco junta perna, torso e um terceiro movimento que não disputa o mesmo músculo — é isso que deixa a sessão em 45 minutos sem perder carga.",
     "blocos": [
       {
-        "nome": "Bloco A",
-        "sub": "3 a 4 voltas · 90s entre voltas",
+        "nome": "Agachamento · Peito · Core",
+        "sub": "4 voltas · 90 a 120s entre voltas",
         "exercicios": [
           {
-            "id": "a-agacha",
+            "id": "ea-agacha",
             "nome": "Agachamento (barra, goblet ou hack)",
-            "prescricao": "4x6-10",
+            "prescricao": "4x5-8",
             "video": "kOgcM3NCYA0",
             "recorte": {
               "inicio": 810,
@@ -240,69 +258,9 @@ export const PLANO: Divisao[] = [
             ]
           },
           {
-            "id": "a-puxada",
-            "nome": "Puxada alta ou barra assistida",
-            "prescricao": "4x8-12",
-            "video": "mPmfwbc_svw",
-            "cues": [
-              "Puxe levando os cotovelos em direção às costelas, escápulas para baixo.",
-              "Sem jogar o tronco para trás para vencer a carga."
-            ],
-            "unilateral": false,
-            "busca": "puxada alta frente pronada execução correta",
-            "alternativos": [
-              {
-                "nome": "Barra fixa assistida no graviton",
-                "video": "w0UVe0JAEDQ",
-                "inicio": 54
-              }
-            ]
-          },
-          {
-            "id": "a-prancha-lat",
-            "nome": "Prancha lateral",
-            "prescricao": "3x20-40s cada lado",
-            "video": "RTxAFDK1OMw",
-            "recorte": {
-              "inicio": 65,
-              "fim": 91
-            },
-            "cues": [
-              "Cotovelo alinhado com o ombro, corpo em linha reta, quadril alto.",
-              "Pare quando a forma quebrar, não quando o tempo acabar."
-            ],
-            "unilateral": false,
-            "busca": "prancha lateral execução correta",
-            "alternativos": []
-          }
-        ]
-      },
-      {
-        "nome": "Bloco B",
-        "sub": "3 a 4 voltas · 90s entre voltas",
-        "exercicios": [
-          {
-            "id": "a-extensora",
-            "nome": "Cadeira extensora",
-            "prescricao": "3x12-15 bilateral + 2x12 cada perna",
-            "video": "exLCpU7mT3g",
-            "recorte": {
-              "inicio": 34,
-              "fim": 52
-            },
-            "cues": [
-              "Encaixe o joelho no eixo da máquina e mantenha o quadril colado no banco.",
-              "Se o enxerto foi do tendão quadricipital ou patelar: progrida devagar nos últimos 30° de extensão.",
-              "A parte unilateral não é opcional. É ela que mostra e corrige a diferença entre as pernas."
-            ],
-            "unilateral": true,
-            "busca": "cadeira extensora execução correta",
-            "alternativos": []
-          },
-          {
-            "id": "a-supino",
+            "id": "ea-supino",
             "nome": "Supino reto ou flexão de braço",
-            "prescricao": "3-4x8-12",
+            "prescricao": "4x6-10",
             "video": "vIGvt-vgrvY",
             "recorte": {
               "inicio": 33,
@@ -323,32 +281,67 @@ export const PLANO: Divisao[] = [
             ]
           },
           {
-            "id": "a-pelvica-uni",
-            "nome": "Elevação pélvica unilateral",
-            "prescricao": "3x12 cada",
-            "video": "Sk-mBla2h8A",
+            "id": "ea-prancha-lat",
+            "nome": "Prancha lateral",
+            "prescricao": "3x25-40s cada lado",
+            "video": "RTxAFDK1OMw",
             "recorte": {
-              "inicio": 252,
-              "fim": 265
+              "inicio": 65,
+              "fim": 91
             },
             "cues": [
-              "Peso do corpo primeiro. Calcanhar sob o joelho, empurre pelo calcanhar.",
-              "Quadril sobe nivelado: não deixe um lado ficar mais baixo que o outro."
+              "Cotovelo alinhado com o ombro, corpo em linha reta, quadril alto.",
+              "Pare quando a forma quebrar, não quando o tempo acabar."
             ],
-            "unilateral": true,
-            "busca": "elevação pélvica unilateral 3 dicas",
+            "unilateral": false,
+            "busca": "prancha lateral execução correta",
             "alternativos": []
           }
         ]
       },
       {
-        "nome": "Bloco C",
-        "sub": "3 voltas",
+        "nome": "Extensora · Ombro · Panturrilha",
+        "sub": "3 voltas · 60 a 90s entre voltas",
         "exercicios": [
           {
-            "id": "a-pant-uni",
+            "id": "ea-extensora",
+            "nome": "Cadeira extensora",
+            "prescricao": "3x10-15 cada perna",
+            "video": "exLCpU7mT3g",
+            "recorte": {
+              "inicio": 34,
+              "fim": 52
+            },
+            "cues": [
+              "Unilateral sempre: a máquina bilateral esconde a diferença entre as pernas, e simetria é o seu critério de segurança.",
+              "Menos de 9 meses de cirurgia: trabalhe de 90 a 45 graus. Mais de 9 meses: amplitude completa, mas a faixa final é de progressão, não de teste de força.",
+              "Suba carga ou amplitude terminal — nunca as duas na mesma semana."
+            ],
+            "unilateral": true,
+            "busca": "cadeira extensora execução correta",
+            "alternativos": []
+          },
+          {
+            "id": "ea-desenvolv",
+            "nome": "Desenvolvimento de ombro",
+            "prescricao": "3x8-12",
+            "video": "IDOZyXHq7aI",
+            "recorte": {
+              "inicio": 13,
+              "fim": 42
+            },
+            "cues": [
+              "Não trave os cotovelos no topo e não deixe os halteres baterem.",
+              "Costelas para baixo: sem arquear a lombar para empurrar."
+            ],
+            "unilateral": false,
+            "busca": "desenvolvimento com halteres sentado execução correta",
+            "alternativos": []
+          },
+          {
+            "id": "ea-pant-uni",
             "nome": "Panturrilha em pé unilateral",
-            "prescricao": "3x12-15 cada",
+            "prescricao": "3x8-15 cada",
             "video": "Xb-nuSxLVSY",
             "recorte": {
               "inicio": 114,
@@ -361,9 +354,32 @@ export const PLANO: Divisao[] = [
             "unilateral": true,
             "busca": "panturrilha unilateral em pé execução",
             "alternativos": []
+          }
+        ]
+      },
+      {
+        "nome": "Pélvica · Deltoide · Tríceps",
+        "sub": "3 voltas · 45 a 60s entre voltas",
+        "exercicios": [
+          {
+            "id": "ea-pelvica-uni",
+            "nome": "Elevação pélvica unilateral",
+            "prescricao": "3x10-12 cada",
+            "video": "Sk-mBla2h8A",
+            "recorte": {
+              "inicio": 252,
+              "fim": 265
+            },
+            "cues": [
+              "Peso do corpo primeiro. Calcanhar sob o joelho, empurre pelo calcanhar.",
+              "Quadril sobe nivelado: não deixe um lado ficar mais baixo que o outro."
+            ],
+            "unilateral": true,
+            "busca": "elevação pélvica unilateral 3 dicas",
+            "alternativos": []
           },
           {
-            "id": "a-elev-lat",
+            "id": "ea-elev-lat",
             "nome": "Elevação lateral de ombro",
             "prescricao": "3x12-15",
             "video": "jannLx4RxKo",
@@ -380,102 +396,40 @@ export const PLANO: Divisao[] = [
             "alternativos": []
           },
           {
-            "id": "a-deadbug",
-            "nome": "Dead bug (ou abdominal à escolha)",
+            "id": "ea-triceps",
+            "nome": "Tríceps na polia acima da cabeça",
             "prescricao": "3x10-12",
-            "video": "0loS0bRNqfs",
-            "recorte": {
-              "inicio": 53,
-              "fim": 76
-            },
+            "video": "1u18yJELsh0",
             "cues": [
-              "Lombar colada no chão do começo ao fim. Se descolou, reduza a amplitude.",
-              "Estenda braço e perna opostos devagar, expirando."
+              "De costas para a polia, corda acima da cabeça, cotovelos apontando para frente e parados.",
+              "Só o antebraço se move. O cotovelo alto é o que coloca a cabeça longa do tríceps em alongamento.",
+              "Braço acima da cabeça rende cerca de 1,4x mais hipertrofia de tríceps que a posição neutra."
             ],
             "unilateral": false,
-            "busca": "dead bug exercício core execução correta",
-            "alternativos": []
-          }
-        ]
-      },
-      {
-        "nome": "Finalizador",
-        "sub": "2 a 3 voltas — o combo que você gosta",
-        "exercicios": [
-          {
-            "id": "a-fin-1",
-            "nome": "Bola entre os joelhos + miniband, abre e fecha",
-            "prescricao": "20",
-            "video": "FsmU1SzfMsc",
-            "cues": [
-              "Mesma execução do aquecimento, agora com a perna já cansada."
-            ],
-            "unilateral": false,
-            "busca": "abdução de quadril deitado mini band",
-            "alternativos": []
-          },
-          {
-            "id": "a-fin-2",
-            "nome": "Flexão de braço",
-            "prescricao": "10",
-            "video": "UkDVBs9GEWo",
-            "recorte": {
-              "inicio": 115,
-              "fim": 130
-            },
-            "cues": [
-              "Corpo em prancha, desça até o peito quase tocar o chão.",
-              "Joelhos apoiados se a forma quebrar."
-            ],
-            "unilateral": false,
-            "busca": "flexão de braço push up execução correta",
-            "alternativos": []
-          },
-          {
-            "id": "a-fin-3",
-            "nome": "Agachamento peso do corpo",
-            "prescricao": "20",
-            "video": "CaTbpJH49i4",
-            "recorte": {
-              "inicio": 117,
-              "fim": 136
-            },
-            "cues": [
-              "Ritmo contínuo e controlado, sem travar o joelho no topo."
-            ],
-            "unilateral": false,
-            "busca": "agachamento livre peso do corpo passo a passo iniciantes",
-            "alternativos": []
-          },
-          {
-            "id": "a-fin-4",
-            "nome": "Equilíbrio em uma perna",
-            "prescricao": "30s cada",
-            "video": "5OKF9DJcP6M",
-            "cues": [
-              "Olhos abertos primeiro. Quando ficar fácil: olhos fechados, depois em almofada.",
-              "Fique perto de uma parede nas primeiras vezes."
-            ],
-            "unilateral": true,
-            "busca": "equilíbrio unipodal propriocepção exercício",
-            "alternativos": []
+            "busca": "tríceps na polia acima da cabeça execução cabeça longa",
+            "alternativos": [
+              {
+                "nome": "Tríceps na polia com corda",
+                "video": "7le1JRUUagM"
+              }
+            ]
           }
         ]
       }
     ]
   },
   {
-    "chave": "forcaB",
-    "rotulo": "Força B",
-    "titulo": "Força B — posterior, glúteo e puxar",
-    "lede": "Mesma lógica de tri-set: A1, A2, A3 em sequência, 90 segundos de descanso, 3 a 4 voltas.",
+    "chave": "puxarA",
+    "rotulo": "Puxar A",
+    "titulo": "Puxar A — costas, bíceps e perna que puxa pelo quadril",
+    "lede": "Nenhum exercício de peito, ombro anterior ou tríceps entra aqui. A panturrilha também não: ela treina nos dias de empurrar, para o tendão de Aquiles não levar carga em dias seguidos.",
     "blocos": [
       {
-        "nome": "Bloco A",
-        "sub": "3 a 4 voltas · 90s entre voltas",
+        "nome": "Stiff · Puxada · Core",
+        "sub": "4 voltas · 90 a 120s entre voltas",
         "exercicios": [
           {
-            "id": "b-terra-uni",
+            "id": "pa-stiff",
             "nome": "Levantamento terra / stiff unilateral",
             "prescricao": "4x8-10 cada perna",
             "video": "5t3TzJ3oW7I",
@@ -499,32 +453,28 @@ export const PLANO: Divisao[] = [
             ]
           },
           {
-            "id": "b-desenvolv",
-            "nome": "Desenvolvimento de ombro ou supino inclinado",
-            "prescricao": "3-4x8-12",
-            "video": "IDOZyXHq7aI",
-            "recorte": {
-              "inicio": 13,
-              "fim": 42
-            },
+            "id": "pa-puxada",
+            "nome": "Puxada alta ou barra assistida",
+            "prescricao": "4x8-12",
+            "video": "mPmfwbc_svw",
             "cues": [
-              "Não trave os cotovelos no topo e não deixe os halteres baterem.",
-              "Costelas para baixo: sem arquear a lombar para empurrar."
+              "Puxe levando os cotovelos em direção às costelas, escápulas para baixo.",
+              "Sem jogar o tronco para trás para vencer a carga."
             ],
             "unilateral": false,
-            "busca": "desenvolvimento com halteres sentado execução correta",
+            "busca": "puxada alta frente pronada execução correta",
             "alternativos": [
               {
-                "nome": "Supino inclinado com barra",
-                "video": "oZjIQN0YMX0",
-                "inicio": 10
+                "nome": "Barra fixa assistida no graviton",
+                "video": "w0UVe0JAEDQ",
+                "inicio": 54
               }
             ]
           },
           {
-            "id": "b-pallof",
+            "id": "pa-pallof",
             "nome": "Pallof press (ou prancha frontal)",
-            "prescricao": "3x30s",
+            "prescricao": "3x25-35s cada lado",
             "video": "LuePuoHEt6s",
             "recorte": {
               "inicio": 112,
@@ -547,13 +497,13 @@ export const PLANO: Divisao[] = [
         ]
       },
       {
-        "nome": "Bloco B",
-        "sub": "3 a 4 voltas · 90s entre voltas",
+        "nome": "Flexora · Remada · Deltoide posterior",
+        "sub": "3 voltas · 60 a 90s entre voltas",
         "exercicios": [
           {
-            "id": "b-flexora",
+            "id": "pa-flexora",
             "nome": "Cadeira flexora",
-            "prescricao": "3x12 bilateral + 2x10 cada perna",
+            "prescricao": "3x10-15",
             "video": "AFG0wxXmTH4",
             "recorte": {
               "inicio": 475,
@@ -563,12 +513,12 @@ export const PLANO: Divisao[] = [
               "Regule o banco: joelho alinhado com o eixo da máquina.",
               "Volte devagar. A fase de descida é onde o posterior mais ganha."
             ],
-            "unilateral": true,
+            "unilateral": false,
             "busca": "cadeira flexora execução correta posterior de coxa",
             "alternativos": []
           },
           {
-            "id": "b-remada-uni",
+            "id": "pa-remada",
             "nome": "Remada unilateral com halter (serrote)",
             "prescricao": "3x10-12 cada",
             "video": "VoGNKTI5wG8",
@@ -581,68 +531,68 @@ export const PLANO: Divisao[] = [
             "alternativos": []
           },
           {
-            "id": "b-pelvica",
-            "nome": "Elevação pélvica bilateral com carga",
-            "prescricao": "3x10-12",
-            "video": "np35bxrQqRI",
-            "recorte": {
-              "inicio": 416,
-              "fim": 453
-            },
+            "id": "pa-deltpost",
+            "nome": "Crucifixo inverso na máquina",
+            "prescricao": "3x12-15",
+            "video": "5YK4bgzXDp0",
             "cues": [
-              "Barra na dobra do quadril com protetor, queixo levemente para dentro.",
-              "Suba até alinhar tronco e coxa, segure 1 segundo apertando o glúteo."
+              "Peito apoiado, braços quase estendidos na altura dos ombros, abra até a linha do tronco.",
+              "Puxe com o cotovelo, não com a mão. Se o trapézio superior subir até a orelha, a carga está alta demais.",
+              "Este é o exercício que faltava no dia de puxar: deltoide posterior a ~90% da contração máxima, contra ~58% na puxada."
             ],
             "unilateral": false,
-            "busca": "elevação pélvica com barra execução correta",
-            "alternativos": []
+            "busca": "crucifixo inverso máquina peck deck invertido execução",
+            "alternativos": [
+              {
+                "nome": "Abertura com elástico, se não houver máquina",
+                "video": "XN0J-hI17SU",
+                "inicio": 33
+              }
+            ]
           }
         ]
       },
       {
-        "nome": "Bloco C",
-        "sub": "3 voltas",
+        "nome": "Búlgaro · Bíceps · Lombar",
+        "sub": "3 voltas · 45 a 60s entre voltas",
         "exercicios": [
           {
-            "id": "b-pant-sent",
-            "nome": "Panturrilha sentada",
-            "prescricao": "3x15-20",
-            "video": "1x2QAgstSn4",
+            "id": "pa-bulgaro",
+            "nome": "Agachamento búlgaro",
+            "prescricao": "3x8-12 cada perna",
+            "video": "a3-bQbTdA_0",
             "recorte": {
-              "inicio": 146,
-              "fim": 155
+              "inicio": 81,
+              "fim": 100
             },
             "cues": [
-              "Joelho dobrado tira o gastrocnêmio e joga o trabalho para o sóleo.",
-              "O sóleo é o músculo que mais sofre na corrida. Amplitude completa e cadência lenta."
+              "Tronco levemente à frente, joelho da frente estável na direção do pé.",
+              "Se incomodar o joelho operado, reduza a altura do apoio de trás."
             ],
-            "unilateral": false,
-            "busca": "panturrilha sentada gêmeos sentado execução correta",
+            "unilateral": true,
+            "busca": "agachamento búlgaro afundo execução correta",
             "alternativos": []
           },
           {
-            "id": "b-biceps",
-            "nome": "Bíceps em supersérie com tríceps",
-            "prescricao": "3x12 + 3x12",
+            "id": "pa-biceps",
+            "nome": "Rosca de bíceps",
+            "prescricao": "3x10-12",
             "video": "LlJ6wf3NjeA",
             "recorte": {
               "inicio": 45,
               "fim": 55
             },
             "cues": [
-              "Cotovelos parados ao lado do corpo, sem balanço de tronco."
+              "Cotovelo parado ao lado do tronco. Se ele vai para frente, o ombro entrou na jogada.",
+              "Desça controlado até estender o cotovelo por inteiro.",
+              "A supersérie com tríceps saiu: tríceps agora treina no dia de empurrar, onde pertence."
             ],
             "unilateral": false,
             "busca": "rosca direta com halteres execução correta",
-            "alternativos": [
-              {
-                "nome": "Tríceps na polia com corda",
-                "video": "7le1JRUUagM"
-              }
-            ]
+            "alternativos": []
           },
           {
-            "id": "b-lombar",
+            "id": "pa-lombar",
             "nome": "Extensão lombar no banco romano (ou bird-dog)",
             "prescricao": "3x12",
             "video": "W_kuBiLk5s0",
@@ -664,91 +614,23 @@ export const PLANO: Divisao[] = [
             ]
           }
         ]
-      },
-      {
-        "nome": "Finalizador",
-        "sub": "2 a 3 voltas",
-        "exercicios": [
-          {
-            "id": "b-fin-1",
-            "nome": "Step-up no banco",
-            "prescricao": "12 cada perna",
-            "video": "9LBlAgBjDKM",
-            "recorte": {
-              "inicio": 170,
-              "fim": 192
-            },
-            "cues": [
-              "Pé inteiro apoiado no banco, empurre pelo calcanhar da perna de cima.",
-              "Não dê impulso com a perna de baixo. Desça controlando."
-            ],
-            "unilateral": true,
-            "busca": "step up subida no banco execução correta",
-            "alternativos": []
-          },
-          {
-            "id": "b-fin-2",
-            "nome": "Afundo estático ou búlgaro",
-            "prescricao": "10 cada perna",
-            "video": "a3-bQbTdA_0",
-            "recorte": {
-              "inicio": 81,
-              "fim": 100
-            },
-            "cues": [
-              "Tronco levemente à frente, joelho da frente estável na direção do pé.",
-              "Se incomodar o joelho operado, reduza a altura do apoio de trás."
-            ],
-            "unilateral": true,
-            "busca": "agachamento búlgaro afundo execução correta",
-            "alternativos": []
-          },
-          {
-            "id": "b-fin-3",
-            "nome": "Abdominal à escolha",
-            "prescricao": "15",
-            "video": "0loS0bRNqfs",
-            "recorte": {
-              "inicio": 60,
-              "fim": 77
-            },
-            "cues": [
-              "Qualquer variação que você consiga fazer sem puxar o pescoço."
-            ],
-            "unilateral": false,
-            "busca": "dead bug abdominal execução",
-            "alternativos": []
-          },
-          {
-            "id": "b-fin-4",
-            "nome": "Apoio em uma perna em superfície instável",
-            "prescricao": "30s cada",
-            "video": "5OKF9DJcP6M",
-            "cues": [
-              "Almofada, colchonete dobrado ou bosu. Joelho semiflexionado e estável."
-            ],
-            "unilateral": true,
-            "busca": "equilíbrio unipodal superfície instável propriocepção",
-            "alternativos": []
-          }
-        ]
       }
     ]
   },
   {
-    "chave": "forcaAl",
-    "rotulo": "Força A'",
-    "titulo": "Força A' — mesma lógica de A, exercícios trocados",
-    "lede": "Sexta-feira. Mantém o padrão de movimento e troca o exercício: você foge da monotonia sem perder o estímulo. Aquecimento e finalizador são os mesmos do treino A.",
+    "chave": "empurrarB",
+    "rotulo": "Empurrar B",
+    "titulo": "Empurrar B — mesma lógica do A, implementos trocados",
+    "lede": "Variante do dia de empurrar: máquina e halter no lugar da barra livre, e o sóleo no lugar do gastrocnêmio. Mesma regra — nada de costas, bíceps ou antebraço.",
     "blocos": [
       {
-        "nome": "Substituições",
-        "sub": "trocas em relação ao Força A",
+        "nome": "Leg press · Crucifixo · Core",
+        "sub": "4 voltas · 90 a 120s entre voltas",
         "exercicios": [
           {
-            "id": "al-leg",
+            "id": "eb-leg",
             "nome": "Leg press 45° (no lugar do agachamento livre)",
-            "prescricao": "4x8-12",
+            "prescricao": "4x10-15",
             "video": "waAxlYvtCcI",
             "recorte": {
               "inicio": 21,
@@ -770,20 +652,7 @@ export const PLANO: Divisao[] = [
             ]
           },
           {
-            "id": "al-remada",
-            "nome": "Remada baixa (no lugar da puxada)",
-            "prescricao": "4x8-12",
-            "video": "s_c8SikiFAU",
-            "cues": [
-              "Tronco estável, puxe até o abdômen, escápulas se aproximando no final.",
-              "Sem embalo de lombar para trás."
-            ],
-            "unilateral": false,
-            "busca": "remada baixa polia execução correta",
-            "alternativos": []
-          },
-          {
-            "id": "al-cruci",
+            "id": "eb-cruci",
             "nome": "Crucifixo ou paralelas (no lugar do supino)",
             "prescricao": "3-4x10-12",
             "video": "ZjIKUMtW37c",
@@ -805,23 +674,89 @@ export const PLANO: Divisao[] = [
             ]
           },
           {
-            "id": "al-extensora",
+            "id": "eb-deadbug",
+            "nome": "Dead bug (ou abdominal à escolha)",
+            "prescricao": "3x10-12",
+            "video": "0loS0bRNqfs",
+            "recorte": {
+              "inicio": 53,
+              "fim": 76
+            },
+            "cues": [
+              "Lombar colada no chão do começo ao fim. Se descolou, reduza a amplitude.",
+              "Estenda braço e perna opostos devagar, expirando."
+            ],
+            "unilateral": false,
+            "busca": "dead bug exercício core execução correta",
+            "alternativos": []
+          }
+        ]
+      },
+      {
+        "nome": "Extensora · Inclinado · Sóleo",
+        "sub": "3 voltas · 60 a 90s entre voltas",
+        "exercicios": [
+          {
+            "id": "eb-extensora",
             "nome": "Cadeira extensora (mantém)",
-            "prescricao": "3x12-15 + 2x12 cada perna",
+            "prescricao": "3x10-15 cada perna",
             "video": "exLCpU7mT3g",
             "recorte": {
               "inicio": 34,
               "fim": 52
             },
             "cues": [
-              "Este não troca. É o exercício mais direto para o quadríceps da perna operada."
+              "Mesma regra do dia de empurrar A: unilateral, e a faixa final da extensão nunca vai à falha.",
+              "Se doer na frente do joelho, reduza a amplitude terminal antes de reduzir a carga.",
+              "Aqui a sessão é a leve da semana: pare com 2 a 3 repetições na reserva."
             ],
             "unilateral": true,
             "busca": "cadeira extensora execução correta",
             "alternativos": []
           },
           {
-            "id": "al-pelvica",
+            "id": "eb-inclinado",
+            "nome": "Supino inclinado com barra",
+            "prescricao": "3x8-12",
+            "video": "oZjIQN0YMX0",
+            "recorte": {
+              "inicio": 10,
+              "fim": 39
+            },
+            "cues": [
+              "Banco entre 30 e 45 graus. Mais que isso vira desenvolvimento de ombro.",
+              "Barra desce na linha da clavícula, cotovelos a cerca de 45 graus do tronco.",
+              "Escápulas encaixadas no banco do começo ao fim."
+            ],
+            "unilateral": false,
+            "busca": "supino inclinado com barra execução correta",
+            "alternativos": []
+          },
+          {
+            "id": "eb-pant-sent",
+            "nome": "Panturrilha sentada",
+            "prescricao": "3x12-20",
+            "video": "1x2QAgstSn4",
+            "recorte": {
+              "inicio": 146,
+              "fim": 155
+            },
+            "cues": [
+              "Joelho dobrado tira o gastrocnêmio e joga o trabalho para o sóleo.",
+              "O sóleo é o músculo que mais sofre na corrida. Amplitude completa e cadência lenta."
+            ],
+            "unilateral": false,
+            "busca": "panturrilha sentada gêmeos sentado execução correta",
+            "alternativos": []
+          }
+        ]
+      },
+      {
+        "nome": "Pélvica · Deltoide · Paralelas",
+        "sub": "3 voltas · 45 a 60s entre voltas",
+        "exercicios": [
+          {
+            "id": "eb-pelvica",
             "nome": "Elevação pélvica unilateral (mantém)",
             "prescricao": "3x12 cada",
             "video": "Sk-mBla2h8A",
@@ -835,6 +770,215 @@ export const PLANO: Divisao[] = [
             "unilateral": true,
             "busca": "elevação pélvica unilateral execução",
             "alternativos": []
+          },
+          {
+            "id": "eb-elev-lat",
+            "nome": "Elevação lateral de ombro",
+            "prescricao": "3x12-15",
+            "video": "jannLx4RxKo",
+            "recorte": {
+              "inicio": 19,
+              "fim": 35
+            },
+            "cues": [
+              "Suba até a linha dos ombros, sem impulso de tronco.",
+              "Carga leve funciona melhor que carga pesada aqui."
+            ],
+            "unilateral": false,
+            "busca": "elevação lateral com halteres técnica correta",
+            "alternativos": []
+          },
+          {
+            "id": "eb-dips",
+            "nome": "Mergulho nas paralelas",
+            "prescricao": "3x8-12",
+            "video": "gTuw7u2PwlM",
+            "cues": [
+              "Tronco levemente inclinado à frente para pegar mais peito; vertical pega mais tríceps.",
+              "Desça até o braço fazer 90 graus. Mais fundo que isso castiga o ombro sem ganho.",
+              "Se não fechar as repetições, use o graviton ou um elástico de assistência."
+            ],
+            "unilateral": false,
+            "busca": "mergulho nas paralelas execução dips",
+            "alternativos": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "chave": "puxarB",
+    "rotulo": "Puxar B",
+    "titulo": "Puxar B — mesma lógica do puxar A, implementos trocados",
+    "lede": "Variante do dia de puxar: pélvica bilateral no lugar do stiff unilateral, remada baixa e barra assistida. Fecha com abdução de quadril carregada, que é o item que faltava para o corredor.",
+    "blocos": [
+      {
+        "nome": "Pélvica bilateral · Remada baixa · Core",
+        "sub": "4 voltas · 90 a 120s entre voltas",
+        "exercicios": [
+          {
+            "id": "pb-pelvica",
+            "nome": "Elevação pélvica bilateral com carga",
+            "prescricao": "3x10-12",
+            "video": "np35bxrQqRI",
+            "recorte": {
+              "inicio": 416,
+              "fim": 453
+            },
+            "cues": [
+              "Barra na dobra do quadril com protetor, queixo levemente para dentro.",
+              "Suba até alinhar tronco e coxa, segure 1 segundo apertando o glúteo."
+            ],
+            "unilateral": false,
+            "busca": "elevação pélvica com barra execução correta",
+            "alternativos": []
+          },
+          {
+            "id": "pb-remada",
+            "nome": "Remada baixa (no lugar da puxada)",
+            "prescricao": "4x8-12",
+            "video": "s_c8SikiFAU",
+            "cues": [
+              "Tronco estável, puxe até o abdômen, escápulas se aproximando no final.",
+              "Sem embalo de lombar para trás."
+            ],
+            "unilateral": false,
+            "busca": "remada baixa polia execução correta",
+            "alternativos": []
+          },
+          {
+            "id": "pb-prancha",
+            "nome": "Prancha frontal",
+            "prescricao": "3x30-45s",
+            "video": "RTxAFDK1OMw",
+            "recorte": {
+              "inicio": 39,
+              "fim": 47
+            },
+            "cues": [
+              "Antebraços no chão, corpo alinhado do calcanhar à cabeça.",
+              "Costela para baixo e glúteo apertado. Se a lombar afundar, o exercício acabou.",
+              "Qualidade da posição vale mais que segundos acumulados."
+            ],
+            "unilateral": false,
+            "busca": "prancha frontal execução correta core",
+            "alternativos": []
+          }
+        ]
+      },
+      {
+        "nome": "Flexora · Barra assistida · Deltoide posterior",
+        "sub": "3 voltas · 60 a 90s entre voltas",
+        "exercicios": [
+          {
+            "id": "pb-flexora",
+            "nome": "Cadeira flexora",
+            "prescricao": "3x12-15",
+            "video": "AFG0wxXmTH4",
+            "recorte": {
+              "inicio": 475,
+              "fim": 491
+            },
+            "cues": [
+              "Regule o banco: joelho alinhado com o eixo da máquina.",
+              "Volte devagar. A fase de descida é onde o posterior mais ganha."
+            ],
+            "unilateral": false,
+            "busca": "cadeira flexora execução correta posterior de coxa",
+            "alternativos": []
+          },
+          {
+            "id": "pb-barra",
+            "nome": "Barra fixa assistida no graviton",
+            "prescricao": "3x8-12",
+            "video": "w0UVe0JAEDQ",
+            "recorte": {
+              "inicio": 54,
+              "fim": 85
+            },
+            "cues": [
+              "Pegada um pouco mais larga que os ombros, ombros longe das orelhas antes de puxar.",
+              "Puxe o cotovelo para o bolso, não a mão para a barra.",
+              "Ajuste a assistência para fechar as repetições com 2 na reserva."
+            ],
+            "unilateral": false,
+            "busca": "barra fixa assistida graviton execução",
+            "alternativos": []
+          },
+          {
+            "id": "pb-deltpost",
+            "nome": "Crucifixo inverso na máquina",
+            "prescricao": "3x12-15",
+            "video": "5YK4bgzXDp0",
+            "cues": [
+              "Peito apoiado, braços quase estendidos na altura dos ombros, abra até a linha do tronco.",
+              "Puxe com o cotovelo, não com a mão. Se o trapézio superior subir até a orelha, a carga está alta demais.",
+              "Este é o exercício que faltava no dia de puxar: deltoide posterior a ~90% da contração máxima, contra ~58% na puxada."
+            ],
+            "unilateral": false,
+            "busca": "crucifixo inverso máquina peck deck invertido execução",
+            "alternativos": [
+              {
+                "nome": "Abertura com elástico, se não houver máquina",
+                "video": "XN0J-hI17SU",
+                "inicio": 33
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "Step-up · Bíceps · Abdutor",
+        "sub": "3 voltas · 45 a 60s entre voltas",
+        "exercicios": [
+          {
+            "id": "pb-stepup",
+            "nome": "Step-up no banco",
+            "prescricao": "3x12 cada perna",
+            "video": "9LBlAgBjDKM",
+            "recorte": {
+              "inicio": 170,
+              "fim": 192
+            },
+            "cues": [
+              "Pé inteiro apoiado no banco, empurre pelo calcanhar da perna de cima.",
+              "Não dê impulso com a perna de baixo. Desça controlando."
+            ],
+            "unilateral": true,
+            "busca": "step up subida no banco execução correta",
+            "alternativos": []
+          },
+          {
+            "id": "pb-biceps",
+            "nome": "Rosca de bíceps",
+            "prescricao": "3x10-12",
+            "video": "LlJ6wf3NjeA",
+            "recorte": {
+              "inicio": 45,
+              "fim": 55
+            },
+            "cues": [
+              "Mesma execução do dia de puxar A, aqui como fechamento leve da semana.",
+              "Cotovelo parado, descida controlada.",
+              "Se a pegada falhar antes do bíceps na remada e na barra, resolva com pegada mista ou straps."
+            ],
+            "unilateral": false,
+            "busca": "rosca direta com halteres execução correta",
+            "alternativos": []
+          },
+          {
+            "id": "pb-abdutor",
+            "nome": "Abdução de quadril na máquina",
+            "prescricao": "3x12-15",
+            "video": "50qHGus1TZk",
+            "cues": [
+              "Sentado, tronco levemente inclinado à frente, abra os joelhos contra o apoio e volte devagar.",
+              "Tronco à frente recruta mais glúteo médio; tronco reto puxa mais o tensor da fáscia lata.",
+              "Aqui é carga de verdade. A caminhada com miniband do aquecimento é ativação, não substitui isto."
+            ],
+            "unilateral": false,
+            "busca": "cadeira abdutora execução glúteo médio",
+            "alternativos": []
           }
         ]
       }
@@ -844,15 +988,14 @@ export const PLANO: Divisao[] = [
     "chave": "corrida",
     "rotulo": "Corrida",
     "titulo": "Corrida",
-    "lede": "Duas rotas: retomando (ainda não corre 5 km contínuos) ou já correndo 5 km. Escolha a sua e siga só ela.",
-    "custom": "corrida",
-    "blocos": []
+    "blocos": [],
+    "custom": "corrida"
   },
   {
     "chave": "circuito",
     "rotulo": "Circuito",
-    "titulo": "Circuito híbrido — sábado, opcional",
-    "lede": "Só entra depois de 4 semanas consistentes no plano. 4 voltas, 90 segundos de descanso entre voltas.",
+    "titulo": "Circuito híbrido — opcional, em semana de deload",
+    "lede": "Não é sessão de força e não substitui a sessão pesada: trabalho submáximo e isométrico não melhoram economia de corrida. É condicionamento para a semana leve.",
     "blocos": [
       {
         "nome": "Circuito",
@@ -953,7 +1096,7 @@ export const PLANO: Divisao[] = [
     "chave": "guia",
     "rotulo": "Guia",
     "titulo": "Guia",
-    "custom": "guia",
-    "blocos": []
+    "blocos": [],
+    "custom": "guia"
   }
 ]

@@ -19,11 +19,11 @@ describe('lerRota', () => {
   })
 
   it('lê a divisão', () => {
-    expect(lerRota('#/forcaA')).toEqual({ divisao: 'forcaA', exercicio: undefined })
+    expect(lerRota('#/empurrarA')).toEqual({ divisao: 'empurrarA', exercicio: undefined })
   })
 
   it('lê divisão e exercício', () => {
-    expect(lerRota('#/forcaA/a-agacha')).toEqual({ divisao: 'forcaA', exercicio: 'a-agacha' })
+    expect(lerRota('#/empurrarA/ea-agacha')).toEqual({ divisao: 'empurrarA', exercicio: 'ea-agacha' })
   })
 
   it('ignora divisão desconhecida e cai em aquecer', () => {
@@ -36,19 +36,19 @@ describe('useRota', () => {
     const { result } = renderHook(() => useRota())
     expect(result.current.divisao).toBe('aquecer')
     act(() => {
-      irPara('forcaB')
+      irPara('puxarA')
     })
-    expect(result.current.divisao).toBe('forcaB')
+    expect(result.current.divisao).toBe('puxarA')
   })
 
   it('abre e fecha o exercício', () => {
     const { result } = renderHook(() => useRota())
     act(() => {
-      irPara('forcaB', 'b-flexora')
+      irPara('puxarA', 'pa-flexora')
     })
-    expect(result.current.exercicio).toBe('b-flexora')
+    expect(result.current.exercicio).toBe('pa-flexora')
     act(() => {
-      irPara('forcaB')
+      irPara('puxarA')
     })
     expect(result.current.exercicio).toBeUndefined()
   })
