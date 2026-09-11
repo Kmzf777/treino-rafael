@@ -69,20 +69,26 @@ describe('PainelGuia', () => {
   })
 })
 
+/**
+ * Asserção por título é falsa segurança num arquivo cujo produto é o texto:
+ * trocar o card de alerta inteiro por "Se doer, pegue leve." deixava os 176
+ * testes verdes. O que se trava aqui é a **afirmação de segurança** — o número,
+ * a proibição, a ordem —, nunca a prosa inteira, que muda a cada revisão de
+ * texto sem mudar o que o leitor faz.
+ */
 describe('cards do guia no modelo empurrar/puxar', () => {
   const titulos = GUIA.map((s) => ('titulo' in s ? s.titulo : ''))
 
-  it('tem o card do joelho operado', () => {
-    expect(titulos).toContain('Joelho operado')
-  })
+  const indiceDe = (titulo: string) => titulos.indexOf(titulo)
 
-  it('tem o card de sinais de alerta', () => {
-    expect(titulos).toContain('Sinais para reduzir a carga')
-  })
-
-  it('tem a checagem mensal de simetria entre as pernas', () => {
-    expect(titulos).toContain('Checagem mensal de simetria')
-  })
+  /** Todo o texto de uma seção, seja ela `texto`, `alerta` ou `cards`. */
+  const textoDe = (titulo: string) => {
+    const secao = GUIA.find((s) => 'titulo' in s && s.titulo === titulo)
+    if (!secao) throw new Error(`o guia perdeu a seção "${titulo}"`)
+    return secao.tipo === 'cards'
+      ? secao.cards.map((c) => `${c.titulo}. ${c.texto}`).join(' ')
+      : secao.texto
+  }
 
   it('tem o card das três regras da corrida', () => {
     expect(titulos).toContain('Corrida — as três regras')
@@ -97,9 +103,82 @@ describe('cards do guia no modelo empurrar/puxar', () => {
     expect(texto).toContain('não é pior')
   })
 
-  it('registra as perguntas em aberto sobre a cirurgia', () => {
-    const texto = JSON.stringify(GUIA)
+  /**
+   * "Freio-mestre" não é ênfase de redação: é hierarquia. O inchaço precisa
+   * aparecer antes dos outros sinais e mandar mais que a regra de frequência —
+   * uma asserção de índice é o que distingue "primeiro da lista" de "mais um
+   * item da lista".
+   */
+  it('o alerta abre pelo inchaço, com o corte de volume que ele obriga', () => {
+    const texto = textoDe('Sinais para reduzir a carga').toLowerCase()
+
+    expect(texto).toContain('inchaço')
+    expect(texto).toContain('30 a 50')
+    expect(texto).toMatch(/vale mais que qualquer regra de frequência/)
+
+    const inchaco = texto.indexOf('inchaço')
+    for (const sinal of ['3/10', '72 horas', 'bloqueio', 'extensão completa']) {
+      expect(texto.indexOf(sinal), `"${sinal}" deveria vir depois do inchaço`).toBeGreaterThan(
+        inchaco,
+      )
+    }
+  })
+
+  it('o card do joelho nomeia as duas amplitudes e proíbe a falha na terminal', () => {
+    const texto = textoDe('Joelho operado')
+
+    // A faixa terminal da spec, em graus: "a faixa final" sozinha não diz a quem
+    // não leu a spec qual faixa é.
+    expect(texto).toContain('45 a 0 graus')
+    // A configuração conservadora, para menos de 9 meses.
+    expect(texto).toContain('90 a 45 graus')
+    expect(texto).toMatch(/nunca até a falha/i)
+    expect(texto).toMatch(/nunca teste de força/i)
+  })
+
+  it('a checagem mensal traz o alvo absoluto, não só a variação do mês', () => {
+    const texto = textoDe('Checagem mensal de simetria')
+
+    expect(texto).toContain('20 ou mais repetições')
+    // Critério absoluto: uma assimetria grande e estável também reprova.
+    expect(texto).toContain('sem diferença entre os lados')
+    expect(texto).toMatch(/não é hora de subir carga/i)
+  })
+
+  /**
+   * Este teste checava `/enxerto/i` sobre o guia inteiro e passava mesmo com a
+   * seção apagada — a nota de rodapé diz "LCA e LCM com enxerto". Agora ele
+   * assere sobre a seção certa.
+   */
+  it('as três perguntas nomeiam enxerto, meses e menisco, e a configuração conservadora', () => {
+    const texto = textoDe('Três perguntas que mudam a prescrição')
+
     expect(texto).toMatch(/enxerto/i)
     expect(texto).toMatch(/menisco/i)
+    expect(texto).toMatch(/meses de cirurgia/i)
+    expect(texto).toMatch(/configuração conservadora/i)
+  })
+
+  /**
+   * O protocolo da extensora é condicional a estas três respostas. Lendo o
+   * joelho antes das perguntas, o leitor recebe a prescrição sem saber que ela
+   * depende de algo que ele ainda não respondeu.
+   */
+  it('as três perguntas vêm antes do card do joelho, porque são o input dele', () => {
+    expect(indiceDe('Três perguntas que mudam a prescrição')).toBeGreaterThanOrEqual(0)
+    expect(indiceDe('Joelho operado')).toBe(
+      indiceDe('Três perguntas que mudam a prescrição') + 1,
+    )
+  })
+
+  /**
+   * `TabelaSemana` imprime as notas laterais na mesma tela do Guia. Quando um
+   * card reenuncia uma nota, as duas cópias divergem sem ninguém notar — as
+   * cláusulas abaixo são as que já estavam duplicadas.
+   */
+  it('os cards do guia não recopiam as notas laterais da semana', () => {
+    const texto = JSON.stringify(GUIA)
+    expect(texto).not.toContain('é ela que sustenta a corrida')
+    expect(texto).not.toContain('separar por 3 horas elimina o efeito')
   })
 })
