@@ -449,7 +449,7 @@ export const PLANO: Divisao[] = [
           },
           {
             "id": "pa-puxada",
-            "nome": "Puxada alta ou barra assistida",
+            "nome": "Puxada alta",
             "prescricao": "4x8-12",
             "video": "mPmfwbc_svw",
             "cues": [
@@ -638,7 +638,8 @@ export const PLANO: Divisao[] = [
               "fim": 46
             },
             "cues": [
-              "Cotovelos levemente dobrados e fixos durante todo o arco."
+              "Cotovelos levemente dobrados e fixos durante todo o arco.",
+              "Abra até sentir o peito alongar, sem passar da linha do tronco. Além disso quem paga a conta é a cápsula do ombro, e o peitoral não ganha nada com os últimos graus."
             ],
             "unilateral": false,
             "busca": "crucifixo reto com halteres execução correta",
