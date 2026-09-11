@@ -955,6 +955,18 @@ A semana deixa de ser uma grade fixa de dias. Os quatro treinos rodam numa fila
 contínua que fecha em 4 semanas, e a carga é propriedade da posição na semana, não
 do treino.
 
+> **Errata, registrada durante a execução.** As Tarefas 3 e 4 **saem num commit só**.
+> Elas estão separadas aqui por clareza de leitura, mas não são separáveis em dois
+> commits verdes: ao reescrever `semana.ts`, o `TabelaSemana.tsx` antigo passa a
+> importar `SEMANA_3`/`SEMANA_4` que deixaram de existir, e o `tsc` quebra. Commit
+> que não compila é um buraco no `git bisect`. Faça as duas e commite uma vez.
+>
+> Duas outras correções vieram da execução: o `lede` do componente usa
+> `text-[17px] leading-[1.47] max-w-[60ch]`, que é a escala de prosa da direção de
+> arte — o `text-[15px] leading-[1.55]` escrito abaixo não existe em lugar nenhum do
+> app. E o campo `divisao` das linhas de corrida em `DIAS_FIXOS` **sai**: nenhum
+> consumidor lê, nem antes nem depois.
+
 - [ ] **Step 1: Escrever o teste que falha**
 
 Criar `app/src/data/semana.test.ts`:
