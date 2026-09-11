@@ -178,7 +178,9 @@ describe('cards do guia no modelo empurrar/puxar', () => {
    */
   it('os cards do guia não recopiam as notas laterais da semana', () => {
     const texto = JSON.stringify(GUIA)
-    expect(texto).not.toContain('é ela que sustenta a corrida')
-    expect(texto).not.toContain('separar por 3 horas elimina o efeito')
+    // Uma cláusula distintiva de cada nota. Guardar a frase inteira seria
+    // frágil; guardar a afirmação que a nota carrega é o que importa.
+    expect(texto).not.toContain('é ela que sustenta a corrida') // REGRA_DE_CARGA
+    expect(texto).not.toContain('custa força explosiva') // REGRA_DE_OURO
   })
 })

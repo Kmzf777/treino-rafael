@@ -33,8 +33,14 @@ export const DIAS_FIXOS: LinhaSemana[] = [
   { dia: 'Domingo', sessao: 'Descanso total', descanso: true },
 ]
 
+/**
+ * A janela é de 48 horas, não de 24. Esta nota dizia "no dia seguinte" — mais
+ * frouxo que a spec e que o card do Guia, e é esta versão que aparece em toda
+ * divisão de força, ou seja, a mais lida. Em texto de segurança, a cópia mais
+ * vista não pode ser a mais permissiva.
+ */
 export const REGRA_DE_OURO =
-  'Nunca coloque corrida intervalada forte no dia seguinte à sessão pesada. Se precisar juntar força e corrida no mesmo dia, faça força primeiro e deixe pelo menos 3 horas entre as duas — colar as duas custa força explosiva, e separar por 3 horas elimina o efeito.'
+  'Corrida de qualidade — tiros ou ritmo forte — só 48 horas depois da sessão pesada. Se precisar juntar força e corrida no mesmo dia, faça força primeiro e deixe pelo menos 3 horas entre as duas: colar as duas custa força explosiva, e separar por 3 horas elimina esse custo.'
 
 export const REGRA_DE_CARGA =
   'A carga mora no dia da semana, não no treino. A primeira sessão da semana é a pesada: topo da carga, base da faixa de repetições, no exercício de perna que abre a sessão. A segunda é moderada. A terceira é leve, com 2 a 3 repetições na reserva. Só uma sessão pesada por semana — é ela que sustenta a corrida.'

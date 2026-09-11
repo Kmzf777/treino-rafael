@@ -85,6 +85,25 @@ describe('ciclo de 4 semanas', () => {
   })
 
   /**
+   * A janela da corrida de qualidade é de 48 h — princípio P9 da spec. Esta nota
+   * já disse "no dia seguinte", que é metade da janela, e como ela aparece em
+   * toda divisão de força era a cópia mais lida e a mais permissiva ao mesmo
+   * tempo. As negativas são deliberadas: se um dia a nota precisar mesmo falar
+   * do dia seguinte (para permitir zona 2, por exemplo), este teste é o lugar
+   * de revisar a janela junto, não de contornar a asserção.
+   */
+  it('a regra de ouro trava a janela em 48 h, não em 24', () => {
+    expect(REGRA_DE_OURO).toMatch(/corrida de qualidade/i)
+    expect(REGRA_DE_OURO).toMatch(/48 horas depois da sessão pesada/i)
+    expect(REGRA_DE_OURO).not.toMatch(/dia seguinte/i)
+    expect(REGRA_DE_OURO).not.toMatch(/24 h/i)
+
+    // O resto da nota, que não muda: força primeiro e o intervalo mínimo.
+    expect(REGRA_DE_OURO).toMatch(/força primeiro/i)
+    expect(REGRA_DE_OURO).toMatch(/3 horas/)
+  })
+
+  /**
    * Comprimento não basta aqui: esta nota é o freio-mestre, e o que vale nela
    * são o gatilho (o inchaço), o número (30 a 50%) e a precedência sobre as
    * outras regras desta mesma tela. Sem os três ela vira conselho genérico.
