@@ -67,7 +67,7 @@ export const GUIA: SecaoGuia[] = [
   // Reenunciar as notas aqui seria duas cópias numa tela só, livres para
   // divergir.
   { tipo: 'cards', titulo: 'Corrida — as três regras', cards: [
-    { titulo: 'Qualidade só 48 h depois da sessão pesada', texto: 'A janela é de 48 horas, não de 24: a perna pesada de segunda ainda cobra o preço na quarta. Corrida leve em zona 2 no dia seguinte é aceitável.' },
+    { titulo: 'Qualidade só 48 h depois da sessão pesada', texto: 'São dois dias inteiros, não um: a perna pesada de segunda ainda cobra o preço na quarta. Corrida leve em zona 2 no dia seguinte é aceitável — a janela vale para o tiro, não para toda corrida.' },
     { titulo: 'Exceção: dia de tiro inverte a ordem', texto: 'A regra de ouro põe a força na frente. Em dia de tiro ou tempo run, não: a corrida é a prioridade da sessão e vem primeiro. O intervalo entre as duas continua valendo.' },
     { titulo: 'Antes de correr em 24 h: 2 a 3 na reserva', texto: 'Nunca até a falha. Com perna em todas as sessões, nenhuma corrida da semana acontece com as pernas totalmente frescas — esse é o custo real do modelo, e é um custo aceito, não um descuido.' },
   ] },
