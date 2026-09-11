@@ -4,7 +4,7 @@ export type SemanaCorrida = { semana: number; sessao: string; leve: boolean }
 export const CORRIDA = {
   retomando: {
     titulo: 'Se você ainda está retomando',
-    lede: 'Duas sessões por semana, terça e sábado. Cinco minutos caminhando antes e cinco depois, sempre.',
+    lede: 'Duas sessões fixas por semana — terça e sábado —, mais uma leve opcional na segunda, pelo menos 3 horas depois da força. A progressão abaixo conta com as três. Cinco minutos caminhando antes e cinco depois, sempre.',
     semanas: [
       { semana: 1, sessao: '6x (2 min corrida / 2 min caminhada)', leve: false },
       { semana: 2, sessao: '6x (3 min corrida / 1min30 caminhada)', leve: false },
@@ -18,11 +18,11 @@ export const CORRIDA = {
   },
   jaCorre: {
     titulo: 'Se você já corre 5 km',
-    lede: 'Duas sessões por semana, nunca em dias seguidos: terça leve, sábado longa ou de qualidade.',
+    lede: 'Duas sessões fixas por semana, terça e sábado, mais a leve opcional na segunda, depois da força.',
     cards: [
-      { titulo: 'Leve (base)', texto: '30 a 40 min em ritmo de conversa. É a maior parte do seu volume — e a parte que a maioria das pessoas corre rápido demais.' },
-      { titulo: 'Qualidade — 1x por semana', texto: '6 a 8 tiros de 400 m em ritmo forte com 2 min de trote entre eles. Ou 20 min contínuos em ritmo confortavelmente difícil.' },
-      { titulo: 'Longa', texto: '6 a 8 km em ritmo leve, aumentando no máximo 10% por semana.' },
+      { titulo: 'Leve (base)', texto: '30 a 40 min em ritmo de conversa na terça, 20 min na opcional de segunda. É a maior parte do seu volume — e a parte que a maioria das pessoas corre rápido demais.' },
+      { titulo: 'Qualidade — sábado, semana sim, semana não', texto: '6 a 8 tiros de 400 m em ritmo forte com 2 min de trote entre eles. Ou 20 min contínuos em ritmo confortavelmente difícil. Sábado é o único dia que sobra: a terça está a 24 horas da sessão pesada, e o tiro pede 48.' },
+      { titulo: 'Longa — sábado, na semana sem tiro', texto: '6 a 8 km em ritmo leve, aumentando no máximo 10% por semana. Divide o sábado com a de qualidade, então as duas se revezam: não é para fazer as duas na mesma semana.' },
     ] as Card[],
   },
   cuidados: {
@@ -75,7 +75,7 @@ export const GUIA: SecaoGuia[] = [
   { tipo: 'texto', titulo: 'Saltos e pliometria', texto: 'Continuam fora do plano. Só entram com liberação do fisio e com a perna operada em pelo menos 90% da força e do salto unipodal da perna boa. Antes disso, o risco não compensa.' },
   { tipo: 'cards', titulo: 'Resumo semanal', cards: [
     { titulo: '3 sessões de força', texto: 'Empurrar e puxar alternados, inferior em todas. Uma única sessão pesada por semana, sempre a primeira; as outras duas são moderada e leve.' },
-    { titulo: '2 corridas e 2 descansos', texto: 'Terça leve, sábado longa ou de qualidade. Quinta é descanso ativo, domingo é descanso total.' },
+    { titulo: '2 corridas fixas, 1 opcional e 2 descansos', texto: 'Terça leve e sábado, que se reveza entre longa e de qualidade. A opcional é uma corrida leve na segunda, depois da força. Quinta é descanso ativo, domingo é descanso total.' },
     { titulo: 'Sono e proteína', texto: '7 a 9 horas de sono e algo entre 1,6 e 2 g de proteína por kg de peso fazem mais diferença na recuperação que qualquer suplemento.' },
   ] },
   { tipo: 'texto', titulo: 'O que este plano não afirma', texto: 'Não afirma que separar peito e costas em dias diferentes é melhor: ninguém testou essa pergunta. O que a evidência permite dizer é que não é pior — e isso basta para organizar o treino do jeito que faz sentido para você. Não afirma que treinar perna 3 vezes por semana rende mais músculo que 2: com o mesmo volume semanal, não rende. O ganho é de distribuição e de exposição frequente ao joelho operado, não de volume extra. E não existe nenhum estudo testando frequência de perna nessa faixa em pessoas com LCA reconstruído que também correm: este plano é extrapolação bem fundamentada, e é por isso que o inchaço na manhã seguinte vale mais que qualquer regra escrita aqui.' },

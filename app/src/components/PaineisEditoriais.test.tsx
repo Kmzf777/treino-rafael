@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { buscarDivisao } from '@/data'
 import { CORRIDA, GUIA } from '@/data/editorial'
+import { DIAS_DE_FORCA, DIAS_FIXOS, REGRA_DE_OURO } from '@/data/semana'
 import { PainelCorrida } from './PainelCorrida'
 import { PainelGuia } from './PainelGuia'
 
@@ -67,6 +68,78 @@ describe('PainelGuia', () => {
   it('não repete a frase do campo de carga, que saiu do escopo', () => {
     render(<PainelGuia />)
     expect(screen.queryByText(/sem anotar, não existe progressão/i)).not.toBeInTheDocument()
+  })
+})
+
+/**
+ * O painel de corrida e a `TabelaSemana` aparecem na MESMA tela, e o painel já
+ * mentiu sobre ela: dizia "Três sessões por semana" enquanto `DIAS_FIXOS` tinha
+ * duas. A terceira corrida saiu junto com o toggle 3/4 dias, o texto ficou, e
+ * nada travava a diferença. Aqui a estrutura que o texto anuncia é lida do
+ * dado, não escrita à mão.
+ */
+describe('estrutura de corrida', () => {
+  const DIAS_DE_CORRIDA = DIAS_FIXOS.filter((linha) => !linha.descanso)
+  const POR_EXTENSO = ['nenhuma', 'uma', 'duas', 'três', 'quatro', 'cinco']
+  const LEDES = [CORRIDA.retomando.lede, CORRIDA.jaCorre.lede].map((l) => l.toLowerCase())
+  const TUDO = JSON.stringify(CORRIDA).toLowerCase()
+
+  it('os dois ledes anunciam tantas sessões fixas quantas a semana tem', () => {
+    const quantas = POR_EXTENSO[DIAS_DE_CORRIDA.length]
+    for (const lede of LEDES) expect(lede).toContain(`${quantas} sessões fixas`)
+  })
+
+  it('os dois ledes nomeiam os dias em que a semana marca corrida', () => {
+    for (const { dia } of DIAS_DE_CORRIDA) {
+      for (const lede of LEDES) expect(lede, dia).toContain(dia.toLowerCase())
+    }
+  })
+
+  /**
+   * A terceira corrida do briefing: leve, opcional, no primeiro dia de força e
+   * DEPOIS dele. Ela não cabe em `DIAS_FIXOS` — segunda é dia de força e o
+   * treino muda a cada semana do ciclo —, então o texto é o único lugar onde
+   * ela existe, e seria de novo o único lugar de onde ela poderia sumir sem
+   * ninguém ver.
+   */
+  it('a corrida opcional mora no primeiro dia de força, e depois dele', () => {
+    const primeiro = DIAS_DE_FORCA[0].toLowerCase()
+    expect(TUDO).toMatch(new RegExp(`opcional n[ao] ${primeiro}`))
+    expect(TUDO).toContain('depois da força')
+  })
+
+  /**
+   * O intervalo entre a força e a opcional não é número próprio do painel: é o
+   * mesmo da `REGRA_DE_OURO`, que a `TabelaSemana` imprime nesta mesma tela.
+   * Lido do texto dela de propósito — mover um obriga a mover o outro, em vez
+   * de deixar duas cifras livres para divergir a um metro de distância.
+   */
+  it('o intervalo da opcional é o que a regra de ouro já exige', () => {
+    const horas = REGRA_DE_OURO.match(/pelo menos (\d+) horas/)?.[1]
+    expect(horas, 'a regra de ouro perdeu o intervalo mínimo').toBeDefined()
+    expect(TUDO).toContain(`pelo menos ${horas} horas`)
+  })
+
+  /**
+   * `DIAS_FIXOS` dá ao sábado duas sessões — "Corrida longa ou de qualidade" —
+   * e ele é o único slot possível para as duas: a terça está a 24 h da sessão
+   * pesada e o tiro pede 48. O painel prometia as duas toda semana, com um card
+   * "Qualidade — 1x por semana" ao lado de um card de longa sem ressalva.
+   */
+  it('o painel diz que o sábado se reveza, em vez de prometer as duas', () => {
+    const acumula = DIAS_DE_CORRIDA.find(
+      (linha) => /longa/i.test(linha.sessao) && /qualidade/i.test(linha.sessao),
+    )
+    expect(acumula, 'a semana perdeu o dia que acumula longa e qualidade').toBeDefined()
+
+    const cards = CORRIDA.jaCorre.cards
+      .map((c) => `${c.titulo}. ${c.texto}`)
+      .join(' ')
+      .toLowerCase()
+
+    expect(cards).toContain(acumula!.dia.toLowerCase())
+    expect(cards).toMatch(/semana sim, semana não|se revezam|alterna/)
+    expect(cards).not.toMatch(/1x por semana/)
   })
 })
 
