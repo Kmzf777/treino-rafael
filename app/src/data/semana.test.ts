@@ -8,6 +8,23 @@ describe('ciclo de 4 semanas', () => {
     for (const semana of CICLO) expect(semana.sessoes).toHaveLength(3)
   })
 
+  /**
+   * Os invariantes abaixo travam as propriedades da fila, não a fila. Uma tabela
+   * diferente e errada passa em todos eles — `A → PB → B → PA`, por exemplo,
+   * alterna empurrar/puxar, dá 3 aparições por treino e nunca repete em sessões
+   * consecutivas. Como o app não tem automação de "qual é o treino de hoje", esta
+   * tabela impressa é o produto: se ela derivar, o app mente em silêncio. Por isso
+   * a literal da spec também é asserção, e não é redundante com o resto.
+   */
+  it('a fila é exatamente a tabela da spec', () => {
+    expect(CICLO.map((s) => s.sessoes.map((x) => x.divisao))).toEqual([
+      ['empurrarA', 'puxarA', 'empurrarB'],
+      ['puxarB', 'empurrarA', 'puxarA'],
+      ['empurrarB', 'puxarB', 'empurrarA'],
+      ['puxarA', 'empurrarB', 'puxarB'],
+    ])
+  })
+
   it('toda sessão aponta para uma divisão que existe', () => {
     for (const semana of CICLO) {
       for (const sessao of semana.sessoes) {
