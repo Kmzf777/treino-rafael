@@ -61,6 +61,13 @@ olhar: `mob-gato`, `b-biceps`, `b-pallof`, `al-pelvica`, `a-pelvica-uni`, `c-fle
   no chute seria pior que deixar a aba como está.
 - **`c-prancha` tem 8 segundos.** É todo o tempo que o vídeo dedica à prancha
   frontal. Preferi um clipe honesto de 8s a inflar até 12s pegando conversa.
+- **Recorte dos 3 vídeos novos.** `pa-deltpost`/`pb-deltpost` (crucifixo inverso,
+  `5YK4bgzXDp0`, 13s), `ea-triceps` (tríceps overhead, `1u18yJELsh0`, 12s) e
+  `pb-abdutor` (abdução de quadril, `50qHGus1TZk`, 35s) entraram em 2026-09-10 sem
+  recorte, só com link. A auditoria quadro a quadro exige `yt-dlp` e `ffmpeg`, que não
+  estavam disponíveis no ambiente — a escolha de cada um foi feita por amostragem de
+  três quadros. Os ids e a justificativa de escolha estão em
+  `docs/dados/videos-novos.json`.
 
 ## Correções ao briefing
 
