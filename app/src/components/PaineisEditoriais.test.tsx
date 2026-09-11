@@ -68,3 +68,34 @@ describe('PainelGuia', () => {
     expect(screen.queryByText(/sem anotar, não existe progressão/i)).not.toBeInTheDocument()
   })
 })
+
+describe('cards do guia no modelo empurrar/puxar', () => {
+  const titulos = GUIA.map((s) => ('titulo' in s ? s.titulo : ''))
+
+  it('tem o card do joelho operado', () => {
+    expect(titulos).toContain('Joelho operado')
+  })
+
+  it('tem o card de sinais de alerta', () => {
+    expect(titulos).toContain('Sinais para reduzir a carga')
+  })
+
+  it('tem o card das três regras da corrida', () => {
+    expect(titulos).toContain('Corrida — as três regras')
+  })
+
+  it('tem o card de honestidade editorial', () => {
+    expect(titulos).toContain('O que este plano não afirma')
+  })
+
+  it('não promete que separar peito e costas é melhor', () => {
+    const texto = JSON.stringify(GUIA)
+    expect(texto).toContain('não é pior')
+  })
+
+  it('registra as perguntas em aberto sobre a cirurgia', () => {
+    const texto = JSON.stringify(GUIA)
+    expect(texto).toMatch(/enxerto/i)
+    expect(texto).toMatch(/menisco/i)
+  })
+})
