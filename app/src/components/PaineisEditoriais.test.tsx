@@ -80,6 +80,10 @@ describe('cards do guia no modelo empurrar/puxar', () => {
     expect(titulos).toContain('Sinais para reduzir a carga')
   })
 
+  it('tem a checagem mensal de simetria entre as pernas', () => {
+    expect(titulos).toContain('Checagem mensal de simetria')
+  })
+
   it('tem o card das três regras da corrida', () => {
     expect(titulos).toContain('Corrida — as três regras')
   })
