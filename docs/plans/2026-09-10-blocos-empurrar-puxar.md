@@ -316,11 +316,24 @@ describe('modelo empurrar/puxar', () => {
     }
   })
 
-  it('toda sessão de força tem exercício de perna — inferior em toda sessão', () => {
-    const PERNA = ['Agachar', 'Dobradiça de quadril', 'Unilateral de perna', 'Isolado']
+  // Filtra por músculo, não por padrão de movimento: 'Isolado' é o padrão de
+  // `ea-triceps` e `pa-biceps`, então um filtro por padrão deixaria uma extensão de
+  // tríceps satisfazer um teste que se chama "tem exercício de perna".
+  it('toda sessão de força tem pelo menos 3 exercícios de perna — inferior em toda sessão', () => {
+    const MUSCULOS_PERNA = [
+      'Quadríceps',
+      'Isquiotibiais',
+      'Glúteo máximo',
+      'Glúteo médio',
+      'Panturrilha (gastrocnêmio)',
+      'Panturrilha (sóleo)',
+      'Adutores',
+    ]
     for (const chave of DIAS_FORCA) {
-      const perna = exerciciosDe(chave).filter((e) => PERNA.includes(e.meta.padraoMovimento))
-      expect(perna.length).toBeGreaterThan(0)
+      const perna = exerciciosDe(chave).filter((e) =>
+        MUSCULOS_PERNA.includes(e.meta.musculoPrimario),
+      )
+      expect(perna.length).toBeGreaterThanOrEqual(3)
     }
   })
 
@@ -893,6 +906,13 @@ agora. Rodar a suíte uma vez, ler os dois números que o Vitest reporta como
 | `src/components/Busca.test.tsx:122` | `{ id: 'a-agacha', divisao: 'forcaA' }` → `{ id: 'ea-agacha', divisao: 'empurrarA' }` |
 | `src/components/IndiceDivisoes.test.tsx:18` | `atual="forcaB"` → `atual="puxarA"` |
 | `src/components/ListaExercicios.test.tsx:7` | `buscarDivisao('forcaA')` → `buscarDivisao('empurrarA')`; renomear as variáveis `forcaA`/`exerciciosDeForcaA` para `empurrarA`/`exerciciosDeEmpurrarA` |
+| `src/components/SheetExercicio.test.tsx` | `a-agacha` → `ea-agacha`, `b-fin-2` → `pa-bulgaro` |
+
+Esta tabela não é exaustiva: ela lista o que foi encontrado ao escrever o plano.
+Rode `grep -rn "forcaA\|forcaB\|forcaAl" app/src` e confirme que não sobrou nada,
+e espere que asserções de contagem em outros testes de componente (número de
+divisões no índice, número de exercícios numa lista, texto do colofão) também
+precisem de ajuste.
 
 - [ ] **Step 10: Rodar a suíte inteira**
 
