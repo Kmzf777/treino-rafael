@@ -230,6 +230,28 @@ describe('modelo empurrar/puxar', () => {
     }
   })
 
+  /**
+   * A tríade da spec é posicional: slot 1 = PERNA · slot 2 = TORSO · slot 3 =
+   * CORE / PANTURRILHA / ISOLADO. O slot 1 é o que tem consequência fora da
+   * estética: a `REGRA_DE_CARGA` manda ir pesado "no exercício de perna que
+   * abre a sessão", e é o Bloco 1 que a sessão abre. Sem esta asserção, trocar
+   * a ordem de `pb-pelvica` e `pb-remada` fazia o dia de puxar B abrir com
+   * torso e a suíte inteira continuava verde — a sessão perdia o exercício que
+   * a regra de carga endereça, e o nome do bloco passava a listar os
+   * exercícios fora da ordem em que eles aparecem.
+   */
+  it('todo bloco de força abre por um exercício de perna — slot 1 da tríade', () => {
+    for (const chave of DIAS_FORCA) {
+      for (const bloco of buscarDivisao(chave)!.blocos) {
+        const abre = bloco.exercicios[0]
+        expect(
+          CLASSES_MUSCULARES.perna,
+          `${chave} · bloco "${bloco.nome}" abre com ${abre.id} (${abre.meta.musculoPrimario}), que não é exercício de perna`,
+        ).toContain(abre.meta.musculoPrimario)
+      }
+    }
+  })
+
   it('nenhum bloco junta dois exercícios do mesmo músculo primário', () => {
     for (const chave of DIAS_FORCA) {
       for (const bloco of buscarDivisao(chave)!.blocos) {

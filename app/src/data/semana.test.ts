@@ -5,6 +5,7 @@ import {
   DIAS_DE_FORCA,
   REGRA_DE_OURO,
   REGRA_DE_CARGA,
+  REGRA_DE_PANTURRILHA,
   REGRA_DO_FREIO,
 } from './semana'
 import { buscarDivisao } from './index'
@@ -101,6 +102,31 @@ describe('ciclo de 4 semanas', () => {
     // O resto da nota, que não muda: força primeiro e o intervalo mínimo.
     expect(REGRA_DE_OURO).toMatch(/força primeiro/i)
     expect(REGRA_DE_OURO).toMatch(/3 horas/)
+  })
+
+  /**
+   * A nota irmã da regra de ouro, e a que ficou sem cinto: nenhum teste a
+   * importava, e `TabelaSemana.test.tsx` cobria três das quatro notas. Trocar
+   * "pelo menos 48 horas" por "24 horas" passava nos 182 — o mesmo defeito que
+   * a regra de ouro já teve. O que se trava é a claim, não a prosa: a janela de
+   * 48 h (P8 da spec, que é sobre tendão de Aquiles, não sobre organização de
+   * semana) e o dia em que a panturrilha aparece.
+   *
+   * As negativas cobrem o afrouxamento que NÃO apaga o número — "48 horas,
+   * mas 24 já serve" continuaria batendo na positiva. `/dias seguidos/` não
+   * serve de negativa: a própria nota usa a expressão para dizer o que não
+   * fazer.
+   */
+  it('a nota da panturrilha trava a janela de 48 h e o dia em que ela aparece', () => {
+    expect(REGRA_DE_PANTURRILHA).toMatch(/pelo menos 48 horas/i)
+    expect(REGRA_DE_PANTURRILHA).toMatch(/só nos dias de empurrar/i)
+    expect(REGRA_DE_PANTURRILHA).toMatch(/nos dias de puxar ela não aparece/i)
+    // A razão da janela, que é o que distingue esta nota de uma regra de
+    // calendário: o tecido que paga a conta.
+    expect(REGRA_DE_PANTURRILHA).toMatch(/aquiles/i)
+
+    expect(REGRA_DE_PANTURRILHA).not.toMatch(/24 h/i)
+    expect(REGRA_DE_PANTURRILHA).not.toMatch(/dia seguinte/i)
   })
 
   /**

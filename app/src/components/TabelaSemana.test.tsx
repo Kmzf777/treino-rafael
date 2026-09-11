@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { REGRA_DO_FREIO } from '@/data/semana'
+import { REGRA_DE_PANTURRILHA, REGRA_DO_FREIO } from '@/data/semana'
 import { TabelaSemana } from './TabelaSemana'
 
 describe('TabelaSemana', () => {
@@ -43,10 +43,18 @@ describe('TabelaSemana', () => {
     expect(screen.getByText(/Descanso total/)).toBeInTheDocument()
   })
 
-  it('mostra a regra de ouro e a regra de carga', () => {
+  /**
+   * As três notas de organização da semana. A da panturrilha faltava aqui — a
+   * tela cobria três das quatro notas —, e é a que carrega a claim sobre o
+   * tendão de Aquiles. O texto entra junto com o rótulo: rótulo sozinho passa
+   * verde com a nota errada embaixo.
+   */
+  it('mostra as três regras da semana, com o texto de cada uma', () => {
     render(<TabelaSemana />)
     expect(screen.getByText('Regra de ouro')).toBeInTheDocument()
     expect(screen.getByText('A carga')).toBeInTheDocument()
+    expect(screen.getByText('Panturrilha')).toBeInTheDocument()
+    expect(screen.getByText(REGRA_DE_PANTURRILHA)).toBeInTheDocument()
   })
 
   /**
