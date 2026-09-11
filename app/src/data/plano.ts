@@ -189,12 +189,7 @@ export const PLANO: Divisao[] = [
             ],
             "unilateral": true,
             "busca": "equilíbrio unipodal propriocepção exercício",
-            "alternativos": [
-              {
-                "nome": "Apoio em superfície instável",
-                "video": "5OKF9DJcP6M"
-              }
-            ]
+            "alternativos": []
           }
         ]
       },
@@ -463,17 +458,11 @@ export const PLANO: Divisao[] = [
             ],
             "unilateral": false,
             "busca": "puxada alta frente pronada execução correta",
-            "alternativos": [
-              {
-                "nome": "Barra fixa assistida no graviton",
-                "video": "w0UVe0JAEDQ",
-                "inicio": 54
-              }
-            ]
+            "alternativos": []
           },
           {
             "id": "pa-pallof",
-            "nome": "Pallof press (ou prancha frontal)",
+            "nome": "Pallof press",
             "prescricao": "3x25-35s cada lado",
             "video": "LuePuoHEt6s",
             "recorte": {
@@ -486,13 +475,7 @@ export const PLANO: Divisao[] = [
             ],
             "unilateral": false,
             "busca": "pallof press anti rotação execução",
-            "alternativos": [
-              {
-                "nome": "Prancha frontal",
-                "video": "RTxAFDK1OMw",
-                "inicio": 39
-              }
-            ]
+            "alternativos": []
           }
         ]
       },
@@ -629,7 +612,7 @@ export const PLANO: Divisao[] = [
         "exercicios": [
           {
             "id": "eb-leg",
-            "nome": "Leg press 45° (no lugar do agachamento livre)",
+            "nome": "Leg press 45°",
             "prescricao": "4x10-15",
             "video": "waAxlYvtCcI",
             "recorte": {
@@ -643,17 +626,11 @@ export const PLANO: Divisao[] = [
             ],
             "unilateral": false,
             "busca": "leg press 45 execução correta",
-            "alternativos": [
-              {
-                "nome": "Ou agachamento búlgaro",
-                "video": "a3-bQbTdA_0",
-                "inicio": 67
-              }
-            ]
+            "alternativos": []
           },
           {
             "id": "eb-cruci",
-            "nome": "Crucifixo ou paralelas (no lugar do supino)",
+            "nome": "Crucifixo",
             "prescricao": "3-4x10-12",
             "video": "ZjIKUMtW37c",
             "recorte": {
@@ -661,17 +638,11 @@ export const PLANO: Divisao[] = [
               "fim": 46
             },
             "cues": [
-              "No crucifixo, cotovelos levemente dobrados e fixos durante todo o arco.",
-              "Nas paralelas, desça até o ombro chegar na altura do cotovelo, não mais."
+              "Cotovelos levemente dobrados e fixos durante todo o arco."
             ],
             "unilateral": false,
             "busca": "crucifixo reto com halteres execução correta",
-            "alternativos": [
-              {
-                "nome": "Mergulho nas paralelas (dips)",
-                "video": "gTuw7u2PwlM"
-              }
-            ]
+            "alternativos": []
           },
           {
             "id": "eb-deadbug",
@@ -698,7 +669,7 @@ export const PLANO: Divisao[] = [
         "exercicios": [
           {
             "id": "eb-extensora",
-            "nome": "Cadeira extensora (mantém)",
+            "nome": "Cadeira extensora",
             "prescricao": "3x10-15 cada perna",
             "video": "exLCpU7mT3g",
             "recorte": {
@@ -757,7 +728,7 @@ export const PLANO: Divisao[] = [
         "exercicios": [
           {
             "id": "eb-pelvica",
-            "nome": "Elevação pélvica unilateral (mantém)",
+            "nome": "Elevação pélvica unilateral",
             "prescricao": "3x12 cada",
             "video": "Sk-mBla2h8A",
             "recorte": {
@@ -765,7 +736,7 @@ export const PLANO: Divisao[] = [
               "fim": 250
             },
             "cues": [
-              "Também não troca. Trabalho unilateral em toda sessão de força, sem exceção."
+              "Trabalho unilateral em toda sessão de força, sem exceção."
             ],
             "unilateral": true,
             "busca": "elevação pélvica unilateral execução",
@@ -835,7 +806,7 @@ export const PLANO: Divisao[] = [
           },
           {
             "id": "pb-remada",
-            "nome": "Remada baixa (no lugar da puxada)",
+            "nome": "Remada baixa",
             "prescricao": "4x8-12",
             "video": "s_c8SikiFAU",
             "cues": [

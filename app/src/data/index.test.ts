@@ -32,6 +32,18 @@ describe('integridade do plano', () => {
     }
   })
 
+  /**
+   * O lado oposto do teste acima. Sem ele, um vídeo que sai do plano continua
+   * em `duracoes.ts` sem ninguém notar — e o `check:clips`, que lê o espelho
+   * `test/duracoes.json`, passa a bater num vídeo que o app não usa mais.
+   */
+  it('não tem duração cadastrada para vídeo que o plano não usa', () => {
+    const usados = new Set(
+      TODOS_EXERCICIOS.flatMap((e) => [e.video, ...e.alternativos.map((a) => a.video)]),
+    )
+    for (const id of Object.keys(DURACOES)) expect(usados.has(id)).toBe(true)
+  })
+
   it('todo exercício tem metadado e todo metadado tem exercício', () => {
     const ids = new Set(TODOS_EXERCICIOS.map((e) => e.id))
     for (const e of TODOS_EXERCICIOS) expect(METADADOS[e.id]).toBeDefined()
