@@ -262,6 +262,16 @@ git commit -m "feat: escolhe os tres videos que faltavam para o modelo empurrar/
 Esta tarefa é atômica: os tipos, as chaves de rota, o plano, os metadados e as
 contagens dos testes mudam juntos ou a suíte fica vermelha no meio do caminho.
 
+> **Errata, registrada durante a execução.** O objeto `AJUSTES` do script abaixo
+> cobre só parte da coluna `prescrição` do mapa de migração. Dez exercícios ficam
+> com a prescrição do modelo antigo se o script for usado como está — entre eles
+> `pa-flexora` e `pb-flexora`, que continuariam `unilateral: true` e fariam a
+> contagem dar 13 em vez de 11. **O mapa de migração é a fonte da verdade**: ao
+> usar este script, complete o `AJUSTES` com o resto da coluna `prescrição`, e
+> marque as duas flexoras como `unilateral: false`. A versão unilateral da flexora
+> só entra se o enxerto for de isquiotibiais, que é uma das perguntas em aberto da
+> spec.
+
 - [ ] **Step 1: Escrever os invariantes do novo modelo como testes que falham**
 
 Acrescentar ao fim de `app/src/data/index.test.ts`:
@@ -901,8 +911,10 @@ caso, siga para a Tarefa 3 antes de commitar.
 - [ ] **Step 12: Verificar que os vídeos continuam no ar**
 
 Run: `cd app && npm run check:clips`
-Expected: `44 de 44 vídeos no ar.` (o número total inclui os vídeos que só aparecem
-como alternativos).
+Expected: `N de N vídeos no ar.` — o que importa é que os dois números sejam iguais,
+não qual é o N. O total conta os ids de `test/duracoes.json`, que inclui os vídeos
+que só aparecem como alternativos, e por isso é maior que a contagem de vídeos
+principais.
 
 - [ ] **Step 13: Commit**
 
@@ -1441,7 +1453,43 @@ Em `docs/RELATORIO.md`, na seção "Pendências não resolvidas", acrescentar:
   escolha de cada vídeo estão em `docs/dados/videos-novos.json`.
 ```
 
-- [ ] **Step 6: Verificação final**
+- [ ] **Step 6: Travar a deriva entre `duracoes.ts` e `test/duracoes.json`**
+
+A Tarefa 2 acrescentou um teste que impede entrada órfã em `duracoes.ts`, mas nada
+garante que `test/duracoes.json` continue idêntico a ele — e essa é justamente a
+armadilha que o comentário do topo de `check-clips.mjs` já avisa em prosa. Um teste
+do Vitest não é o lugar: ele teria que ler fora de `app/`, e não há precedente disso
+no repositório. O lugar certo é o próprio `check-clips.mjs`, que já é quem lê o JSON.
+
+Acrescentar no início de `app/scripts/check-clips.mjs`, logo depois da linha que
+carrega `DURACOES`:
+
+```javascript
+// O JSON e o .ts precisam ser o mesmo dado. Se derivarem, esta verificação passa a
+// olhar para um conjunto de vídeos que o app não usa mais — falha silenciosa que já
+// aconteceu uma vez.
+const TS = fileURLToPath(new URL('../src/data/duracoes.ts', import.meta.url))
+const texto = readFileSync(TS, 'utf8')
+const doTs = JSON.parse(texto.slice(texto.indexOf('{'), texto.lastIndexOf('}') + 1))
+
+const soNoJson = Object.keys(DURACOES).filter((id) => !(id in doTs))
+const soNoTs = Object.keys(doTs).filter((id) => !(id in DURACOES))
+const divergentes = Object.keys(DURACOES).filter((id) => id in doTs && doTs[id] !== DURACOES[id])
+
+if (soNoJson.length || soNoTs.length || divergentes.length) {
+  console.log('test/duracoes.json e src/data/duracoes.ts divergiram:')
+  if (soNoJson.length) console.log(`  só no JSON: ${soNoJson.join(', ')}`)
+  if (soNoTs.length) console.log(`  só no .ts:  ${soNoTs.join(', ')}`)
+  if (divergentes.length) console.log(`  duração diferente: ${divergentes.join(', ')}`)
+  process.exit(1)
+}
+```
+
+Verificar que a guarda pega a regressão de verdade: mude a duração de um vídeo
+qualquer só em `test/duracoes.json`, rode `npm run check:clips`, confirme que ele
+sai com `duração diferente: <id>` e código 1, e desfaça a mudança.
+
+- [ ] **Step 7: Verificação final**
 
 Run: `cd app && npm test && npm run lint && npm run build && npm run check:clips`
 
@@ -1449,13 +1497,13 @@ Expected, nesta ordem:
 - Vitest: todos os arquivos PASS, nenhum teste pulado.
 - oxlint: nenhum erro.
 - `tsc -b && vite build`: build concluído, sem erro de tipo.
-- `check:clips`: `44 de 44 vídeos no ar.`
+- `check:clips`: `N de N vídeos no ar.`, com os dois números iguais.
 
 Se `check:clips` reclamar de um vídeo, ele saiu do ar depois da Tarefa 1 — escolha
 outro, atualize `plano.ts`, `duracoes.ts`, `test/duracoes.json` e
 `docs/dados/videos-novos.json`.
 
-- [ ] **Step 7: Conferir no navegador**
+- [ ] **Step 8: Conferir no navegador**
 
 Run: `cd app && npm run build && npm start`
 
@@ -1470,7 +1518,7 @@ Abrir `http://localhost:5173` e confirmar, na ordem:
 5. No `GUIA`, o card `Joelho operado` e o `O que este plano não afirma` aparecem.
 6. A tabela do ciclo mostra as 4 semanas e as três notas laterais.
 
-- [ ] **Step 8: Commit**
+- [ ] **Step 9: Commit**
 
 ```bash
 git add README.md docs/RELATORIO.md
