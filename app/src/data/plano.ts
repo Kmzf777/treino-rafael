@@ -222,7 +222,7 @@ export const PLANO: Divisao[] = [
     "blocos": [
       {
         "nome": "Agachamento · Peito · Core",
-        "sub": "4 voltas · 90 a 120s entre voltas",
+        "sub": "4 voltas · 45 a 60s entre exercícios · 90 a 120s entre voltas",
         "exercicios": [
           {
             "id": "ea-agacha",
@@ -296,7 +296,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Extensora · Ombro · Panturrilha",
-        "sub": "3 voltas · 60 a 90s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios · 60 a 90s entre voltas",
         "exercicios": [
           {
             "id": "ea-extensora",
@@ -336,7 +336,7 @@ export const PLANO: Divisao[] = [
           {
             "id": "ea-pant-uni",
             "nome": "Panturrilha em pé unilateral",
-            "prescricao": "3x8-15 cada",
+            "prescricao": "3x8-15 cada, descida de 3s",
             "video": "Xb-nuSxLVSY",
             "recorte": {
               "inicio": 114,
@@ -354,7 +354,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Pélvica · Deltoide · Tríceps",
-        "sub": "3 voltas · 45 a 60s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios e entre voltas",
         "exercicios": [
           {
             "id": "ea-pelvica-uni",
@@ -421,7 +421,7 @@ export const PLANO: Divisao[] = [
     "blocos": [
       {
         "nome": "Stiff · Puxada · Core",
-        "sub": "4 voltas · 90 a 120s entre voltas",
+        "sub": "4 voltas · 45 a 60s entre exercícios · 90 a 120s entre voltas",
         "exercicios": [
           {
             "id": "pa-stiff",
@@ -481,7 +481,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Flexora · Remada · Deltoide posterior",
-        "sub": "3 voltas · 60 a 90s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios · 60 a 90s entre voltas",
         "exercicios": [
           {
             "id": "pa-flexora",
@@ -537,7 +537,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Búlgaro · Bíceps · Lombar",
-        "sub": "3 voltas · 45 a 60s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios e entre voltas",
         "exercicios": [
           {
             "id": "pa-bulgaro",
@@ -607,7 +607,7 @@ export const PLANO: Divisao[] = [
     "blocos": [
       {
         "nome": "Leg press · Crucifixo · Core",
-        "sub": "4 voltas · 90 a 120s entre voltas",
+        "sub": "4 voltas · 45 a 60s entre exercícios · 90 a 120s entre voltas",
         "exercicios": [
           {
             "id": "eb-leg",
@@ -665,7 +665,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Extensora · Inclinado · Sóleo",
-        "sub": "3 voltas · 60 a 90s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios · 60 a 90s entre voltas",
         "exercicios": [
           {
             "id": "eb-extensora",
@@ -724,7 +724,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Pélvica · Deltoide · Paralelas",
-        "sub": "3 voltas · 45 a 60s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios e entre voltas",
         "exercicios": [
           {
             "id": "eb-pelvica",
@@ -787,7 +787,7 @@ export const PLANO: Divisao[] = [
     "blocos": [
       {
         "nome": "Pélvica bilateral · Remada baixa · Core",
-        "sub": "4 voltas · 90 a 120s entre voltas",
+        "sub": "4 voltas · 45 a 60s entre exercícios · 90 a 120s entre voltas",
         "exercicios": [
           {
             "id": "pb-pelvica",
@@ -841,7 +841,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Flexora · Barra assistida · Deltoide posterior",
-        "sub": "3 voltas · 60 a 90s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios · 60 a 90s entre voltas",
         "exercicios": [
           {
             "id": "pb-flexora",
@@ -902,7 +902,7 @@ export const PLANO: Divisao[] = [
       },
       {
         "nome": "Step-up · Bíceps · Abdutor",
-        "sub": "3 voltas · 45 a 60s entre voltas",
+        "sub": "3 voltas · 45 a 60s entre exercícios e entre voltas",
         "exercicios": [
           {
             "id": "pb-stepup",
