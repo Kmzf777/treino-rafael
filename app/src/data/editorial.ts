@@ -4,7 +4,7 @@ export type SemanaCorrida = { semana: number; sessao: string; leve: boolean }
 export const CORRIDA = {
   retomando: {
     titulo: 'Se você ainda está retomando',
-    lede: 'Três sessões por semana. Cinco minutos caminhando antes e cinco depois, sempre.',
+    lede: 'Duas sessões por semana, terça e sábado. Cinco minutos caminhando antes e cinco depois, sempre.',
     semanas: [
       { semana: 1, sessao: '6x (2 min corrida / 2 min caminhada)', leve: false },
       { semana: 2, sessao: '6x (3 min corrida / 1min30 caminhada)', leve: false },
@@ -18,7 +18,7 @@ export const CORRIDA = {
   },
   jaCorre: {
     titulo: 'Se você já corre 5 km',
-    lede: 'Duas ou três sessões por semana, sempre com um dia entre elas.',
+    lede: 'Duas sessões por semana, nunca em dias seguidos: terça leve, sábado longa ou de qualidade.',
     cards: [
       { titulo: 'Leve (base)', texto: '30 a 40 min em ritmo de conversa. É a maior parte do seu volume — e a parte que a maioria das pessoas corre rápido demais.' },
       { titulo: 'Qualidade — 1x por semana', texto: '6 a 8 tiros de 400 m em ritmo forte com 2 min de trote entre eles. Ou 20 min contínuos em ritmo confortavelmente difícil.' },
@@ -48,7 +48,7 @@ export type SecaoGuia =
 
 export const GUIA: SecaoGuia[] = [
   { tipo: 'texto', titulo: 'Antes de tudo', texto: 'Este plano assume que você já teve alta do fisioterapeuta para treino de força com carga e para corrida. Se ainda não teve, ou se está com menos de 9 meses de cirurgia, mostre isto ao seu fisio ou cirurgião antes de começar a parte de corrida.' },
-  { tipo: 'texto', titulo: 'Como o plano é organizado', texto: 'Quatro treinos numa fila contínua: empurrar A, puxar A, empurrar B, puxar B. O superior alterna — num dia só empurra (peito, ombro, tríceps), no outro só puxa (costas, bíceps, deltoide posterior). O inferior está em todas as sessões, com a ênfase acompanhando o superior: dia de empurrar puxa mais quadríceps, dia de puxar carrega mais quadril e posterior. Cada bloco junta perna, torso e um terceiro movimento que não disputa o mesmo músculo, porque dois exercícios do mesmo motor no mesmo bloco derrubam o desempenho do segundo.' },
+  { tipo: 'texto', titulo: 'Como o plano é organizado', texto: 'Quatro treinos numa fila contínua: empurrar A, puxar A, empurrar B, puxar B. O superior alterna — num dia só empurra (peito, ombro, tríceps), no outro só puxa (costas, bíceps, deltoide posterior). O inferior está em todas as sessões, com a ênfase acompanhando o superior: dia de empurrar cobra mais quadríceps, dia de puxar carrega mais quadril e posterior. Cada bloco junta perna, torso e um terceiro movimento que não disputa o mesmo músculo, porque dois exercícios do mesmo motor no mesmo bloco derrubam o desempenho do segundo.' },
   // As três perguntas vêm ANTES do joelho operado de propósito: o protocolo da
   // extensora logo abaixo é condicional a estas respostas, e é aqui que o leitor
   // descobre que, sem elas, o plano inteiro roda na configuração conservadora.

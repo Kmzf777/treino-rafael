@@ -603,7 +603,7 @@ export const PLANO: Divisao[] = [
     "chave": "empurrarB",
     "rotulo": "Empurrar B",
     "titulo": "Empurrar B — mesma lógica do A, implementos trocados",
-    "lede": "Variante do dia de empurrar: máquina e halter no lugar da barra livre, e o sóleo no lugar do gastrocnêmio. Mesma regra — nada de costas, bíceps ou antebraço.",
+    "lede": "Variante do dia de empurrar: leg press no lugar do agachamento, o peito por crucifixo, inclinado e paralelas, e o sóleo no lugar do gastrocnêmio. Mesma regra — nada de costas, bíceps ou antebraço.",
     "blocos": [
       {
         "nome": "Leg press · Crucifixo · Core",
@@ -1061,7 +1061,7 @@ export const PLANO: Divisao[] = [
     ],
     "avisoFinal": {
       "titulo": "Saltos e pliometria",
-      "texto": "Só entram se o fisio liberar e se a perna operada tiver pelo menos 90% da força e do salto unipodal da perna boa."
+      "texto": "Continuam fora do plano. Só entram com liberação do fisio e com a perna operada em pelo menos 90% da força e do salto unipodal da perna boa. Antes disso, o risco não compensa."
     }
   },
   {

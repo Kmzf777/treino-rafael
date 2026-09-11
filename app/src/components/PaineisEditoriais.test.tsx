@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
+import { buscarDivisao } from '@/data'
 import { CORRIDA, GUIA } from '@/data/editorial'
 import { PainelCorrida } from './PainelCorrida'
 import { PainelGuia } from './PainelGuia'
@@ -92,6 +93,19 @@ describe('cards do guia no modelo empurrar/puxar', () => {
 
   it('tem o card das três regras da corrida', () => {
     expect(titulos).toContain('Corrida — as três regras')
+  })
+
+  /**
+   * Este texto vive em dois lugares: aqui e no `avisoFinal` do circuito, que é
+   * nota lateral no fim de outra divisão. Um não pode importar o outro —
+   * `plano.ts` é gerado —, então o que segura as duas cópias juntas é esta
+   * asserção. Elas já divergiram uma vez: o Guia foi reescrito nesta branch e o
+   * `avisoFinal` ficou com a redação anterior.
+   */
+  it('o aviso de pliometria do circuito repete o do guia, palavra por palavra', () => {
+    const circuito = buscarDivisao('circuito')!
+    expect(circuito.avisoFinal?.titulo).toBe('Saltos e pliometria')
+    expect(circuito.avisoFinal?.texto).toBe(textoDe('Saltos e pliometria'))
   })
 
   it('tem o card de honestidade editorial', () => {
