@@ -1,5 +1,6 @@
 import { DIVISOES } from '@/data'
 import {
+  CARGAS,
   CICLO,
   DIAS_DE_FORCA,
   DIAS_FIXOS,
@@ -16,10 +17,6 @@ const DIA = 'border-b border-fio py-3 pr-3 text-left align-baseline font-mono te
 
 const ROTULOS = new Map(DIVISOES.map((d) => [d.chave, d.rotulo]))
 
-// A carga de cada posição vem do próprio ciclo, não de uma lista paralela que
-// poderia sair de sincronia com `semana.ts`.
-const CARGAS = CICLO[0].sessoes.map((s) => s.carga)
-
 export function TabelaSemana() {
   return (
     <section className="border-t border-fio pt-5">
@@ -32,7 +29,16 @@ export function TabelaSemana() {
         próximo da fila, não “o treino de segunda”. A fila fecha em quatro semanas.
       </p>
 
-      <div className="mt-3 overflow-x-auto">
+      {/* `tabIndex` porque região que rola precisa receber foco: sem ele, quem
+          navega só por teclado não consegue rolar a tabela em tela estreita
+          (WCAG 2.1.1). Com foco vem o `role`/`aria-label`, para a região ter
+          nome ao ser anunciada. */}
+      <div
+        className="mt-3 overflow-x-auto"
+        tabIndex={0}
+        role="region"
+        aria-label="Ciclo de quatro semanas"
+      >
         <table className="w-full border-collapse">
           <caption className="sr-only">Ciclo de quatro semanas de treino de força</caption>
           <thead>
@@ -54,12 +60,12 @@ export function TabelaSemana() {
                 <th scope="row" className={DIA}>
                   Semana {semana.numero}
                 </th>
-                {semana.sessoes.map((sessao) => (
+                {semana.sessoes.map((divisao) => (
                   <td
-                    key={sessao.divisao}
+                    key={divisao}
                     className="border-b border-fio py-3 pr-3 align-baseline text-[17px] leading-[1.47] text-tinta"
                   >
-                    {ROTULOS.get(sessao.divisao)}
+                    {ROTULOS.get(divisao)}
                   </td>
                 ))}
               </tr>

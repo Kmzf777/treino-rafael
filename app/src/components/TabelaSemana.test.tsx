@@ -10,11 +10,24 @@ describe('TabelaSemana', () => {
     }
   })
 
-  it('mostra os três dias de força como cabeçalho', () => {
+  it('mostra os três dias de força com a carga de cada posição', () => {
     render(<TabelaSemana />)
-    expect(screen.getByText(/Segunda/)).toBeInTheDocument()
-    expect(screen.getByText(/Quarta/)).toBeInTheDocument()
-    expect(screen.getByText(/Sexta/)).toBeInTheDocument()
+    for (const [dia, carga] of [
+      ['Segunda', 'pesada'],
+      ['Quarta', 'moderada'],
+      ['Sexta', 'leve'],
+    ]) {
+      expect(
+        screen.getByRole('columnheader', { name: new RegExp(`^${dia}\\s*\\(${carga}\\)$`) }),
+      ).toBeInTheDocument()
+    }
+  })
+
+  it('deixa a região rolável da tabela alcançável por teclado', () => {
+    render(<TabelaSemana />)
+    const regiao = screen.getByRole('region', { name: 'Ciclo de quatro semanas' })
+    expect(regiao).toHaveClass('overflow-x-auto')
+    expect(regiao).toHaveAttribute('tabindex', '0')
   })
 
   it('mostra o rótulo de cada treino nas células', () => {

@@ -417,7 +417,7 @@ export const PLANO: Divisao[] = [
     "chave": "puxarA",
     "rotulo": "Puxar A",
     "titulo": "Puxar A — costas, bíceps e perna que puxa pelo quadril",
-    "lede": "Nenhum exercício de peito, ombro anterior ou tríceps entra aqui. A panturrilha também não: ela treina nos dias de empurrar, para o tendão de Aquiles não levar carga em dias seguidos.",
+    "lede": "Nenhum exercício de peito, ombro anterior ou tríceps entra aqui.",
     "blocos": [
       {
         "nome": "Stiff · Puxada · Core",

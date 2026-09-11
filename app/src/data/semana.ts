@@ -1,11 +1,16 @@
 import type { ChaveDivisao } from './tipos'
 
-export type Carga = 'pesada' | 'moderada' | 'leve'
-export type Sessao = { divisao: ChaveDivisao; carga: Carga }
-export type SemanaDoCiclo = { numero: number; sessoes: Sessao[] }
+export type SemanaDoCiclo = { numero: number; sessoes: ChaveDivisao[] }
 export type LinhaSemana = { dia: string; sessao: string; descanso: boolean }
 
+/**
+ * A carga é propriedade da posição na semana, não do treino: a i-ésima sessão
+ * de qualquer semana cai em `DIAS_DE_FORCA[i]` e é `CARGAS[i]`. Por isso a
+ * carga não aparece no ciclo — repeti-la nas doze sessões seria o mesmo fato
+ * escrito quatro vezes, livre para divergir.
+ */
 export const DIAS_DE_FORCA = ['Segunda', 'Quarta', 'Sexta'] as const
+export const CARGAS = ['pesada', 'moderada', 'leve'] as const
 
 /**
  * Os quatro treinos rodam numa fila que não reinicia no domingo: o treino de
@@ -14,38 +19,10 @@ export const DIAS_DE_FORCA = ['Segunda', 'Quarta', 'Sexta'] as const
  * três vezes, empurrar e puxar seis vezes cada.
  */
 export const CICLO: SemanaDoCiclo[] = [
-  {
-    numero: 1,
-    sessoes: [
-      { divisao: 'empurrarA', carga: 'pesada' },
-      { divisao: 'puxarA', carga: 'moderada' },
-      { divisao: 'empurrarB', carga: 'leve' },
-    ],
-  },
-  {
-    numero: 2,
-    sessoes: [
-      { divisao: 'puxarB', carga: 'pesada' },
-      { divisao: 'empurrarA', carga: 'moderada' },
-      { divisao: 'puxarA', carga: 'leve' },
-    ],
-  },
-  {
-    numero: 3,
-    sessoes: [
-      { divisao: 'empurrarB', carga: 'pesada' },
-      { divisao: 'puxarB', carga: 'moderada' },
-      { divisao: 'empurrarA', carga: 'leve' },
-    ],
-  },
-  {
-    numero: 4,
-    sessoes: [
-      { divisao: 'puxarA', carga: 'pesada' },
-      { divisao: 'empurrarB', carga: 'moderada' },
-      { divisao: 'puxarB', carga: 'leve' },
-    ],
-  },
+  { numero: 1, sessoes: ['empurrarA', 'puxarA', 'empurrarB'] },
+  { numero: 2, sessoes: ['puxarB', 'empurrarA', 'puxarA'] },
+  { numero: 3, sessoes: ['empurrarB', 'puxarB', 'empurrarA'] },
+  { numero: 4, sessoes: ['puxarA', 'empurrarB', 'puxarB'] },
 ]
 
 /** Os dias que não são de força são iguais em todas as semanas do ciclo. */
@@ -60,7 +37,7 @@ export const REGRA_DE_OURO =
   'Nunca coloque corrida intervalada forte no dia seguinte à sessão pesada. Se precisar juntar força e corrida no mesmo dia, faça força primeiro e deixe pelo menos 3 horas entre as duas — colar as duas custa força explosiva, e separar por 3 horas elimina o efeito.'
 
 export const REGRA_DE_CARGA =
-  'A carga mora no dia da semana, não no treino. A primeira sessão da semana é a pesada: topo da carga, base da faixa de repetições, no exercício de perna que abre o Bloco 1. A segunda é moderada. A terceira é leve, com 2 a 3 repetições na reserva. Só uma sessão pesada por semana — é ela que sustenta a corrida.'
+  'A carga mora no dia da semana, não no treino. A primeira sessão da semana é a pesada: topo da carga, base da faixa de repetições, no exercício de perna que abre a sessão. A segunda é moderada. A terceira é leve, com 2 a 3 repetições na reserva. Só uma sessão pesada por semana — é ela que sustenta a corrida.'
 
 export const REGRA_DE_PANTURRILHA =
-  'Panturrilha com carga só nos dias de empurrar. Nos dias de puxar ela não aparece: o tendão de Aquiles já recebe carga nas corridas, e a síntese de colágeno só fica positiva entre 36 e 72 horas depois do estímulo.'
+  'Panturrilha com carga só nos dias de empurrar. Nos dias de puxar ela não aparece: o tendão de Aquiles já leva carga nas corridas, e carregar em dias seguidos desgasta o tendão em vez de fortalecer. Como empurrar e puxar se alternam, sobram sempre pelo menos 48 horas entre uma sessão de panturrilha e a outra.'
