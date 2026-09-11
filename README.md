@@ -45,7 +45,7 @@ npm run build && npm start   # http://localhost:5173
 
 | | |
 |---|---|
-| `npm test` | 181 testes (Vitest) |
+| `npm test` | 185 testes (Vitest) |
 | `npm run lint` | oxlint |
 | `npm run check:clips` | confere `test/duracoes.json` contra `src/data/duracoes.ts` e verifica se algum vídeo saiu do ar |
 
