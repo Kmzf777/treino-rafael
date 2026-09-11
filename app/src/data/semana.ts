@@ -41,3 +41,13 @@ export const REGRA_DE_CARGA =
 
 export const REGRA_DE_PANTURRILHA =
   'Panturrilha com carga só nos dias de empurrar. Nos dias de puxar ela não aparece: o tendão de Aquiles já leva carga nas corridas, e carregar em dias seguidos desgasta o tendão em vez de fortalecer. Como empurrar e puxar se alternam, sobram sempre pelo menos 48 horas entre uma sessão de panturrilha e a outra.'
+
+/**
+ * O freio-mestre. Mora aqui, e não nos dados de cada divisão, porque a nota
+ * lateral é uma só e `TabelaSemana` aparece em toda divisão de força: quatro
+ * cópias no `plano.ts` seriam quatro textos livres para divergir. O card de
+ * alerta do Guia abre pelo mesmo sinal — lá ele encabeça a lista completa de
+ * sinais, aqui ele é a regra isolada que segue o leitor para dentro do treino.
+ */
+export const REGRA_DO_FREIO =
+  'Inchaço no joelho na manhã seguinte — qualquer onda ao deslizar a mão — corta 30 a 50% do volume de perna na sessão seguinte. Esse corte vale mais que qualquer regra de frequência deste plano: quando o joelho e o calendário discordam, quem cede é o calendário.'

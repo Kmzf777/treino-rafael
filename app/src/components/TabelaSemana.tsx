@@ -7,6 +7,7 @@ import {
   REGRA_DE_CARGA,
   REGRA_DE_OURO,
   REGRA_DE_PANTURRILHA,
+  REGRA_DO_FREIO,
 } from '@/data/semana'
 import { NotaLateral } from './SecaoEditorial'
 
@@ -97,6 +98,11 @@ export function TabelaSemana() {
       <NotaLateral rotulo="Regra de ouro" texto={REGRA_DE_OURO} />
       <NotaLateral rotulo="A carga" texto={REGRA_DE_CARGA} />
       <NotaLateral rotulo="Panturrilha" texto={REGRA_DE_PANTURRILHA} />
+      {/* `aviso` porque é o único item desta tela que é risco articular, e não
+          organização de semana: o freio-mestre precisa vencer as três regras
+          acima quando discordarem. Como `TabelaSemana` abre toda divisão de
+          força, esta é a única cópia que cobre as quatro. */}
+      <NotaLateral rotulo="O freio" texto={REGRA_DO_FREIO} aviso />
     </section>
   )
 }

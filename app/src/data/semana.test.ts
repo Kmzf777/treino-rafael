@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { CARGAS, CICLO, DIAS_DE_FORCA, REGRA_DE_OURO, REGRA_DE_CARGA } from './semana'
+import {
+  CARGAS,
+  CICLO,
+  DIAS_DE_FORCA,
+  REGRA_DE_OURO,
+  REGRA_DE_CARGA,
+  REGRA_DO_FREIO,
+} from './semana'
 import { buscarDivisao } from './index'
 
 describe('ciclo de 4 semanas', () => {
@@ -75,5 +82,16 @@ describe('ciclo de 4 semanas', () => {
   it('a regra de ouro e a regra de carga existem e não estão vazias', () => {
     expect(REGRA_DE_OURO.length).toBeGreaterThan(40)
     expect(REGRA_DE_CARGA.length).toBeGreaterThan(40)
+  })
+
+  /**
+   * Comprimento não basta aqui: esta nota é o freio-mestre, e o que vale nela
+   * são o gatilho (o inchaço), o número (30 a 50%) e a precedência sobre as
+   * outras regras desta mesma tela. Sem os três ela vira conselho genérico.
+   */
+  it('a nota do freio traz o gatilho, o corte e a precedência', () => {
+    expect(REGRA_DO_FREIO).toMatch(/inchaço/i)
+    expect(REGRA_DO_FREIO).toMatch(/30 a 50/)
+    expect(REGRA_DO_FREIO).toMatch(/vale mais que qualquer regra de frequência/i)
   })
 })

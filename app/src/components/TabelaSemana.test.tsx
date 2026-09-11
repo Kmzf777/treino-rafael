@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
+import { REGRA_DO_FREIO } from '@/data/semana'
 import { TabelaSemana } from './TabelaSemana'
 
 describe('TabelaSemana', () => {
@@ -46,5 +47,21 @@ describe('TabelaSemana', () => {
     render(<TabelaSemana />)
     expect(screen.getByText('Regra de ouro')).toBeInTheDocument()
     expect(screen.getByText('A carga')).toBeInTheDocument()
+  })
+
+  /**
+   * A spec pede o freio-mestre nas divisões de força. `TabelaSemana` é o que
+   * toda divisão de força renderiza (o `App` a monta para tudo que não é
+   * aquecimento nem painel editorial), então é aqui que a cobertura mora: uma
+   * nota só, quatro divisões. Se esta nota sair daqui, o aviso some das quatro
+   * de uma vez.
+   */
+  it('leva o freio-mestre para dentro de toda divisão de força', () => {
+    render(<TabelaSemana />)
+    const rotulo = screen.getByText('O freio')
+
+    expect(rotulo).toHaveClass('text-tijolo')
+    expect(rotulo.closest('aside')).toHaveClass('border-tijolo')
+    expect(screen.getByText(REGRA_DO_FREIO)).toBeInTheDocument()
   })
 })
