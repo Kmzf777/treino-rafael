@@ -2,6 +2,14 @@
 
 Data: 2026-09-08 · App: `treino-rafael.html` · Backup: `treino-rafael.ORIGINAL.bak`
 
+> **Registro histórico, congelado em 2026-09-08.** Daqui até o fim, o documento
+> descreve o app daquela data — a página HTML única, as divisões Força A / B / A',
+> 47 exercícios — e nada dele foi reescrito quando o plano virou os quatro treinos
+> empurrar/puxar. O que continua valendo é o método: estes recortes, auditados quadro
+> a quadro, são os que o app React usa hoje. A única parte viva é a nota de 2026-09-10
+> em [Pendências não resolvidas](#pendências-não-resolvidas), sobre os 3 vídeos novos
+> que entraram sem recorte. Para o estado atual, veja o `README.md` da raiz.
+
 ## Resultado
 
 | | |

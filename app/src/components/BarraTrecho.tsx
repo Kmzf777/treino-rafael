@@ -5,11 +5,11 @@ import { mmss } from '@/lib/formato'
  *
  * Uma régua fina que representa a duração INTEIRA do vídeo original, com a
  * janela curada acesa em --carimbo. Em uma linha, sem texto, ela mostra o
- * produto: 139 minutos de vídeo bruto reduzidos a 11 minutos úteis.
+ * produto: 137:39 de vídeo bruto reduzidos a 12:50 úteis.
  *
- * Renderiza instantaneamente — a duração real dos 47 vídeos já está em
- * src/data/duracoes.ts, então nada aqui depende de getDuration() nem espera
- * player algum.
+ * Renderiza instantaneamente — a duração real dos 49 vídeos (os 44 do plano e os
+ * alternativos) já está em src/data/duracoes.ts, então nada aqui depende de
+ * getDuration() nem espera player algum.
  */
 
 type Props = {
