@@ -308,9 +308,9 @@ export const PLANO: Divisao[] = [
               "fim": 52
             },
             "cues": [
-              "Unilateral sempre: a máquina bilateral esconde a diferença entre as pernas, e simetria é o seu critério de segurança.",
-              "Menos de 9 meses de cirurgia: trabalhe de 90 a 45 graus. Mais de 9 meses: amplitude completa, mas a faixa final é de progressão, não de teste de força.",
-              "Suba carga ou amplitude terminal — nunca as duas na mesma semana."
+              "Encaixe o joelho no eixo da máquina e mantenha o quadril colado no banco.",
+              "Unilateral sempre: a máquina bilateral esconde a diferença entre as pernas.",
+              "Menos de 9 meses de cirurgia: 90 a 45 graus. Mais de 9: amplitude completa, mas a faixa final nunca vai à falha."
             ],
             "unilateral": true,
             "busca": "cadeira extensora execução correta",
@@ -397,14 +397,14 @@ export const PLANO: Divisao[] = [
             "video": "1u18yJELsh0",
             "cues": [
               "De costas para a polia, corda acima da cabeça, cotovelos apontando para frente e parados.",
-              "Só o antebraço se move. O cotovelo alto é o que coloca a cabeça longa do tríceps em alongamento.",
-              "Braço acima da cabeça rende cerca de 1,4x mais hipertrofia de tríceps que a posição neutra."
+              "Só o antebraço se move. Cotovelo que abre para os lados tira a carga da cabeça longa.",
+              "Estenda por inteiro no topo, sem arquear a lombar para ajudar."
             ],
             "unilateral": false,
             "busca": "tríceps na polia acima da cabeça execução cabeça longa",
             "alternativos": [
               {
-                "nome": "Tríceps na polia com corda",
+                "nome": "Tríceps na polia com o braço à frente do corpo",
                 "video": "7le1JRUUagM"
               }
             ]
@@ -520,8 +520,8 @@ export const PLANO: Divisao[] = [
             "video": "5YK4bgzXDp0",
             "cues": [
               "Peito apoiado, braços quase estendidos na altura dos ombros, abra até a linha do tronco.",
-              "Puxe com o cotovelo, não com a mão. Se o trapézio superior subir até a orelha, a carga está alta demais.",
-              "Este é o exercício que faltava no dia de puxar: deltoide posterior a ~90% da contração máxima, contra ~58% na puxada."
+              "Puxe com o cotovelo, não com a mão.",
+              "Ombros longe das orelhas. Se o trapézio sobe, a carga está alta demais."
             ],
             "unilateral": false,
             "busca": "crucifixo inverso máquina peck deck invertido execução",
@@ -567,8 +567,7 @@ export const PLANO: Divisao[] = [
             },
             "cues": [
               "Cotovelo parado ao lado do tronco. Se ele vai para frente, o ombro entrou na jogada.",
-              "Desça controlado até estender o cotovelo por inteiro.",
-              "A supersérie com tríceps saiu: tríceps agora treina no dia de empurrar, onde pertence."
+              "Desça controlado até estender o cotovelo por inteiro."
             ],
             "unilateral": false,
             "busca": "rosca direta com halteres execução correta",
@@ -639,7 +638,7 @@ export const PLANO: Divisao[] = [
             },
             "cues": [
               "Cotovelos levemente dobrados e fixos durante todo o arco.",
-              "Abra até sentir o peito alongar, sem passar da linha do tronco. Além disso quem paga a conta é a cápsula do ombro, e o peitoral não ganha nada com os últimos graus."
+              "Abra até o peito alongar, não além da linha do tronco. Passar disso castiga o ombro sem dar nada ao peitoral."
             ],
             "unilateral": false,
             "busca": "crucifixo reto com halteres execução correta",
@@ -647,7 +646,7 @@ export const PLANO: Divisao[] = [
           },
           {
             "id": "eb-deadbug",
-            "nome": "Dead bug (ou abdominal à escolha)",
+            "nome": "Dead bug",
             "prescricao": "3x10-12",
             "video": "0loS0bRNqfs",
             "recorte": {
@@ -678,9 +677,9 @@ export const PLANO: Divisao[] = [
               "fim": 52
             },
             "cues": [
-              "Mesma regra do dia de empurrar A: unilateral, e a faixa final da extensão nunca vai à falha.",
-              "Se doer na frente do joelho, reduza a amplitude terminal antes de reduzir a carga.",
-              "Aqui a sessão é a leve da semana: pare com 2 a 3 repetições na reserva."
+              "Encaixe o joelho no eixo da máquina e mantenha o quadril colado no banco.",
+              "Unilateral. A faixa final da extensão nunca vai à falha.",
+              "Se doer na frente do joelho, reduza a amplitude terminal antes de reduzir a carga."
             ],
             "unilateral": true,
             "busca": "cadeira extensora execução correta",
@@ -886,8 +885,8 @@ export const PLANO: Divisao[] = [
             "video": "5YK4bgzXDp0",
             "cues": [
               "Peito apoiado, braços quase estendidos na altura dos ombros, abra até a linha do tronco.",
-              "Puxe com o cotovelo, não com a mão. Se o trapézio superior subir até a orelha, a carga está alta demais.",
-              "Este é o exercício que faltava no dia de puxar: deltoide posterior a ~90% da contração máxima, contra ~58% na puxada."
+              "Puxe com o cotovelo, não com a mão.",
+              "Ombros longe das orelhas. Se o trapézio sobe, a carga está alta demais."
             ],
             "unilateral": false,
             "busca": "crucifixo inverso máquina peck deck invertido execução",
@@ -932,9 +931,8 @@ export const PLANO: Divisao[] = [
               "fim": 55
             },
             "cues": [
-              "Mesma execução do dia de puxar A, aqui como fechamento leve da semana.",
-              "Cotovelo parado, descida controlada.",
-              "Se a pegada falhar antes do bíceps na remada e na barra, resolva com pegada mista ou straps."
+              "Cotovelo parado ao lado do tronco. Se ele vai para frente, o ombro entrou na jogada.",
+              "Desça até estender o cotovelo por inteiro. Meia repetição na descida é meia repetição."
             ],
             "unilateral": false,
             "busca": "rosca direta com halteres execução correta",

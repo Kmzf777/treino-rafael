@@ -325,7 +325,7 @@ export const METADADOS: Record<string, Metadados> = {
     "musculosSecundarios": [],
     "equipamento": "Máquina",
     "padraoMovimento": "Isolado",
-    "porQue": "Repete na sexta o estímulo direto que a perna operada não pode perder."
+    "porQue": "Repete o estímulo direto de quadríceps que a perna operada não pode perder."
   },
   "eb-inclinado": {
     "musculoPrimario": "Peitoral maior",
@@ -335,7 +335,7 @@ export const METADADOS: Record<string, Metadados> = {
     ],
     "equipamento": "Barra",
     "padraoMovimento": "Empurrar horizontal",
-    "porQue": "Variante de ângulo do empurrar do dia A, com mais porção clavicular do peitoral."
+    "porQue": "Variante de ângulo do supino, com mais porção clavicular do peitoral."
   },
   "eb-pant-sent": {
     "musculoPrimario": "Panturrilha (sóleo)",
@@ -401,7 +401,7 @@ export const METADADOS: Record<string, Metadados> = {
     ],
     "equipamento": "Peso do corpo",
     "padraoMovimento": "Core anti-extensão",
-    "porQue": "Core anti-extensão do dia de puxar B, sem competir com a dobradiça de quadril do Bloco 1."
+    "porQue": "Core anti-extensão que não disputa músculo com a elevação pélvica ao lado."
   },
   "pb-flexora": {
     "musculoPrimario": "Isquiotibiais",
@@ -420,7 +420,7 @@ export const METADADOS: Record<string, Metadados> = {
     ],
     "equipamento": "Máquina",
     "padraoMovimento": "Puxar vertical",
-    "porQue": "Variante de puxar vertical do dia de puxar A, com a pegada e o padrão da barra fixa."
+    "porQue": "Variante de puxar vertical, com a pegada e o padrão da barra fixa."
   },
   "pb-deltpost": {
     "musculoPrimario": "Deltoide posterior",

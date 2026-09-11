@@ -114,15 +114,26 @@ describe('buscarExercicio', () => {
   })
 })
 
-const TORSO_PUXAR = [
-  'Dorsal (latíssimo)',
-  'Bíceps',
-  'Trapézio médio',
-  'Deltoide posterior',
-  'Antebraço',
-]
+/**
+ * As duas variantes soletradas uma vez só. O arquivo usava `startsWith` aqui e
+ * a lista completa ali para o mesmo problema; agora há uma grafia só.
+ */
+const PANTURRILHA = ['Panturrilha (gastrocnêmio)', 'Panturrilha (sóleo)']
 
-const TORSO_EMPURRAR = ['Peitoral maior', 'Deltoide anterior', 'Deltoide lateral', 'Tríceps']
+/**
+ * A classificação muscular do modelo. Cada string foi levantada do vocabulário
+ * que `metadados.ts` de fato usa como `musculoPrimario` nos quatro dias de
+ * força — não escrita à mão a partir da spec. É o que o teste de classificação
+ * abaixo garante: string que não é primário de ninguém é entrada morta, e foi
+ * entrada morta ('Trapézio médio', 'Antebraço', 'Adutores', que só existem como
+ * secundários) que deixou a versão anterior destes testes verde por acidente.
+ */
+const CLASSES_MUSCULARES: Record<string, string[]> = {
+  puxar: ['Dorsal (latíssimo)', 'Bíceps', 'Deltoide posterior'],
+  empurrar: ['Peitoral maior', 'Deltoide anterior', 'Deltoide lateral', 'Tríceps'],
+  perna: ['Quadríceps', 'Isquiotibiais', 'Glúteo máximo', 'Glúteo médio', ...PANTURRILHA],
+  neutro: ['Abdômen (reto abdominal)', 'Oblíquos', 'Eretores da espinha'],
+}
 
 const DIAS_EMPURRAR = ['empurrarA', 'empurrarB']
 const DIAS_PUXAR = ['puxarA', 'puxarB']
@@ -133,14 +144,40 @@ function exerciciosDe(chave: string) {
 }
 
 describe('modelo empurrar/puxar', () => {
-  it('existe um dia para cada ponto da fila', () => {
-    for (const chave of DIAS_FORCA) expect(buscarDivisao(chave)).toBeDefined()
+  /**
+   * O guarda que dá sentido aos dois testes de pureza abaixo. Eles são
+   * asserções negativas sobre uma `string` livre: sozinhos, ficariam verdes
+   * para sempre se alguém renomeasse 'Dorsal (latíssimo)' em `metadados.ts`, e
+   * um dorsal poderia migrar para um dia de empurrar sem ninguém notar. Este
+   * teste é o que transforma "não está na lista errada" em "está em exatamente
+   * uma lista conhecida".
+   */
+  it('todo músculo primário dos dias de força está classificado em exatamente uma classe', () => {
+    for (const chave of DIAS_FORCA) {
+      for (const e of exerciciosDe(chave)) {
+        const classes = Object.entries(CLASSES_MUSCULARES)
+          .filter(([, musculos]) => musculos.includes(e.meta.musculoPrimario))
+          .map(([nome]) => nome)
+        expect(classes, `${e.id}: músculo primário "${e.meta.musculoPrimario}"`).toHaveLength(1)
+      }
+    }
+  })
+
+  it('nenhuma classe muscular tem entrada que não é primário de ninguém', () => {
+    const primarios = new Set(
+      DIAS_FORCA.flatMap((chave) => exerciciosDe(chave).map((e) => e.meta.musculoPrimario)),
+    )
+    for (const [classe, musculos] of Object.entries(CLASSES_MUSCULARES)) {
+      for (const musculo of musculos) {
+        expect(primarios.has(musculo), `${classe}: "${musculo}" não é primário de nenhum exercício`).toBe(true)
+      }
+    }
   })
 
   it('nenhum dia de empurrar contém músculo de puxar como primário', () => {
     for (const chave of DIAS_EMPURRAR) {
       for (const e of exerciciosDe(chave)) {
-        expect(TORSO_PUXAR).not.toContain(e.meta.musculoPrimario)
+        expect(CLASSES_MUSCULARES.puxar).not.toContain(e.meta.musculoPrimario)
       }
     }
   })
@@ -148,26 +185,17 @@ describe('modelo empurrar/puxar', () => {
   it('nenhum dia de puxar contém músculo de empurrar como primário', () => {
     for (const chave of DIAS_PUXAR) {
       for (const e of exerciciosDe(chave)) {
-        expect(TORSO_EMPURRAR).not.toContain(e.meta.musculoPrimario)
+        expect(CLASSES_MUSCULARES.empurrar).not.toContain(e.meta.musculoPrimario)
       }
     }
   })
 
   it('toda sessão de força tem pelo menos 3 exercícios de perna — inferior em toda sessão', () => {
-    const MUSCULOS_PERNA = [
-      'Quadríceps',
-      'Isquiotibiais',
-      'Glúteo máximo',
-      'Glúteo médio',
-      'Panturrilha (gastrocnêmio)',
-      'Panturrilha (sóleo)',
-      'Adutores',
-    ]
     for (const chave of DIAS_FORCA) {
       const perna = exerciciosDe(chave).filter((e) =>
-        MUSCULOS_PERNA.includes(e.meta.musculoPrimario),
+        CLASSES_MUSCULARES.perna.includes(e.meta.musculoPrimario),
       )
-      expect(perna.length).toBeGreaterThanOrEqual(3)
+      expect(perna.length, chave).toBeGreaterThanOrEqual(3)
     }
   })
 
@@ -188,13 +216,10 @@ describe('modelo empurrar/puxar', () => {
   })
 
   it('panturrilha carregada só nos dias de empurrar — P8 da spec', () => {
-    const ehPanturrilha = (m: string) => m.startsWith('Panturrilha')
-    for (const chave of DIAS_PUXAR) {
-      expect(exerciciosDe(chave).some((e) => ehPanturrilha(e.meta.musculoPrimario))).toBe(false)
-    }
-    for (const chave of DIAS_EMPURRAR) {
-      expect(exerciciosDe(chave).some((e) => ehPanturrilha(e.meta.musculoPrimario))).toBe(true)
-    }
+    const temPanturrilha = (chave: string) =>
+      exerciciosDe(chave).some((e) => PANTURRILHA.includes(e.meta.musculoPrimario))
+    for (const chave of DIAS_PUXAR) expect(temPanturrilha(chave), chave).toBe(false)
+    for (const chave of DIAS_EMPURRAR) expect(temPanturrilha(chave), chave).toBe(true)
   })
 
   it('todo dia de força tem exatamente 3 blocos de 3 exercícios', () => {
