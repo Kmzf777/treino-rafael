@@ -11,18 +11,28 @@ sem contador de progresso.** É um documento que se consulta.
 
 ## O ativo
 
-O plano qualquer um escreve. O que não se refaz numa tarde são os **37 recortes de vídeo
-auditados à mão**, cada um apontando para o segundo em que a execução correta aparece.
+O plano qualquer um escreve. O que não se refaz numa tarde são os **40 recortes de
+vídeo**, cada um apontando para o segundo em que a execução correta aparece: 37
+auditados à mão, quadro a quadro, e 3 herdados de alternativos que passaram pela mesma
+auditoria quando viraram exercício próprio.
 
 | | |
 |---|---|
-| Exercícios | 47 |
-| Com recorte (`início`+`fim`) | 37 |
-| Sem recorte (só link) | 10 |
-| Vídeos únicos | 39 |
-| Vídeo bruto | 139:45 |
-| Vídeo útil depois do recorte | **11:51** |
-| Redução | **91,5%** |
+| Exercícios | 53 |
+| Com recorte (`início`+`fim`) | 40 |
+| Sem recorte (só link) | 13 |
+| Vídeos únicos | 44 |
+| Vídeo bruto | 137:39 |
+| Vídeo útil depois do recorte | **12:50** |
+| Redução | **90,7%** |
+
+## O plano
+
+Quatro treinos numa fila contínua — **Empurrar A, Puxar A, Empurrar B, Puxar B** —
+com trabalho de perna em todas as sessões. O superior alterna: num dia só empurra,
+no outro só puxa. Cada bloco junta perna, torso e um terceiro movimento que não
+disputa o mesmo músculo. O desenho e a evidência que o sustenta estão em
+[`docs/specs/2026-09-10-blocos-empurrar-puxar-design.md`](docs/specs/2026-09-10-blocos-empurrar-puxar-design.md).
 
 ## Rodar
 
@@ -35,9 +45,9 @@ npm run build && npm start   # http://localhost:5173
 
 | | |
 |---|---|
-| `npm test` | 147 testes (Vitest) |
+| `npm test` | 190 testes (Vitest) |
 | `npm run lint` | oxlint |
-| `npm run check:clips` | verifica se algum vídeo saiu do ar |
+| `npm run check:clips` | confere `test/duracoes.json` contra `src/data/duracoes.ts` e verifica se algum vídeo saiu do ar |
 
 ## Precisa ser servido por HTTP
 
@@ -75,10 +85,11 @@ app/                      o app (Vite + React 19 + TypeScript)
   server/index.js         servidor estático, zero dependências
 docs/specs/               design aprovado
 docs/plans/               planos de implementação
+docs/pesquisa/            dossiê de evidência que sustenta o desenho do treino
 docs/dados/               timestamps, auditoria, metadados dos exercícios
 docs/RELATORIO.md         como cada recorte foi decidido
 docs/original-antes-do-recorte.html   o app original, antes do trabalho de recorte
-test/duracoes.json        duração real dos 47 vídeos
+test/duracoes.json        duração real dos 49 vídeos (os 44 do plano e os alternativos)
 vercel.json               configuração de deploy
 ```
 
@@ -110,10 +121,14 @@ Detalhes em [`docs/specs/2026-09-09-remodelagem-react-design.md`](docs/specs/202
 
 ## Histórico
 
-O app nasceu como uma página HTML única, sem build. Essa versão foi aposentada em
-2026-09-09 e vive no histórico do git (`254b621` e anteriores). O trabalho de recorte dos
-vídeos, feito sobre ela, está descrito em [`docs/RELATORIO.md`](docs/RELATORIO.md) — e os
-dados que ele produziu são os mesmos que o app React usa hoje.
+O app nasceu como uma página HTML única, sem build. O app React a substituiu em
+2026-09-09 e ela saiu do repositório em 2026-09-10 (`1041fe1`); a última versão dela
+está em `254b621`. O trabalho de recorte dos vídeos, feito sobre ela, está descrito em
+[`docs/RELATORIO.md`](docs/RELATORIO.md) — e os recortes que ele produziu são a base do
+que o app React usa hoje.
+
+Em 2026-09-10 o plano trocou as três divisões de força que misturavam padrões opostos
+pelos quatro treinos empurrar/puxar descritos acima.
 
 ## Aviso
 

@@ -1,42 +1,75 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
+import { REGRA_DE_PANTURRILHA, REGRA_DO_FREIO } from '@/data/semana'
 import { TabelaSemana } from './TabelaSemana'
 
-// A preferência persiste em localStorage e o jsdom é o mesmo para o arquivo
-// inteiro: sem limpar, o teste do modo "3 dias" contaminaria os seguintes.
-beforeEach(() => {
-  localStorage.clear()
-})
-
 describe('TabelaSemana', () => {
-  it('mostra os 7 dias', () => {
+  it('mostra as quatro semanas do ciclo', () => {
     render(<TabelaSemana />)
-    expect(screen.getAllByRole('row')).toHaveLength(8) // cabeçalho + 7
+    for (const n of [1, 2, 3, 4]) {
+      expect(screen.getByText(`Semana ${n}`)).toBeInTheDocument()
+    }
   })
 
-  it('troca de 4 para 3 dias', async () => {
-    const usuario = userEvent.setup()
+  it('mostra os três dias de força com a carga de cada posição', () => {
     render(<TabelaSemana />)
-    expect(screen.getByText(/Força A \+ corrida leve/)).toBeInTheDocument()
-    await usuario.click(screen.getByRole('button', { name: '3 dias' }))
-    expect(screen.queryByText(/Força A \+ corrida leve/)).not.toBeInTheDocument()
-    expect(screen.getAllByText('Força A').length).toBe(2)
+    for (const [dia, carga] of [
+      ['Segunda', 'pesada'],
+      ['Quarta', 'moderada'],
+      ['Sexta', 'leve'],
+    ]) {
+      expect(
+        screen.getByRole('columnheader', { name: new RegExp(`^${dia}\\s*\\(${carga}\\)$`) }),
+      ).toBeInTheDocument()
+    }
   })
 
-  it('mostra a regra de ouro', () => {
+  it('deixa a região rolável da tabela alcançável por teclado', () => {
     render(<TabelaSemana />)
-    expect(screen.getByText(/nunca coloque corrida intervalada forte/i)).toBeInTheDocument()
+    const regiao = screen.getByRole('region', { name: 'Ciclo de quatro semanas' })
+    expect(regiao).toHaveClass('overflow-x-auto')
+    expect(regiao).toHaveAttribute('tabindex', '0')
   })
 
-  it('guarda o modo escolhido em localStorage e volta nele', async () => {
-    const usuario = userEvent.setup()
-    const { unmount } = render(<TabelaSemana />)
-    await usuario.click(screen.getByRole('button', { name: '3 dias' }))
-    expect(localStorage.getItem('treino.modo')).toBe('3')
-
-    unmount()
+  it('mostra o rótulo de cada treino nas células', () => {
     render(<TabelaSemana />)
-    expect(screen.getByRole('button', { name: '3 dias' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getAllByText('Empurrar A')).toHaveLength(3)
+    expect(screen.getAllByText('Puxar B')).toHaveLength(3)
+  })
+
+  it('mostra os dias fixos da semana', () => {
+    render(<TabelaSemana />)
+    expect(screen.getByText(/Descanso ativo/)).toBeInTheDocument()
+    expect(screen.getByText(/Descanso total/)).toBeInTheDocument()
+  })
+
+  /**
+   * As três notas de organização da semana. A da panturrilha faltava aqui — a
+   * tela cobria três das quatro notas —, e é a que carrega a claim sobre o
+   * tendão de Aquiles. O texto entra junto com o rótulo: rótulo sozinho passa
+   * verde com a nota errada embaixo.
+   */
+  it('mostra as três regras da semana, com o texto de cada uma', () => {
+    render(<TabelaSemana />)
+    expect(screen.getByText('Regra de ouro')).toBeInTheDocument()
+    expect(screen.getByText('A carga')).toBeInTheDocument()
+    expect(screen.getByText('Panturrilha')).toBeInTheDocument()
+    expect(screen.getByText(REGRA_DE_PANTURRILHA)).toBeInTheDocument()
+  })
+
+  /**
+   * A spec pede o freio-mestre nas divisões de força. `TabelaSemana` é o que
+   * toda divisão de força renderiza (o `App` a monta para tudo que não é
+   * aquecimento nem painel editorial), então é aqui que a cobertura mora: uma
+   * nota só, quatro divisões. Se esta nota sair daqui, o aviso some das quatro
+   * de uma vez.
+   */
+  it('leva o freio-mestre para dentro de toda divisão de força', () => {
+    render(<TabelaSemana />)
+    const rotulo = screen.getByText('O freio')
+
+    expect(rotulo).toHaveClass('text-tijolo')
+    expect(rotulo.closest('aside')).toHaveClass('border-tijolo')
+    expect(screen.getByText(REGRA_DO_FREIO)).toBeInTheDocument()
   })
 })

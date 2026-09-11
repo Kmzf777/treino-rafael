@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { buscarExercicio } from '@/data'
 import { SheetExercicio } from './SheetExercicio'
 
-const exercicio = buscarExercicio('a-agacha')!
+const exercicio = buscarExercicio('ea-agacha')!
 
 describe('SheetExercicio', () => {
   it('mostra nome, número e prescrição', () => {
@@ -26,7 +26,7 @@ describe('SheetExercicio', () => {
   })
 
   it('oferece os vídeos alternativos', () => {
-    const comAlt = buscarExercicio('a-agacha')!
+    const comAlt = buscarExercicio('ea-agacha')!
     render(<SheetExercicio exercicio={comAlt} aberto onFechar={() => {}} />)
     for (const alt of comAlt.alternativos) {
       expect(screen.getByRole('link', { name: alt.nome })).toBeInTheDocument()
@@ -123,8 +123,8 @@ describe('SheetExercicio', () => {
     })
 
     it('marca o cue condicional de dor', () => {
-      const finalizador = buscarExercicio('b-fin-2')!
-      render(<SheetExercicio exercicio={finalizador} aberto onFechar={() => {}} />)
+      const bulgaro = buscarExercicio('pa-bulgaro')!
+      render(<SheetExercicio exercicio={bulgaro} aberto onFechar={() => {}} />)
       expect(
         screen.getByText('Se incomodar o joelho operado, reduza a altura do apoio de trás.')
           .className,

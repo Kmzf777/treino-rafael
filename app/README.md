@@ -1,11 +1,11 @@
 # Protocolo de treino
 
-App de consulta ao plano de treino: 7 divisões, 47 exercícios e 37 recortes de vídeo
-apontando para o segundo exato da execução correta — 11:51 de vídeo útil no lugar de
-139:45 de vídeo bruto.
+App de consulta ao plano de treino: 8 divisões, 53 exercícios e 40 recortes de vídeo
+apontando para o segundo exato da execução correta — 12:50 de vídeo útil no lugar de
+137:39 de vídeo bruto.
 
-Substitui o `index.html` da raiz do repositório, que ficou como referência
-histórica dos dados.
+Substituiu a página HTML única que era o app até 2026-09-09. Ela saiu do repositório
+em 2026-09-10 (`1041fe1`); a última versão dela está em `254b621`.
 
 ## Rodar
 
@@ -32,7 +32,7 @@ Porta: `PORT=8080 npm start` se a 5173 estiver ocupada.
 | `npm test` | Testes (Vitest + Testing Library + jsdom) |
 | `npm run test:watch` | Testes em modo watch |
 | `npm run lint` | oxlint (não há eslint neste projeto) |
-| `npm run check:clips` | Verifica pela oEmbed se algum vídeo saiu do ar |
+| `npm run check:clips` | Confere `test/duracoes.json` contra `src/data/duracoes.ts` e verifica pela oEmbed se algum vídeo saiu do ar |
 | `npm run build` | `tsc -b` + build de produção |
 
 ## Estrutura
@@ -41,7 +41,7 @@ Porta: `PORT=8080 npm start` se a 5173 estiver ocupada.
   carregamento, funciona offline depois do primeiro carregamento. Importe sempre de
   `@/data` (o modelo derivado), não dos módulos crus.
 - `src/hooks/useYouTubeClip.ts` — o loop `[início, fim]`, a parte mais delicada do app.
-- `src/lib/rota.ts` — roteamento por hash (`#/forcaA/a-agacha`) em ~40 linhas.
+- `src/lib/rota.ts` — roteamento por hash (`#/empurrarA/ea-agacha`) em ~40 linhas.
 - `src/components/` — a interface. `AppShell` é a moldura, `App.tsx` a composição por rota.
 - `server/index.js` — servidor estático.
 - `scripts/check-clips.mjs` — saúde dos vídeos.
@@ -53,11 +53,11 @@ acaso se movem. Não é um dashboard. Quem for mexer na interface:
 
 - Sem cards, sem sombras, sem bordas de caixa. O único dispositivo estrutural é o filete
   de 1px (`--fio`). Hierarquia se faz com tamanho, peso, espaço e régua.
-- Numeração de protocolo: divisões `01`–`07`, exercícios `2.3`, cues `2.3.1`.
+- Numeração de protocolo: divisões `01`–`08`, exercícios `2.3`, cues `2.3.1`.
 - Newsreader (display) · IBM Plex Sans (corpo, 17px) · IBM Plex Mono (todo dado, com
   `tabular-nums`).
-- `--tijolo` **só** em cue de risco articular. `--carimbo` em numeração, indicador ativo
-  e foco. Alvo de toque mínimo de 44px.
+- `--tijolo` **só** em cue de risco articular e na nota lateral de aviso. `--carimbo`
+  em numeração, indicador ativo e foco. Alvo de toque mínimo de 44px.
 - Movimento: spring para geometria, bezier para opacidade — nunca spring em opacidade.
   `prefers-reduced-motion` é respeitado.
 

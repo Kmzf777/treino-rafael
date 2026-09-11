@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 
 /**
- * As duas únicas chaves persistidas do app. Ambas são preferência de leitura,
- * não sessão de treino: não há cronômetro, "feito", carga nem progresso.
+ * A única chave persistida do app é o tema, e ela é preferência de leitura, não
+ * sessão de treino: não há cronômetro, "feito", carga nem progresso.
  *
- * - `treino.modo` → '4' | '3'  (dias de academia na tabela da semana)
  * - `treino.tema` → 'claro' | 'escuro' | 'auto'
+ *
+ * `usePreferencia` segue genérico de propósito — a tabela da semana já teve um
+ * `treino.modo` de 4/3 dias, que saiu quando a semana virou o ciclo de 4 semanas.
  */
 
 function ler<T extends string>(chave: string, padrao: T, validos: readonly T[]): T {

@@ -15,7 +15,8 @@ import { Dialog, DialogClose, DialogContent, DialogTitle } from './ui/dialog'
  */
 
 /**
- * Cue de risco articular: o único lugar onde --tijolo aparece.
+ * Cue de risco articular. Com a nota lateral de aviso (`SecaoEditorial`), é um
+ * dos dois lugares onde --tijolo aparece.
  *
  * A regra é POSICIONAL, não de vocabulário: só é aviso o cue que ABRE dizendo o
  * que não fazer, ou o que fazer se doer. Procurar a palavra "dor" em qualquer
@@ -24,7 +25,7 @@ import { Dialog, DialogClose, DialogContent, DialogTitle } from './ui/dialog'
  * "sem dor" é o objetivo, não o alerta. Vermelho na frase mais importante da
  * tela desvaloriza os avisos de verdade.
  *
- * Conferido nos 92 cues do plano: 10 marcados (11%), todos de proibição
+ * Conferido nos 121 cues do plano: 11 marcados (9%), todos de proibição
  * ("Não deixe o joelho cair para dentro…") ou de condição de dor ("Se incomodar
  * o joelho operado…"). Ver a spec: --tijolo deve viver em ~12 linhas do app.
  */

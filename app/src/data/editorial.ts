@@ -4,7 +4,7 @@ export type SemanaCorrida = { semana: number; sessao: string; leve: boolean }
 export const CORRIDA = {
   retomando: {
     titulo: 'Se você ainda está retomando',
-    lede: 'Três sessões por semana. Cinco minutos caminhando antes e cinco depois, sempre.',
+    lede: 'Duas sessões fixas por semana — terça e sábado —, mais uma leve opcional na segunda, pelo menos 3 horas depois da força. A progressão abaixo conta com as três. Cinco minutos caminhando antes e cinco depois, sempre.',
     semanas: [
       { semana: 1, sessao: '6x (2 min corrida / 2 min caminhada)', leve: false },
       { semana: 2, sessao: '6x (3 min corrida / 1min30 caminhada)', leve: false },
@@ -18,11 +18,11 @@ export const CORRIDA = {
   },
   jaCorre: {
     titulo: 'Se você já corre 5 km',
-    lede: 'Duas ou três sessões por semana, sempre com um dia entre elas.',
+    lede: 'Duas sessões fixas por semana, terça e sábado, mais a leve opcional na segunda, depois da força.',
     cards: [
-      { titulo: 'Leve (base)', texto: '30 a 40 min em ritmo de conversa. É a maior parte do seu volume — e a parte que a maioria das pessoas corre rápido demais.' },
-      { titulo: 'Qualidade — 1x por semana', texto: '6 a 8 tiros de 400 m em ritmo forte com 2 min de trote entre eles. Ou 20 min contínuos em ritmo confortavelmente difícil.' },
-      { titulo: 'Longa', texto: '6 a 8 km em ritmo leve, aumentando no máximo 10% por semana.' },
+      { titulo: 'Leve (base)', texto: '30 a 40 min em ritmo de conversa na terça, 20 min na opcional de segunda. É a maior parte do seu volume — e a parte que a maioria das pessoas corre rápido demais.' },
+      { titulo: 'Qualidade — sábado, semana sim, semana não', texto: '6 a 8 tiros de 400 m em ritmo forte com 2 min de trote entre eles. Ou 20 min contínuos em ritmo confortavelmente difícil. Sábado é o único dia que sobra: a terça está a 24 horas da sessão pesada, e o tiro pede 48.' },
+      { titulo: 'Longa — sábado, na semana sem tiro', texto: '6 a 8 km em ritmo leve, aumentando no máximo 10% por semana. Divide o sábado com a de qualidade, então as duas se revezam: não é para fazer as duas na mesma semana.' },
     ] as Card[],
   },
   cuidados: {
@@ -48,17 +48,36 @@ export type SecaoGuia =
 
 export const GUIA: SecaoGuia[] = [
   { tipo: 'texto', titulo: 'Antes de tudo', texto: 'Este plano assume que você já teve alta do fisioterapeuta para treino de força com carga e para corrida. Se ainda não teve, ou se está com menos de 9 meses de cirurgia, mostre isto ao seu fisio ou cirurgião antes de começar a parte de corrida.' },
-  { tipo: 'cards', titulo: 'Depende de onde saiu o enxerto', cards: [
-    { titulo: 'Tendão quadricipital ou patelar', texto: 'O quadríceps costuma demorar mais para recuperar força. Progrida a cadeira extensora com calma nos últimos 30° de extensão e priorize volume de quadríceps.' },
-    { titulo: 'Isquiotibiais', texto: 'Priorize flexora, stiff e trabalho excêntrico de posterior.' },
+  { tipo: 'texto', titulo: 'Como o plano é organizado', texto: 'Quatro treinos numa fila contínua: empurrar A, puxar A, empurrar B, puxar B. O superior alterna — num dia só empurra (peito, ombro, tríceps), no outro só puxa (costas, bíceps, deltoide posterior). O inferior está em todas as sessões, com a ênfase acompanhando o superior: dia de empurrar cobra mais quadríceps, dia de puxar carrega mais quadril e posterior. Cada bloco junta perna, torso e um terceiro movimento que não disputa o mesmo músculo, porque dois exercícios do mesmo motor no mesmo bloco derrubam o desempenho do segundo.' },
+  // As três perguntas vêm ANTES do joelho operado de propósito: o protocolo da
+  // extensora logo abaixo é condicional a estas respostas, e é aqui que o leitor
+  // descobre que, sem elas, o plano inteiro roda na configuração conservadora.
+  // Como apêndice, no fim do guia, chegavam seis seções tarde demais.
+  { tipo: 'cards', titulo: 'Três perguntas que mudam a prescrição', cards: [
+    { titulo: 'De onde saiu o enxerto', texto: 'Isquiotibiais: o déficit de flexão profunda persiste por anos e a cadeira flexora deveria aparecer em duas sessões, não em uma — o stiff não substitui. Patelar ou quadricipital: vigilância redobrada com dor na frente do joelho na extensora e no agachamento fundo.' },
+    { titulo: 'Quantos meses de cirurgia', texto: 'Menos de 9 meses mantém a extensora em 90 a 45 graus. Mais de 9 meses libera a amplitude e o limitador passa a ser sintoma, não protocolo.' },
+    { titulo: 'Houve reparo de menisco junto', texto: 'Se houve, o menisco dita o ritmo no período inicial — sem agachamento abaixo de 90 graus com carga, sem flexão profunda carregada com rotação. Enquanto não souber, o plano roda na configuração conservadora: extensora de 90 a 45, agachamento até 90.' },
   ] },
-  { tipo: 'alerta', titulo: 'Sinais para reduzir a carga', texto: 'Inchaço ou derrame no joelho no dia seguinte, dor acima de 3/10, calor local, sensação de falseio, ou dor no local de retirada do enxerto que não passa em 48 horas.' },
-  { tipo: 'texto', titulo: 'Como progredir a carga', texto: 'Quando completar todas as séries no topo da faixa de repetições, com 2 repetições de reserva e sem dor no joelho, aumente 2,5 a 5% na semana seguinte. A cada 4 semanas, faça uma semana leve: metade das séries, mesma carga.' },
-  { tipo: 'texto', titulo: 'Saltos e pliometria', texto: 'Só entram se o fisio liberar e se a perna operada tiver pelo menos 90% da força e do salto unipodal da perna boa. Antes disso, o risco não compensa.' },
+  { tipo: 'texto', titulo: 'Joelho operado', texto: 'A cadeira extensora não está proibida — é o exercício que fecha o déficit de reto femoral que agachamento e leg press não fecham, porque na cadeia fechada esse músculo trabalha em quase-isometria. Ela é obrigatória aqui, e sempre unilateral: a máquina bilateral esconde a diferença entre as pernas, justamente em quem tem simetria como critério de segurança. Menos de 9 meses de cirurgia: trabalhe de 90 a 45 graus, sem carga alta até a extensão completa. Mais de 9 meses: amplitude completa liberada, mas a faixa final — de 45 a 0 graus, o último terço antes da perna esticada — é faixa de progressão: 10 a 15 repetições com 2 a 3 na reserva, nunca teste de força, nunca até a falha. Suba carga ou amplitude terminal, nunca as duas na mesma semana. O LCM não restringe a extensora, que é movimento puramente sagital: a ressalva do LCM vale para o joelho apontando para dentro no afundo e no búlgaro.' },
+  { tipo: 'alerta', titulo: 'Sinais para reduzir a carga', texto: 'Inchaço no joelho na manhã seguinte — qualquer onda ao deslizar a mão — vale mais que qualquer regra de frequência deste plano: corte 30 a 50% do volume de perna na próxima sessão. Dor acima de 3/10, ou dor que não normaliza em 24 horas. Dor na frente do joelho que piora no dia seguinte: reduza a amplitude terminal e a profundidade, não abandone o exercício. Perda de extensão completa comparada ao outro lado, que é o sinal mais precoce de irritação articular. Dor no tendão de Aquiles ou no patelar ao acordar: 72 horas antes de recarregar aquele tecido. Bloqueio, falseio ou dor na linha da articulação: pare e procure reavaliação. Isso não é fadiga.' },
+  { tipo: 'texto', titulo: 'Checagem mensal de simetria', texto: 'Uma vez por mês, teste panturrilha unilateral: amplitude completa, 2 segundos por repetição, até não conseguir mais. A meta são 20 ou mais repetições em cada perna, sem diferença entre os lados. Enquanto a operada ficar atrás da boa, não é hora de subir carga — é hora de igualar, seja o buraco grande ou pequeno, novo ou antigo. E uma diferença que cresce de um mês para o outro é o aviso mais precoce de volume mal distribuído. Este teste vale mais que qualquer sensação, porque a perna operada compensa sem você perceber.' },
+  // Os cards ficam com o que a regra de ouro e a regra de carga — as notas
+  // laterais da semana, logo acima nesta mesma tela — não dizem: a janela de
+  // 48 h, a exceção do dia de tiro, os 2-3 na reserva e o custo declarado.
+  // Reenunciar as notas aqui seria duas cópias numa tela só, livres para
+  // divergir.
+  { tipo: 'cards', titulo: 'Corrida — as três regras', cards: [
+    { titulo: 'Qualidade só 48 h depois da sessão pesada', texto: 'São dois dias inteiros, não um: a perna pesada de segunda ainda cobra o preço na quarta. Corrida leve em zona 2 no dia seguinte é aceitável — a janela vale para o tiro, não para toda corrida.' },
+    { titulo: 'Exceção: dia de tiro inverte a ordem', texto: 'A regra de ouro põe a força na frente. Em dia de tiro ou tempo run, não: a corrida é a prioridade da sessão e vem primeiro. O intervalo entre as duas continua valendo.' },
+    { titulo: 'Antes de correr em 24 h: 2 a 3 na reserva', texto: 'Nunca até a falha. Com perna em todas as sessões, nenhuma corrida da semana acontece com as pernas totalmente frescas — esse é o custo real do modelo, e é um custo aceito, não um descuido.' },
+  ] },
+  { tipo: 'texto', titulo: 'Como progredir a carga', texto: 'Quando completar todas as séries no topo da faixa de repetições, com 2 repetições de reserva e sem dor no joelho, aumente 2,5 a 5% na semana seguinte. A cada 4 a 6 semanas, reduza 40 a 50% do volume de perna por uma semana, mantendo a carga. E na transição para este plano: você está saindo de 2 para 3 sessões de perna por semana — leve 4 a 6 semanas para chegar lá, subindo menos de 10% de carga total por semana. Aumento abrupto de carga é o preditor de lesão, não a frequência em si.' },
+  { tipo: 'texto', titulo: 'Saltos e pliometria', texto: 'Continuam fora do plano. Só entram com liberação do fisio e com a perna operada em pelo menos 90% da força e do salto unipodal da perna boa. Antes disso, o risco não compensa.' },
   { tipo: 'cards', titulo: 'Resumo semanal', cards: [
-    { titulo: '3 a 4 sessões de força', texto: 'Corpo inteiro, com trabalho unilateral de perna em todas elas. Sem exceção — é o que mais protege o joelho operado a longo prazo.' },
-    { titulo: '2 a 3 corridas', texto: 'Mais 1 dia de descanso total por semana.' },
+    { titulo: '3 sessões de força', texto: 'Empurrar e puxar alternados, inferior em todas. Uma única sessão pesada por semana, sempre a primeira; as outras duas são moderada e leve.' },
+    { titulo: '2 corridas fixas, 1 opcional e 2 descansos', texto: 'Terça leve e sábado, que se reveza entre longa e de qualidade. A opcional é uma corrida leve na segunda, depois da força. Quinta é descanso ativo, domingo é descanso total.' },
     { titulo: 'Sono e proteína', texto: '7 a 9 horas de sono e algo entre 1,6 e 2 g de proteína por kg de peso fazem mais diferença na recuperação que qualquer suplemento.' },
   ] },
+  { tipo: 'texto', titulo: 'O que este plano não afirma', texto: 'Não afirma que separar peito e costas em dias diferentes é melhor: ninguém testou essa pergunta. O que a evidência permite dizer é que não é pior — e isso basta para organizar o treino do jeito que faz sentido para você. Não afirma que treinar perna 3 vezes por semana rende mais músculo que 2: com o mesmo volume semanal, não rende. O ganho é de distribuição e de exposição frequente ao joelho operado, não de volume extra. E não existe nenhum estudo testando frequência de perna nessa faixa em pessoas com LCA reconstruído que também correm: este plano é extrapolação bem fundamentada, e é por isso que o inchaço na manhã seguinte vale mais que qualquer regra escrita aqui.' },
   { tipo: 'nota', texto: 'Este plano é orientação geral de treino e não substitui avaliação de fisioterapeuta ou médico. Como você teve reconstrução de LCA e LCM com enxerto, vale revisar esta estrutura com o profissional que acompanhou sua reabilitação.' },
 ]

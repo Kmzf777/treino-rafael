@@ -1,75 +1,88 @@
-import { motion } from 'motion/react'
-import { REGRA_DE_OURO, SEMANA_3, SEMANA_4 } from '@/data/semana'
-import { usePreferencia } from '@/hooks/usePreferencias'
+import { DIVISOES } from '@/data'
+import {
+  CARGAS,
+  CICLO,
+  DIAS_DE_FORCA,
+  DIAS_FIXOS,
+  REGRA_DE_CARGA,
+  REGRA_DE_OURO,
+  REGRA_DE_PANTURRILHA,
+  REGRA_DO_FREIO,
+} from '@/data/semana'
 import { NotaLateral } from './SecaoEditorial'
-
-const MODOS = ['4', '3'] as const
-type Modo = (typeof MODOS)[number]
-
-const PRESS = { type: 'spring', visualDuration: 0.25, bounce: 0 } as const
-const ABA = { type: 'spring', visualDuration: 0.35, bounce: 0.1 } as const
 
 const CABECALHO =
   'border-b border-fio pb-2 text-left font-mono text-[12px] font-medium uppercase tracking-[0.04em] text-tinta-2'
 
-export function TabelaSemana() {
-  const [modo, setModo] = usePreferencia<Modo>('treino.modo', '4', MODOS)
-  const linhas = modo === '4' ? SEMANA_4 : SEMANA_3
+const DIA = 'border-b border-fio py-3 pr-3 text-left align-baseline font-mono text-[13px] font-normal text-tinta-2'
 
+const ROTULOS = new Map(DIVISOES.map((d) => [d.chave, d.rotulo]))
+
+export function TabelaSemana() {
   return (
     <section className="border-t border-fio pt-5">
-      <div className="flex flex-wrap items-center justify-between gap-x-4">
-        <h3 className="font-display text-[20px] font-medium leading-[1.25] tracking-[-0.017em] text-tinta">
-          A semana
-        </h3>
+      <h3 className="font-display text-[20px] font-medium leading-[1.25] tracking-[-0.017em] text-tinta">
+        O ciclo
+      </h3>
 
-        <div role="group" aria-label="Dias de academia por semana" className="flex items-center">
-          {MODOS.map((opcao) => {
-            const ativo = modo === opcao
-            return (
-              <motion.button
-                key={opcao}
-                type="button"
-                onClick={() => setModo(opcao)}
-                aria-pressed={ativo}
-                whileTap={{ scale: 0.97 }}
-                transition={PRESS}
-                className={`relative flex min-h-11 items-center px-2 font-mono text-[12px] font-medium uppercase tracking-[0.04em] ${
-                  ativo ? 'text-tinta' : 'text-tinta-2'
-                }`}
-              >
-                {opcao} dias
-                {ativo && (
-                  <motion.span
-                    layoutId="modo-semana-ativo"
-                    transition={ABA}
-                    className="absolute inset-x-2 bottom-[9px] h-[2px] bg-carimbo"
-                  />
-                )}
-              </motion.button>
-            )
-          })}
-        </div>
+      <p className="mt-2 max-w-[60ch] text-[17px] leading-[1.47] text-tinta-2">
+        Quatro treinos numa fila que não reinicia no domingo. O treino de segunda é o
+        próximo da fila, não “o treino de segunda”. A fila fecha em quatro semanas.
+      </p>
+
+      {/* `tabIndex` porque região que rola precisa receber foco: sem ele, quem
+          navega só por teclado não consegue rolar a tabela em tela estreita
+          (WCAG 2.1.1). Com foco vem o `role`/`aria-label`, para a região ter
+          nome ao ser anunciada. */}
+      <div
+        className="mt-3 overflow-x-auto"
+        tabIndex={0}
+        role="region"
+        aria-label="Ciclo de quatro semanas"
+      >
+        <table className="w-full border-collapse">
+          <caption className="sr-only">Ciclo de quatro semanas de treino de força</caption>
+          <thead>
+            <tr>
+              <th scope="col" className={`w-[92px] pr-3 ${CABECALHO}`}>
+                <span className="sr-only">Semana</span>
+              </th>
+              {DIAS_DE_FORCA.map((dia, i) => (
+                <th key={dia} scope="col" className={`pr-3 ${CABECALHO}`}>
+                  {dia}
+                  <span className="ml-1 normal-case">({CARGAS[i]})</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {CICLO.map((semana) => (
+              <tr key={semana.numero}>
+                <th scope="row" className={DIA}>
+                  Semana {semana.numero}
+                </th>
+                {semana.sessoes.map((divisao) => (
+                  <td
+                    key={divisao}
+                    className="border-b border-fio py-3 pr-3 align-baseline text-[17px] leading-[1.47] text-tinta"
+                  >
+                    {ROTULOS.get(divisao)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      <table className="mt-3 w-full border-collapse">
-        <caption className="sr-only">Semana de treino em {modo} dias de academia</caption>
-        <thead>
-          <tr>
-            <th scope="col" className={`w-[92px] pr-3 ${CABECALHO}`}>
-              Dia
-            </th>
-            <th scope="col" className={CABECALHO}>
-              Sessão
-            </th>
-          </tr>
-        </thead>
+      <table className="mt-5 w-full border-collapse">
+        <caption className="sr-only">Os dias que não mudam de semana para semana</caption>
         <tbody>
-          {linhas.map((linha) => (
+          {DIAS_FIXOS.map((linha) => (
             <tr key={linha.dia}>
-              <td className="border-b border-fio py-3 pr-3 align-baseline font-mono text-[13px] text-tinta-2">
+              <th scope="row" className={`w-[92px] ${DIA}`}>
                 {linha.dia}
-              </td>
+              </th>
               <td
                 className={`border-b border-fio py-3 align-baseline text-[17px] leading-[1.47] ${
                   linha.descanso ? 'text-tinta-2' : 'text-tinta'
@@ -83,6 +96,13 @@ export function TabelaSemana() {
       </table>
 
       <NotaLateral rotulo="Regra de ouro" texto={REGRA_DE_OURO} />
+      <NotaLateral rotulo="A carga" texto={REGRA_DE_CARGA} />
+      <NotaLateral rotulo="Panturrilha" texto={REGRA_DE_PANTURRILHA} />
+      {/* `aviso` porque é o único item desta tela que é risco articular, e não
+          organização de semana: o freio-mestre precisa vencer as três regras
+          acima quando discordarem. Como `TabelaSemana` abre toda divisão de
+          força, esta é a única cópia que cobre as quatro. */}
+      <NotaLateral rotulo="O freio" texto={REGRA_DO_FREIO} aviso />
     </section>
   )
 }

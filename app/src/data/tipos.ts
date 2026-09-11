@@ -25,7 +25,14 @@ export type Exercicio = {
 export type Bloco = { nome: string; sub: string; exercicios: Exercicio[] }
 
 export type ChaveDivisao =
-  | 'aquecer' | 'forcaA' | 'forcaB' | 'forcaAl' | 'corrida' | 'circuito' | 'guia'
+  | 'aquecer'
+  | 'empurrarA'
+  | 'puxarA'
+  | 'empurrarB'
+  | 'puxarB'
+  | 'corrida'
+  | 'circuito'
+  | 'guia'
 
 export type Divisao = {
   chave: ChaveDivisao

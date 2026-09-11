@@ -1,0 +1,26 @@
+{
+  "pa-deltpost": {
+    "video": "5YK4bgzXDp0",
+    "duracao": 13,
+    "titulo": "Machine Reverse Flye",
+    "canal": "Renaissance Periodization",
+    "porque": "Demonstração muda de 13s em 1280x720, então preenche o player `aspect-video` do app sem tarjas. Câmera fixa em três quartos por trás, na altura do ombro: é o ângulo que mostra a retração das escápulas e o arco dos braços, que é o ponto do exercício. Os três quadros amostrados (25%, 50%, 75%) caem todos em execução, com a câmera imóvel entre eles — sem vinheta, sem legenda sobre o corpo, sem marca d'água e sem tela final. Está em inglês, mas o vídeo não tem narração nenhuma: o único texto é o título, e o app põe o nome em português por cima. Mesmo canal e mesma produção do `ea-triceps`, o que deixa os dois vídeos de empurrar/puxar com a mesma linguagem visual. Todas as opções em português foram reprovadas na amostragem de quadros: `iQD461A66CM` é limpo mas é 9:16 (og 405x720) e apareceria pillarboxed numa faixa central estreita, bem menor que o resto do app; `sqOdPFCxFt8` põe um letreiro \"CRUCIFIXO INVERSO MÁQUINA\" por cima do corpo; `iVwOmlHa_MI` abre com vinheta preta e fecha com tela final de contato; `mtZOrNqFywg` tem tarja inferior e cartela de patrocinador; `OX_G0c_Vbwk` tem banner atravessando o tronco mais marca d'água do InShot; `EWwR2Z-yHjQ` é tutorial falado de 3min46 com cartela de título.",
+    "recorte": null
+  },
+  "ea-triceps": {
+    "video": "1u18yJELsh0",
+    "duracao": 12,
+    "titulo": "Cable Overhead Triceps Extension",
+    "canal": "Renaissance Periodization",
+    "porque": "Vista posterior em leve oblíqua — o atleta está de costas para a câmera, com a polia à direita do quadro — fechada no tronco e nos braços, que é onde mora o erro deste exercício: cotovelo que abre e ombro que foge. Os três quadros amostrados mostram a corda atrás da cabeça com o cotovelo alto, sem corte de câmera entre eles. Demonstração muda em 1280x720, sem narração, sem vinheta, sem legenda e sem tela final nos 12s. Está em inglês, mas o critério permite quando a execução é melhor: as opções em português eram tutoriais falados e longos, e as curtas em inglês tinham enquadramento pior — `AZ7yNOQoSV4` põe tarja de título no topo e filma de longe, `8WC7rIOkhi0` deixa o executante pequeno no quadro, e `ns-RGsbzqok` filma de frente com o tronco inclinado, escondendo o cotovelo. Fica coerente com o alternativo já auditado do app, o tríceps na polia com corda (`7le1JRUUagM`).",
+    "recorte": null
+  },
+  "pb-abdutor": {
+    "video": "50qHGus1TZk",
+    "duracao": 35,
+    "titulo": "Cadeira Abdutora: Como fazer e Postura correta",
+    "canal": "Treino Mestre",
+    "porque": "Mesmo canal do tríceps na polia com corda (`7le1JRUUagM`), que já passou pela auditoria original do app. Os três quadros amostrados pegam a executante sentada na máquina com os coxins por fora dos joelhos, abrindo as pernas — abdução mesmo, não a adutora — em 1280x720 e com boa iluminação. Diferente dos outros dois, este não é uma demonstração muda: é um tutorial narrado, com um instrutor de polo preta em pé ao lado da máquina gesticulando nos três quadros, e o vídeo corta entre pelo menos dois enquadramentos (os quadros de 25% e 50% são abertos, o de 75% é mais fechado), ou seja, a câmera não é única e fixa. Tem ainda uma marca d'água permanente \"TreinoMestre\" no canto inferior direito e selos de \"inscreva-se\" e \"like\" no canto inferior esquerdo. Nada disso cobre o corpo, que é o que o critério proíbe, e não há vinheta nem tela final nos 35s — a execução já está no ar aos 9s, então também não há narração longa antes. Fica como o melhor disponível: é o único candidato em português, dentro de 3 min e em 16:9 que mostra o exercício sem legenda por cima do corpo. `rI_8g_hBQBI` foi reprovado por trazer a legenda \"FOCO NO GLÚTEO NA CADEIRA ABDUTORA\" exatamente por cima do quadril; `34R9TjiSMh0`, `_vDDFsPbubs` e `h9BqUMqK-SY` passam de 3 min de conversa; `vyD3R_11mO4` é 16:9 e cabe nos 3 min, mas gasta a maior parte do tempo em preparação — nos quadros de 25% e 50% o apresentador ainda está em pé ao lado da máquina, ajustando o encosto e falando, e só no de 75% ele aparece sentado executando, que é a narração longa antes proibida pelo critério 1. Se um dia aparecer uma demonstração muda em 16:9, vale trocar.",
+    "recorte": null
+  }
+}

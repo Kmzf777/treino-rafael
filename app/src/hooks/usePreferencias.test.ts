@@ -2,7 +2,10 @@ import { act, renderHook } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { usePreferencia, useTema } from './usePreferencias'
 
-const MODOS = ['4', '3'] as const
+// Fixture neutra: o hook é genérico, e a única chave que o app persiste hoje é
+// `treino.tema`, exercitada no describe de baixo.
+const CHAVE = 'teste.chave'
+const VALIDOS = ['a', 'b'] as const
 
 beforeEach(() => {
   localStorage.clear()
@@ -17,26 +20,26 @@ afterEach(() => {
 
 describe('usePreferencia', () => {
   it('começa no padrão e persiste a escolha', () => {
-    const { result } = renderHook(() => usePreferencia('treino.modo', '4', MODOS))
-    expect(result.current[0]).toBe('4')
+    const { result } = renderHook(() => usePreferencia(CHAVE, 'a', VALIDOS))
+    expect(result.current[0]).toBe('a')
 
     act(() => {
-      result.current[1]('3')
+      result.current[1]('b')
     })
-    expect(result.current[0]).toBe('3')
-    expect(localStorage.getItem('treino.modo')).toBe('3')
+    expect(result.current[0]).toBe('b')
+    expect(localStorage.getItem(CHAVE)).toBe('b')
   })
 
   it('lê o valor já gravado', () => {
-    localStorage.setItem('treino.modo', '3')
-    const { result } = renderHook(() => usePreferencia('treino.modo', '4', MODOS))
-    expect(result.current[0]).toBe('3')
+    localStorage.setItem(CHAVE, 'b')
+    const { result } = renderHook(() => usePreferencia(CHAVE, 'a', VALIDOS))
+    expect(result.current[0]).toBe('b')
   })
 
   it('ignora valor gravado fora do conjunto conhecido', () => {
-    localStorage.setItem('treino.modo', '7')
-    const { result } = renderHook(() => usePreferencia('treino.modo', '4', MODOS))
-    expect(result.current[0]).toBe('4')
+    localStorage.setItem(CHAVE, 'z')
+    const { result } = renderHook(() => usePreferencia(CHAVE, 'a', VALIDOS))
+    expect(result.current[0]).toBe('a')
   })
 
   it('sobrevive a localStorage indisponível (modo privado)', () => {
@@ -47,14 +50,14 @@ describe('usePreferencia', () => {
       throw new Error('acesso negado')
     })
 
-    const { result } = renderHook(() => usePreferencia('treino.modo', '4', MODOS))
-    expect(result.current[0]).toBe('4')
+    const { result } = renderHook(() => usePreferencia(CHAVE, 'a', VALIDOS))
+    expect(result.current[0]).toBe('a')
 
     act(() => {
-      result.current[1]('3')
+      result.current[1]('b')
     })
     // A preferência não persiste, mas a UI responde na mesma sessão.
-    expect(result.current[0]).toBe('3')
+    expect(result.current[0]).toBe('b')
   })
 })
 

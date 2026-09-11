@@ -262,6 +262,16 @@ git commit -m "feat: escolhe os tres videos que faltavam para o modelo empurrar/
 Esta tarefa é atômica: os tipos, as chaves de rota, o plano, os metadados e as
 contagens dos testes mudam juntos ou a suíte fica vermelha no meio do caminho.
 
+> **Errata, registrada durante a execução.** O objeto `AJUSTES` do script abaixo
+> cobre só parte da coluna `prescrição` do mapa de migração. Dez exercícios ficam
+> com a prescrição do modelo antigo se o script for usado como está — entre eles
+> `pa-flexora` e `pb-flexora`, que continuariam `unilateral: true` e fariam a
+> contagem dar 13 em vez de 11. **O mapa de migração é a fonte da verdade**: ao
+> usar este script, complete o `AJUSTES` com o resto da coluna `prescrição`, e
+> marque as duas flexoras como `unilateral: false`. A versão unilateral da flexora
+> só entra se o enxerto for de isquiotibiais, que é uma das perguntas em aberto da
+> spec.
+
 - [ ] **Step 1: Escrever os invariantes do novo modelo como testes que falham**
 
 Acrescentar ao fim de `app/src/data/index.test.ts`:
@@ -306,11 +316,24 @@ describe('modelo empurrar/puxar', () => {
     }
   })
 
-  it('toda sessão de força tem exercício de perna — inferior em toda sessão', () => {
-    const PERNA = ['Agachar', 'Dobradiça de quadril', 'Unilateral de perna', 'Isolado']
+  // Filtra por músculo, não por padrão de movimento: 'Isolado' é o padrão de
+  // `ea-triceps` e `pa-biceps`, então um filtro por padrão deixaria uma extensão de
+  // tríceps satisfazer um teste que se chama "tem exercício de perna".
+  it('toda sessão de força tem pelo menos 3 exercícios de perna — inferior em toda sessão', () => {
+    const MUSCULOS_PERNA = [
+      'Quadríceps',
+      'Isquiotibiais',
+      'Glúteo máximo',
+      'Glúteo médio',
+      'Panturrilha (gastrocnêmio)',
+      'Panturrilha (sóleo)',
+      'Adutores',
+    ]
     for (const chave of DIAS_FORCA) {
-      const perna = exerciciosDe(chave).filter((e) => PERNA.includes(e.meta.padraoMovimento))
-      expect(perna.length).toBeGreaterThan(0)
+      const perna = exerciciosDe(chave).filter((e) =>
+        MUSCULOS_PERNA.includes(e.meta.musculoPrimario),
+      )
+      expect(perna.length).toBeGreaterThanOrEqual(3)
     }
   })
 
@@ -883,6 +906,13 @@ agora. Rodar a suíte uma vez, ler os dois números que o Vitest reporta como
 | `src/components/Busca.test.tsx:122` | `{ id: 'a-agacha', divisao: 'forcaA' }` → `{ id: 'ea-agacha', divisao: 'empurrarA' }` |
 | `src/components/IndiceDivisoes.test.tsx:18` | `atual="forcaB"` → `atual="puxarA"` |
 | `src/components/ListaExercicios.test.tsx:7` | `buscarDivisao('forcaA')` → `buscarDivisao('empurrarA')`; renomear as variáveis `forcaA`/`exerciciosDeForcaA` para `empurrarA`/`exerciciosDeEmpurrarA` |
+| `src/components/SheetExercicio.test.tsx` | `a-agacha` → `ea-agacha`, `b-fin-2` → `pa-bulgaro` |
+
+Esta tabela não é exaustiva: ela lista o que foi encontrado ao escrever o plano.
+Rode `grep -rn "forcaA\|forcaB\|forcaAl" app/src` e confirme que não sobrou nada,
+e espere que asserções de contagem em outros testes de componente (número de
+divisões no índice, número de exercícios numa lista, texto do colofão) também
+precisem de ajuste.
 
 - [ ] **Step 10: Rodar a suíte inteira**
 
@@ -901,8 +931,10 @@ caso, siga para a Tarefa 3 antes de commitar.
 - [ ] **Step 12: Verificar que os vídeos continuam no ar**
 
 Run: `cd app && npm run check:clips`
-Expected: `44 de 44 vídeos no ar.` (o número total inclui os vídeos que só aparecem
-como alternativos).
+Expected: `N de N vídeos no ar.` — o que importa é que os dois números sejam iguais,
+não qual é o N. O total conta os ids de `test/duracoes.json`, que inclui os vídeos
+que só aparecem como alternativos, e por isso é maior que a contagem de vídeos
+principais.
 
 - [ ] **Step 13: Commit**
 
@@ -922,6 +954,18 @@ git commit -m "feat: reorganiza o plano em empurrar/puxar com inferior em toda s
 A semana deixa de ser uma grade fixa de dias. Os quatro treinos rodam numa fila
 contínua que fecha em 4 semanas, e a carga é propriedade da posição na semana, não
 do treino.
+
+> **Errata, registrada durante a execução.** As Tarefas 3 e 4 **saem num commit só**.
+> Elas estão separadas aqui por clareza de leitura, mas não são separáveis em dois
+> commits verdes: ao reescrever `semana.ts`, o `TabelaSemana.tsx` antigo passa a
+> importar `SEMANA_3`/`SEMANA_4` que deixaram de existir, e o `tsc` quebra. Commit
+> que não compila é um buraco no `git bisect`. Faça as duas e commite uma vez.
+>
+> Duas outras correções vieram da execução: o `lede` do componente usa
+> `text-[17px] leading-[1.47] max-w-[60ch]`, que é a escala de prosa da direção de
+> arte — o `text-[15px] leading-[1.55]` escrito abaixo não existe em lugar nenhum do
+> app. E o campo `divisao` das linhas de corrida em `DIAS_FIXOS` **sai**: nenhum
+> consumidor lê, nem antes nem depois.
 
 - [ ] **Step 1: Escrever o teste que falha**
 
@@ -1287,6 +1331,15 @@ git commit -m "feat: tabela da semana vira o ciclo de 4 semanas"
 O Guia hoje fala de um plano que não existe mais ("3 a 4 sessões de força, corpo
 inteiro"). Os quatro cards da spec entram no lugar.
 
+> **Errata, registrada durante a execução.** O array abaixo **perdeu a checagem
+> mensal de simetria** que a spec traz no fim do bloco SINAIS DE ALERTA. Sem ela o
+> app fica sem nenhum teste objetivo de diferença entre as pernas — que é o critério
+> que sustenta a liberação para corrida num joelho operado. Ela entra como seção
+> `texto` própria, com o título `Checagem mensal de simetria`, logo depois do card
+> `Sinais para reduzir a carga`. Card próprio e não no fim da lista de alertas de
+> propósito: aquele card enumera seis motivos para parar ou reduzir, e uma checagem
+> proativa mensal enterrada ali não seria feita.
+
 - [ ] **Step 1: Escrever o teste que falha**
 
 Acrescentar a `app/src/components/PaineisEditoriais.test.tsx`:
@@ -1441,7 +1494,43 @@ Em `docs/RELATORIO.md`, na seção "Pendências não resolvidas", acrescentar:
   escolha de cada vídeo estão em `docs/dados/videos-novos.json`.
 ```
 
-- [ ] **Step 6: Verificação final**
+- [ ] **Step 6: Travar a deriva entre `duracoes.ts` e `test/duracoes.json`**
+
+A Tarefa 2 acrescentou um teste que impede entrada órfã em `duracoes.ts`, mas nada
+garante que `test/duracoes.json` continue idêntico a ele — e essa é justamente a
+armadilha que o comentário do topo de `check-clips.mjs` já avisa em prosa. Um teste
+do Vitest não é o lugar: ele teria que ler fora de `app/`, e não há precedente disso
+no repositório. O lugar certo é o próprio `check-clips.mjs`, que já é quem lê o JSON.
+
+Acrescentar no início de `app/scripts/check-clips.mjs`, logo depois da linha que
+carrega `DURACOES`:
+
+```javascript
+// O JSON e o .ts precisam ser o mesmo dado. Se derivarem, esta verificação passa a
+// olhar para um conjunto de vídeos que o app não usa mais — falha silenciosa que já
+// aconteceu uma vez.
+const TS = fileURLToPath(new URL('../src/data/duracoes.ts', import.meta.url))
+const texto = readFileSync(TS, 'utf8')
+const doTs = JSON.parse(texto.slice(texto.indexOf('{'), texto.lastIndexOf('}') + 1))
+
+const soNoJson = Object.keys(DURACOES).filter((id) => !(id in doTs))
+const soNoTs = Object.keys(doTs).filter((id) => !(id in DURACOES))
+const divergentes = Object.keys(DURACOES).filter((id) => id in doTs && doTs[id] !== DURACOES[id])
+
+if (soNoJson.length || soNoTs.length || divergentes.length) {
+  console.log('test/duracoes.json e src/data/duracoes.ts divergiram:')
+  if (soNoJson.length) console.log(`  só no JSON: ${soNoJson.join(', ')}`)
+  if (soNoTs.length) console.log(`  só no .ts:  ${soNoTs.join(', ')}`)
+  if (divergentes.length) console.log(`  duração diferente: ${divergentes.join(', ')}`)
+  process.exit(1)
+}
+```
+
+Verificar que a guarda pega a regressão de verdade: mude a duração de um vídeo
+qualquer só em `test/duracoes.json`, rode `npm run check:clips`, confirme que ele
+sai com `duração diferente: <id>` e código 1, e desfaça a mudança.
+
+- [ ] **Step 7: Verificação final**
 
 Run: `cd app && npm test && npm run lint && npm run build && npm run check:clips`
 
@@ -1449,13 +1538,13 @@ Expected, nesta ordem:
 - Vitest: todos os arquivos PASS, nenhum teste pulado.
 - oxlint: nenhum erro.
 - `tsc -b && vite build`: build concluído, sem erro de tipo.
-- `check:clips`: `44 de 44 vídeos no ar.`
+- `check:clips`: `N de N vídeos no ar.`, com os dois números iguais.
 
 Se `check:clips` reclamar de um vídeo, ele saiu do ar depois da Tarefa 1 — escolha
 outro, atualize `plano.ts`, `duracoes.ts`, `test/duracoes.json` e
 `docs/dados/videos-novos.json`.
 
-- [ ] **Step 7: Conferir no navegador**
+- [ ] **Step 8: Conferir no navegador**
 
 Run: `cd app && npm run build && npm start`
 
@@ -1470,7 +1559,7 @@ Abrir `http://localhost:5173` e confirmar, na ordem:
 5. No `GUIA`, o card `Joelho operado` e o `O que este plano não afirma` aparecem.
 6. A tabela do ciclo mostra as 4 semanas e as três notas laterais.
 
-- [ ] **Step 8: Commit**
+- [ ] **Step 9: Commit**
 
 ```bash
 git add README.md docs/RELATORIO.md

@@ -42,7 +42,7 @@ describe('Busca', () => {
   })
 
   it('mostra o número de protocolo e o músculo primário no resultado', async () => {
-    const alvo = buscarExercicio('b-pant-sent')
+    const alvo = buscarExercicio('eb-pant-sent')
     const usuario = userEvent.setup()
     render(<Busca aberta onFechar={() => {}} onEscolher={() => {}} />)
     await usuario.type(campo(), 'panturrilha sentada')
@@ -106,10 +106,10 @@ describe('Busca', () => {
     const usuario = userEvent.setup()
     render(<Busca aberta onFechar={() => {}} onEscolher={() => {}} />)
     const viva = screen.getByRole('status')
-    expect(viva).toHaveTextContent('47 de 47 exercícios')
+    expect(viva).toHaveTextContent('53 de 53 exercícios')
 
     await usuario.type(campo(), 'zzzzzz')
-    expect(viva).toHaveTextContent('0 de 47 exercícios')
+    expect(viva).toHaveTextContent('0 de 53 exercícios')
   })
 
   it('devolve o exercício escolhido', async () => {
@@ -119,7 +119,7 @@ describe('Busca', () => {
     await usuario.type(campo(), 'agacha')
     await usuario.click(screen.getByText(/Agachamento \(barra, goblet ou hack\)/))
     expect(onEscolher).toHaveBeenCalledWith(
-      expect.objectContaining({ id: 'a-agacha', divisao: 'forcaA' }),
+      expect.objectContaining({ id: 'ea-agacha', divisao: 'empurrarA' }),
     )
   })
 })
