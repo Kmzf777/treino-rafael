@@ -153,11 +153,21 @@ describe('modelo empurrar/puxar', () => {
     }
   })
 
-  it('toda sessão de força tem exercício de perna — inferior em toda sessão', () => {
-    const PERNA = ['Agachar', 'Dobradiça de quadril', 'Unilateral de perna', 'Isolado']
+  it('toda sessão de força tem pelo menos 3 exercícios de perna — inferior em toda sessão', () => {
+    const MUSCULOS_PERNA = [
+      'Quadríceps',
+      'Isquiotibiais',
+      'Glúteo máximo',
+      'Glúteo médio',
+      'Panturrilha (gastrocnêmio)',
+      'Panturrilha (sóleo)',
+      'Adutores',
+    ]
     for (const chave of DIAS_FORCA) {
-      const perna = exerciciosDe(chave).filter((e) => PERNA.includes(e.meta.padraoMovimento))
-      expect(perna.length).toBeGreaterThan(0)
+      const perna = exerciciosDe(chave).filter((e) =>
+        MUSCULOS_PERNA.includes(e.meta.musculoPrimario),
+      )
+      expect(perna.length).toBeGreaterThanOrEqual(3)
     }
   })
 

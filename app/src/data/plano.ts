@@ -737,6 +737,8 @@ export const PLANO: Divisao[] = [
               "fim": 250
             },
             "cues": [
+              "Costas na borda do banco, na linha da omoplata. Calcanhar sob o joelho, a outra perna solta — não use ela para ajudar.",
+              "Suba até alinhar tronco e coxa. Se a lombar arqueia para ganhar altura, você já passou do ponto: quem termina o movimento é o glúteo, não a coluna.",
               "Trabalho unilateral em toda sessão de força, sem exceção."
             ],
             "unilateral": true,
