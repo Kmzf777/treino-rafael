@@ -2,6 +2,7 @@ import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import App from './App'
+import { CHAVES_DIVISAO } from './lib/rota'
 
 /**
  * Testes de composição: o que só existe quando as peças estão juntas — rota,
@@ -53,6 +54,32 @@ describe('App', () => {
     window.location.hash = '#/circuito'
     render(<App />)
     expect(screen.getByText('Saltos e pliometria')).toBeInTheDocument()
+  })
+
+  /**
+   * Escopo da tabela da semana, rota por rota. Ela carrega o ciclo dos quatro
+   * treinos de força e três notas que só valem dentro deles — a carga da
+   * primeira sessão, a janela de 48 h, a panturrilha nos dias de empurrar.
+   * O circuito a recebia por herança do legado ("tudo que não é aquecimento") e
+   * ficava com a regra de carga e a nota da panturrilha impressas sob um lede
+   * que diz, na mesma tela, que aquilo não é sessão de força — numa divisão sem
+   * panturrilha nenhuma.
+   *
+   * Corrida e Guia continuam com a tabela, de propósito: é justo antes de
+   * correr que se precisa saber se ontem teve perna. A varredura é sobre
+   * `CHAVES_DIVISAO` inteira para que uma divisão nova precise ser classificada
+   * aqui, em vez de herdar o escopo por descuido.
+   */
+  it('imprime a tabela da semana só onde ela vale', () => {
+    const COM_TABELA = new Set(['empurrarA', 'puxarA', 'empurrarB', 'puxarB', 'corrida', 'guia'])
+
+    for (const chave of CHAVES_DIVISAO) {
+      window.location.hash = `#/${chave}`
+      const { unmount } = render(<App />)
+      const tabela = screen.queryByRole('region', { name: 'Ciclo de quatro semanas' })
+      expect(tabela != null, chave).toBe(COM_TABELA.has(chave))
+      unmount()
+    }
   })
 
   it('abre o exercício ao tocar na linha e fecha voltando para a divisão', async () => {

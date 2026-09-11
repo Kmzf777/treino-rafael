@@ -10,6 +10,7 @@ import { NotaLateral } from './components/SecaoEditorial'
 import { SheetExercicio } from './components/SheetExercicio'
 import { TabelaSemana } from './components/TabelaSemana'
 import { buscarDivisao, buscarExercicio, DIVISOES } from './data'
+import { DIVISOES_DE_FORCA } from './data/semana'
 import { mmss } from './lib/formato'
 import { irPara, useRota } from './lib/rota'
 
@@ -111,9 +112,14 @@ export default function App() {
               <PainelGuia />
             ) : (
               <>
-                {/* Mesma regra do legado: a semana acompanha toda divisão de
-                    treino, menos o aquecimento. */}
-                {divisao.chave !== 'aquecer' && (
+                {/* A semana acompanha as quatro divisões de força — as mesmas
+                    que a tabela imprime. A regra herdada do legado era "tudo
+                    que não é aquecimento", e com ela o circuito recebia o
+                    ciclo, a regra de carga ("a primeira sessão da semana é a
+                    pesada") e a nota da panturrilha logo abaixo de um lede que
+                    diz que aquilo não é sessão de força e não tem panturrilha
+                    nenhuma. Corrida e Guia montam a tabela nos seus painéis. */}
+                {DIVISOES_DE_FORCA.has(divisao.chave) && (
                   <div className="mb-10">
                     <TabelaSemana />
                   </div>

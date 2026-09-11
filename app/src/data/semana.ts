@@ -25,6 +25,20 @@ export const CICLO: SemanaDoCiclo[] = [
   { numero: 4, sessoes: ['puxarA', 'empurrarB', 'puxarB'] },
 ]
 
+/**
+ * Onde a tabela da semana vale. Derivado do próprio ciclo, não listado à mão:
+ * a tabela acompanha exatamente as divisões que ela imprime. Fora delas, as
+ * notas que ela carrega falam de outro treino — a da carga, da "primeira
+ * sessão da semana" numa divisão que não está em semana nenhuma; a da
+ * panturrilha, de um exercício que ali não existe.
+ *
+ * Corrida e Guia são a exceção deliberada, e montam a tabela nos seus próprios
+ * painéis: é justo na corrida que se precisa saber se ontem teve perna.
+ */
+export const DIVISOES_DE_FORCA: ReadonlySet<ChaveDivisao> = new Set(
+  CICLO.flatMap((semana) => semana.sessoes),
+)
+
 /** Os dias que não são de força são iguais em todas as semanas do ciclo. */
 export const DIAS_FIXOS: LinhaSemana[] = [
   { dia: 'Terça', sessao: 'Corrida leve em ritmo de conversa, 25 a 40 min', descanso: false },
