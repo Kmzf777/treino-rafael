@@ -1331,6 +1331,15 @@ git commit -m "feat: tabela da semana vira o ciclo de 4 semanas"
 O Guia hoje fala de um plano que não existe mais ("3 a 4 sessões de força, corpo
 inteiro"). Os quatro cards da spec entram no lugar.
 
+> **Errata, registrada durante a execução.** O array abaixo **perdeu a checagem
+> mensal de simetria** que a spec traz no fim do bloco SINAIS DE ALERTA. Sem ela o
+> app fica sem nenhum teste objetivo de diferença entre as pernas — que é o critério
+> que sustenta a liberação para corrida num joelho operado. Ela entra como seção
+> `texto` própria, com o título `Checagem mensal de simetria`, logo depois do card
+> `Sinais para reduzir a carga`. Card próprio e não no fim da lista de alertas de
+> propósito: aquele card enumera seis motivos para parar ou reduzir, e uma checagem
+> proativa mensal enterrada ali não seria feita.
+
 - [ ] **Step 1: Escrever o teste que falha**
 
 Acrescentar a `app/src/components/PaineisEditoriais.test.tsx`:
